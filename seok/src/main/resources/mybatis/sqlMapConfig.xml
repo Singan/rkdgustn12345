@@ -8,7 +8,7 @@
 	
 	<!-- SQL의 결과를 담을 VO 객체들의 별칭을 설정하여 사용의 편의를 도모  -->
 	<typeAliases>
-		
+		<typeAlias alias="chat" type="com.naver.repository.domain.chatMapper"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -24,6 +24,6 @@
 	</environments>
 
 	<mappers>
-		
+		<mapper url="config/chat.xml" />
 	</mappers>
 </configuration>
