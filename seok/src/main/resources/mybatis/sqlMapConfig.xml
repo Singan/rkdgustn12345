@@ -8,12 +8,10 @@
 	
 	<!-- SQL의 결과를 담을 VO 객체들의 별칭을 설정하여 사용의 편의를 도모  -->
 	<typeAliases>
-		<typeAlias alias="friend" type="com.naver.repository.domain.friendMapper"/>
-		<typeAlias alias="login" type="com.naver.repository.domain.LoginMapper"/>
-		<typeAlias alias="signUp" type="com.naver.repository.domain.SignUpMapper"/>
-		<typeAlias alias="free" type="com.naver.repository.domain.FreeMapper"/>
-		<typeAlias alias="quiz" type="com.naver.repository.domain.QuizMapper"/>
-		<typeAlias alias="question" type="com.naver.repository.domain.QuestionMapper"/>
+		<typeAlias alias="friend" type="com.naver.repository.domain.FriendMapper"/>
+		<typeAlias alias="member" type="com.naver.repository.domain.MemberMapper"/>
+		<typeAlias alias="board" type="com.naver.repository.domain.BoardMapper"/>
+		<typeAlias alias="comment" type="com.naver.repository.domain.CommentMapper"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -30,10 +28,8 @@
 
 	<mappers>
 		<mapper url="config/friend.xml" />
-		<mapper url="config/login.xml" />
-		<mapper url="config/signUp.xml" />
-		<mapper url="config/freeBoard.xml" />
-		<mapper url="config/Question.xml" />
-		<mapper url="config/Quiz.xml" />
+		<mapper url="config/member.xml" />
+		<mapper url="config/board.xml" />
+		<mapper url="config/comment.xml" />
 	</mappers>
 </configuration>
