@@ -2,7 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.naver.repository.mapper.DiaryMapper">
-<select id="page" parameterType="">
+<resultMap type="diary" id="diaryMap">
+		<result column="DIARY_YEAR" property="diaryYear" />
+		<result column="DIARY_MOMTH" property="diaryMonth" />
+		<result column="DIARY_DAY" property="diaryDay" />
+		<result column="DIARY_CONTENT" property="diaryContent" />
+		<result column="FILE_GROUP_NO" property="fileGroupNo" />
+</resultMap>
+
+
+<select id="page" parameterType="diary" resultMap="diaryMap">
 	select * from TO_DIARY where DIARY_YEAR=2017 and DIARY_MONTH = 11 order by DIARY_DAY asc;
 </select>
 
