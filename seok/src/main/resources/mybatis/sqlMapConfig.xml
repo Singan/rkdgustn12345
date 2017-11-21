@@ -4,14 +4,15 @@
 <configuration>
 
 	<!-- 설정파일에서 사용할 프로퍼티의 파일의 경로 지정: classpath -->
-	<properties resource="config/mybatis/db.properties"/>
+	<properties resource="mybatis/db.properties"/>
 	
 	<!-- SQL의 결과를 담을 VO 객체들의 별칭을 설정하여 사용의 편의를 도모  -->
 	<typeAliases>
-		<typeAlias alias="friend" type="com.naver.repository.domain.FriendMapper"/>
-		<typeAlias alias="member" type="com.naver.repository.domain.MemberMapper"/>
-		<typeAlias alias="board" type="com.naver.repository.domain.BoardMapper"/>
-		<typeAlias alias="comment" type="com.naver.repository.domain.CommentMapper"/>
+		<typeAlias alias="friend" type="com.naver.repository.domain.Friend"/>
+		<typeAlias alias="member" type="com.naver.repository.domain.Member"/>
+		<typeAlias alias="board" type="com.naver.repository.domain.Board"/>
+		<typeAlias alias="comment" type="com.naver.repository.domain.Comment"/>
+		<typeAlias alias="diary" type="com.naver.repository.domain.Diary"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -31,5 +32,6 @@
 		<mapper url="config/member.xml" />
 		<mapper url="config/board.xml" />
 		<mapper url="config/comment.xml" />
+		<mapper url="config/diary.xml" />
 	</mappers>
 </configuration>
