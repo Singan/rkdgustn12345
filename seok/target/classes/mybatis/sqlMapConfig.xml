@@ -9,6 +9,11 @@
 	<!-- SQL의 결과를 담을 VO 객체들의 별칭을 설정하여 사용의 편의를 도모  -->
 	<typeAliases>
 		<typeAlias alias="chat" type="com.naver.repository.domain.chatMapper"/>
+		<typeAlias alias="login" type="com.naver.repository.domain.LoginMapper"/>
+		<typeAlias alias="signUp" type="com.naver.repository.domain.SignUpMapper"/>
+		<typeAlias alias="free" type="com.naver.repository.domain.FreeMapper"/>
+		<typeAlias alias="quiz" type="com.naver.repository.domain.QuizMapper"/>
+		<typeAlias alias="question" type="com.naver.repository.domain.QuestionMapper"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -25,5 +30,10 @@
 
 	<mappers>
 		<mapper url="config/chat.xml" />
+		<mapper url="config/login.xml" />
+		<mapper url="config/signUp.xml" />
+		<mapper url="config/freeBoard.xml" />
+		<mapper url="config/Question.xml" />
+		<mapper url="config/Quiz.xml" />
 	</mappers>
 </configuration>
