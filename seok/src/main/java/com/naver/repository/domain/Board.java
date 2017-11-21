@@ -3,7 +3,7 @@ package com.naver.repository.domain;
 import java.util.Date;
 
 //게시판 게시글 테이블
-public class BoardDomain {
+public class Board {
 
  // 게시글 번호 
  private Integer boardNo;
@@ -138,7 +138,7 @@ public class BoardDomain {
  }
 
  // ToBoard 모델 복사
- public void CopyData(BoardDomain param)
+ public void CopyData(Board param)
  {
      this.boardNo = param.getBoardNo();
      this.categoryNo = param.getCategoryNo();

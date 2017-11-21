@@ -1,7 +1,7 @@
 package com.naver.repository.domain;
 
 //회원 회원 정보 테이블
-public class MemberDomain {
+public class Member {
 
  // 회원 번호 
  private Integer memberNo;
@@ -59,7 +59,7 @@ public class MemberDomain {
  }
 
  // ToMember 모델 복사
- public void CopyData(MemberDomain param)
+ public void CopyData(Member param)
  {
      this.memberNo = param.getMemberNo();
      this.memberId = param.getMemberId();
