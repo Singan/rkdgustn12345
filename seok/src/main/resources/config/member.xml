@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.naver.repository.mapper.MemberMapper">
-	<insert parameterType="member">
+	<insert id="listMember" parameterType="member">
 		insert into to_member(
 			member_no, memeber_id, member_pass, member_email, member_name
 		) values(
-			To_Member_SEQ.nextval, #{id}, #{pass}, #{email}, #{name};
+			To_Member_SEQ.nextval, #{member_id}, #{member_pass}, #{member_email}, #{member_name};
 		);
 	</insert>
 </mapper>

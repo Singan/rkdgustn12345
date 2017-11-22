@@ -3,4 +3,38 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.naver.repository.mapper.BoardMapper">
 	
+	<resultMap id="boardMap" type="board">
+		<result column="category_no" property="categoryNo" />
+		<result column="board_name" property="boardName" />
+		<result column="board_writer" property="boardWriter" />
+		<result column="board_views" property="boardViews" />
+		<result column="member_no" property="memberNo" />
+		<result column="board_date" property="boardDate" />
+		<result column="board_content" property="boardContent" />
+		<result column="file_group_no" property="fileGroupNo" />
+		<result column="board_image_path" property="boardImagePath" />
+	</resultMap>
+	
+	<select id="listBoard" parameterType="int" resultMap="boardMap">
+		select  *
+		 from to_board
+		where board_no = #{board_no}
+		order by board_no
+	</select>
+	
+	<insert id="inserBoard" parameterType="member">
+		insert into to_board(
+			board_no, category_no, board_name, board_writer, board_views, member_no,
+			board_content, file_group_no, board_image_path
+		) values(
+			board_no_seq.nextval, #{category_no}, #{board_name}, #{board_writer}, #{board_views}, #{member_no},
+			#{board_content}, #{file_group_no}, #{board_image_path} 
+		) 
+	</insert>
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete
+		  from to_board
+	  	 where board_no = #{board_no}
+	</delete>
 </mapper>
