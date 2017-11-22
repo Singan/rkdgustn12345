@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="${pageContext.request.contextPath}/member/signUp.do">signUp</a></br>
-	<a href="${pageContext.request.contextPath}/member/login.do">login</a></br>
+	<a href="${pageContext.request.contextPath}/sign/signUp.do">signUp</a></br>
+	<a href="${pageContext.request.contextPath}/sign/login.do">login</a></br>
 	<a href="${pageContext.request.contextPath}/board/free.do">free</a></br>
 	<a href="${pageContext.request.contextPath}/board/quiz.do">quiz</a></br>
 	<a href="${pageContext.request.contextPath}/board/question.do">question</a></br>
