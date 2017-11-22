@@ -1,0 +1,232 @@
+-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬됐을 수도 있고 아닐 수도 있습니다.
+
+-- To_Member Table Create SQL
+CREATE TABLE To_Member
+(
+    member_no       NUMBER           NOT NULL, 
+    member_id       VARCHAR2(100)    NULL, 
+    member_pass     VARCHAR2(100)    NULL, 
+    member_email    VARCHAR2(100)    NULL, 
+    member_name     VARCHAR2(100)    NULL, 
+    CONSTRAINT TO_MEMBER_PK PRIMARY KEY (member_no)
+);
+
+CREATE SEQUENCE To_Member_SEQ;
+
+COMMENT ON TABLE To_Member IS '회원 정보 테이블';
+COMMENT ON COLUMN To_Member.member_no IS '회원 번호';
+COMMENT ON COLUMN To_Member.member_id IS '회원 아이디';
+COMMENT ON COLUMN To_Member.member_pass IS '회원 비밀번호';
+COMMENT ON COLUMN To_Member.member_email IS '회원 이메일';
+COMMENT ON COLUMN To_Member.member_name IS '회원 이름';
+
+-- To_Category Table Create SQL
+CREATE TABLE To_Category
+(
+    category_no      NUMBER           NOT NULL, 
+    category_name    VARCHAR2(100)    NULL, 
+    category_url     VARCHAR2(100)    NULL, 
+    CONSTRAINT TO_CATEGORY_PK PRIMARY KEY (category_no)
+);
+
+CREATE SEQUENCE To_Category_SEQ;
+
+
+COMMENT ON TABLE To_Category IS '카테고리 테이블';
+COMMENT ON COLUMN To_Category.category_no IS '카테고리 번호';
+COMMENT ON COLUMN To_Category.category_name IS '카테고리 이름';
+COMMENT ON COLUMN To_Category.category_url IS '카테고리 주소';
+
+
+-- To_Board Table Create SQL
+CREATE TABLE To_Board
+(
+    board_no            NUMBER            NOT NULL, 
+    category_no         NUMBER            NULL, 
+    board_name          VARCHAR2(100)     NULL, 
+    board_writer        VARCHAR2(100)     NULL, 
+    board_views         NUMBER            NULL, 
+    member_no           NUMBER            NULL, 
+    board_date          DATE              DEFAULT sysdate, 
+    board_up            NUMBER            DEFAULT 0, 
+    board_down          NUMBER            DEFAULT 0, 
+    board_content       VARCHAR2(4000)    NULL, 
+    file_group_no       NUMBER            NULL, 
+    board_image_path    VARCHAR2(4000)    NULL, 
+    CONSTRAINT TO_BOARD_PK PRIMARY KEY (board_no)
+);
+
+CREATE SEQUENCE To_Board_SEQ;
+
+COMMENT ON TABLE To_Board IS '게시글 테이블';
+COMMENT ON COLUMN To_Board.board_no IS '게시글 번호';
+COMMENT ON COLUMN To_Board.category_no IS '카테고리 번호';
+COMMENT ON COLUMN To_Board.board_name IS '게시글 제목';
+COMMENT ON COLUMN To_Board.board_writer IS '게시글 작성자';
+COMMENT ON COLUMN To_Board.board_views IS '게시글 조회수';
+COMMENT ON COLUMN To_Board.member_no IS '회원 번호';
+COMMENT ON COLUMN To_Board.board_date IS '게시글 작성일';
+COMMENT ON COLUMN To_Board.board_up IS '게시글 추천';
+COMMENT ON COLUMN To_Board.board_down IS '게시글 비추천';
+COMMENT ON COLUMN To_Board.board_content IS '게시글 내용';
+COMMENT ON COLUMN To_Board.file_group_no IS '파일 그룹 번호';
+COMMENT ON COLUMN To_Board.board_image_path IS '게시글 내에 직접 표시할 사진 파일 경로, ;를 구분자로 사용'
+
+ALTER TABLE To_Board
+    ADD CONSTRAINT FK_To_Board_category_no_To_Cat FOREIGN KEY (category_no)
+        REFERENCES To_Category (category_no) on delete cascade;
+
+ALTER TABLE To_Board
+    ADD CONSTRAINT FK_To_Board_member_no_To_Membe FOREIGN KEY (member_no)
+        REFERENCES To_Member (member_no) on delete cascade;
+
+
+-- To_Comment Table Create SQL
+CREATE TABLE To_Comment
+(
+    comment_no         NUMBER           NOT NULL, 
+    board_no           NUMBER           NULL, 
+    comment_content    VARCHAR2(400)    NULL, 
+    comment_date       DATE             DEFAULT sysdate, 
+    member_name        VARCHAR2(100)    NULL, 
+    CONSTRAINT TO_COMMENT_PK PRIMARY KEY (comment_no)
+);
+
+CREATE SEQUENCE To_Comment_SEQ;
+
+COMMENT ON TABLE To_Comment IS '댓글 테이블';
+COMMENT ON COLUMN To_Comment.comment_no IS '댓글 번호';
+COMMENT ON COLUMN To_Comment.board_no IS '게시글 번호';
+COMMENT ON COLUMN To_Comment.comment_content IS '댓글 내용';
+COMMENT ON COLUMN To_Comment.comment_date IS '댓글 작성일';
+COMMENT ON COLUMN To_Comment.member_name IS '작성자 이름';
+
+ALTER TABLE To_Comment
+    ADD CONSTRAINT FK_To_Comment_board_no_To_Boar FOREIGN KEY (board_no)
+        REFERENCES To_Board (board_no) on delete cascade;
+
+
+-- To_Diary Table Create SQL
+CREATE TABLE To_Diary
+(
+    Diary_year       NUMBER            NULL, 
+    Diary_month      NUMBER            NULL, 
+    Diary_day        NUMBER            NULL, 
+    Diary_content    VARCHAR2(4000)    NULL, 
+    file_group_no       NUMBER            NULL, 
+    CONSTRAINT TO_Diary_PK PRIMARY KEY (Diary_year, Diary_month, Diary_day)
+);
+
+COMMENT ON TABLE To_Diary IS '스케쥴 테이블';
+COMMENT ON COLUMN To_Diary.Diary_year IS '년';
+COMMENT ON COLUMN To_Diary.Diary_month IS '월';
+COMMENT ON COLUMN To_Diary.Diary_day IS '일';
+COMMENT ON COLUMN To_Diary.Diary_content IS '스케쥴 내용';
+COMMENT ON COLUMN To_Diary.file_group_no IS '파일 그룹 번호';
+
+-- To_File Table Create SQL
+CREATE TABLE To_File
+(
+    file_no             NUMBER            NOT NULL, 
+    file_group_no       NUMBER            NULL, 
+    file_path           VARCHAR2(4000)    NULL, 
+    file_origin_name    VARCHAR2(4000)    NULL, 
+    CONSTRAINT TO_FILE_PK PRIMARY KEY (file_no)
+);
+
+CREATE SEQUENCE To_File_SEQ;
+
+COMMENT ON TABLE To_File IS '파일 정보 테이블';
+COMMENT ON COLUMN To_File.file_no IS '파일 번호';
+COMMENT ON COLUMN To_File.file_group_no IS '파일 그룹 번호';
+COMMENT ON COLUMN To_File.file_path IS '첨부 파일 경로, ;를 구분자로 사용';
+COMMENT ON COLUMN To_File.file_origin_name IS '업로더 기준 파일의 본래 이름';
+
+-- To_Lunch Table Create SQL
+CREATE TABLE To_Lunch
+(
+    lunch_no        NUMBER            NOT NULL, 
+    member_name     NUMBER            NULL, 
+    lng             FLOAT             NULL, 
+    lat             FLOAT             NULL, 
+    lunch_review    VARCHAR2(4000)    NULL, 
+    lunch_addr      VARCHAR2(1000)    NULL, 
+    lunch_rate      NUMBER            NULL, 
+    lunch_name      VARCHAR2(100)     NULL, 
+    CONSTRAINT TO_LUNCH_PK PRIMARY KEY (lunch_no)
+);
+
+CREATE SEQUENCE To_Lunch_SEQ;
+
+COMMENT ON TABLE To_Lunch IS '식당 정보 테이블';
+COMMENT ON COLUMN To_Lunch.lunch_no IS '점심 번호';
+COMMENT ON COLUMN To_Lunch.member_name IS '식당 정보 작성자의 회원번호';
+COMMENT ON COLUMN To_Lunch.lng IS '위도';
+COMMENT ON COLUMN To_Lunch.lat IS '경도';
+COMMENT ON COLUMN To_Lunch.lunch_review IS '식당 리뷰';
+COMMENT ON COLUMN To_Lunch.lunch_addr IS '식당 주소';
+COMMENT ON COLUMN To_Lunch.lunch_rate IS '식당 별점';
+COMMENT ON COLUMN To_Lunch.lunch_name IS '식당 이름';
+
+-- To_Friend Table Create SQL
+CREATE TABLE To_Friend
+(
+    member_no      NUMBER    NOT NULL, 
+    friend_no      NUMBER    NOT NULL, 
+    friend_date    DATE      DEFAULT sysdate, 
+    CONSTRAINT TO_FRIEND_PK PRIMARY KEY (member_no, friend_no)
+);
+
+COMMENT ON TABLE To_Friend IS '친구정보 테이블';
+COMMENT ON COLUMN To_Friend.member_no IS '회원 번호';
+COMMENT ON COLUMN To_Friend.friend_no IS '상대 번호';
+COMMENT ON COLUMN To_Friend.friend_date IS '친구 등록 일시';
+
+ALTER TABLE To_Friend
+    ADD CONSTRAINT FK_To_Friend_member_no_To_Memb FOREIGN KEY (member_no)
+        REFERENCES To_Member (member_no) on delete cascade;
+
+-- To_Answer Table Create SQL
+CREATE TABLE To_Answer
+(
+    answer_no         NUMBER            NOT NULL, 
+    board_no          NUMBER            NULL, 
+    answer_content    VARCHAR2(4000)    NULL, 
+    answer_date       DATE              DEFAULT sysdate, 
+    CONSTRAINT TO_ANSWER_PK PRIMARY KEY (answer_no)
+);
+
+CREATE SEQUENCE To_Answer_SEQ;
+
+COMMENT ON TABLE To_Answer IS '질문게시판 답변 테이블';
+COMMENT ON COLUMN To_Answer.answer_no IS '답변 번호';
+COMMENT ON COLUMN To_Answer.board_no IS '게시글 번호';
+COMMENT ON COLUMN To_Answer.answer_content IS '답변 내용';
+COMMENT ON COLUMN To_Answer.answer_date IS '답변 날짜';
+
+ALTER TABLE To_Answer
+    ADD CONSTRAINT FK_To_Answer_board_no_To_Board FOREIGN KEY (board_no)
+        REFERENCES To_Board (board_no) on delete cascade;
+
+
+-- To_Message Table Create SQL
+CREATE TABLE To_Message
+(
+    message_no         NUMBER            NOT NULL, 
+    message_content    VARCHAR2(4000)    NULL, 
+    sender_name        VARCHAR2(100)     NULL, 
+    sender_id          VARCHAR2(100)     NULL, 
+    receiver_name      VARCHAR2(100)     NULL, 
+    receiver_id        VARCHAR2(100)     NULL, 
+    CONSTRAINT TO_MESSAGE_PK PRIMARY KEY (message_no)
+);
+
+CREATE SEQUENCE To_Message_SEQ;
+
+COMMENT ON TABLE To_Message IS '쪽지 테이블';
+COMMENT ON COLUMN To_Message.message_no IS '쪽지 번호';
+COMMENT ON COLUMN To_Message.message_content IS '쪽지 내용';
+COMMENT ON COLUMN To_Message.sender_name IS '발신자 이름';
+COMMENT ON COLUMN To_Message.sender_id IS '발신자 아이디';
+COMMENT ON COLUMN To_Message.receiver_name IS '수신자 이름';
+COMMENT ON COLUMN To_Message.receiver_id IS '수신자 아이디';

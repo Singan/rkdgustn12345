@@ -1,0 +1,19 @@
+drop table to_answer;
+drop table to_board;
+drop table to_category;
+drop table to_comment;
+drop table to_diary;
+drop table to_file;
+drop table to_friend;
+drop table to_lunch;
+drop table to_member;
+drop table to_message;
+
+drop sequence to_answer_seq;
+drop sequence to_board_seq;
+drop sequence to_category_seq;
+drop sequence to_comment_seq;
+drop sequence to_file_seq;
+drop sequence to_lunch_seq;
+drop sequence to_member_seq;
+drop sequence to_amessage_seq;
