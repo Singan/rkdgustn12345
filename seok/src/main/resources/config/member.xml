@@ -9,4 +9,5 @@
 			To_Member_SEQ.nextval, #{member_id}, #{member_pass}, #{member_email}, #{member_name};
 		);
 	</insert>
+	
 </mapper>

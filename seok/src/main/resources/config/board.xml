@@ -15,6 +15,7 @@
 		<result column="board_image_path" property="boardImagePath" />
 	</resultMap>
 	
+	
 	<select id="listBoard" parameterType="int" resultMap="boardMap">
 		select  *
 		 from to_board
