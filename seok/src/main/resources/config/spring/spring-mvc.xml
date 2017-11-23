@@ -59,7 +59,13 @@
         p:url="${jdbc.oracle.url}"
         p:username="${jdbc.oracle.username}" 
         p:password="${jdbc.oracle.password}" />
-        
+    <!-- 도메인,XML 설정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="com.naver.repository.domain" />			
+		<property name="mapperLocations" value="classpath:config/query/*.xml" />
+		<property name="configLocation" value="classpath:config/mybatis/sqlMapConfig.xml" />		
+	</bean>
     <bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
@@ -76,13 +82,7 @@
 			expression="execution(public * db.member.service.*Impl.*(..)) " />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="tranMethod" />
 	</aop:config>
-	<!-- 도메인,XML 설정 -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="typeAliasesPackage" value="com.naver.repository.domain" />			
-		<property name="mapperLocations" value="classpath:config/query/*.xml" />
-		<property name="configLocation" value="classpath:config/mybatis/sqlMapConfig.xml" />		
-	</bean>
+	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.naver.repository.mapper" />
 	</bean>
