@@ -16,7 +16,7 @@ public class SignUpController {
 	@RequestMapping("/sign/signUp.do")
 	public String signUp(Member member, RedirectAttributes attr) {
 		attr.addFlashAttribute("msg", "가입이 완료되었습니다. 로그인을 해주세요");
-		return "redirect:/sign/login.do";
+		return "redirect:/sign/loginForm.do";
 	}
 }
 

@@ -16,7 +16,7 @@
 	<div class="form-group">
 		<h1>Log in to Seok</h1>
 		<div class="form-group">
-			<form class="form-horizontal" action="${pageContext.request.contextPath}/main.jsp"
+			<form class="form-horizontal" action="${pageContext.request.contextPath}/sign/login.do"
 						method="post">
 				<div class="form-group">
 					<div>

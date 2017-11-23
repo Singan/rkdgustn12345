@@ -39,6 +39,14 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/sign/**.do" />
+			<bean class="com.naver.sign.login.AuthInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 	<!-- <mvc:view-controller path="/file/uploadForm.do" view-name="file/fileUploadForm" 
 		/> -->
 
@@ -49,40 +57,38 @@
 	</bean>
 	<!-- WEB의 정적 페이지 처리 등을 위해 사용 -->
 	<mvc:default-servlet-handler />
-	
+
 	<!-- 마이바티스 객체(석성희) -->
-	<context:property-placeholder 
-		location="classpath:config/mybatis/db.properties"/>
-	<!--  DB 접속 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
-      	p:driverClassName="${jdbc.oracle.driver}"
-        p:url="${jdbc.oracle.url}"
-        p:username="${jdbc.oracle.username}" 
-        p:password="${jdbc.oracle.password}" />
-    <!-- 도메인,XML 설정 -->
+	<context:property-placeholder location="classpath:config/mybatis/db.properties" />
+	<!-- DB 접속 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" p:driverClassName="${jdbc.oracle.driver}"
+		p:url="${jdbc.oracle.url}" p:username="${jdbc.oracle.username}"
+		p:password="${jdbc.oracle.password}" />
+	<!-- 도메인,XML 설정 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="typeAliasesPackage" value="com.naver.repository.domain" />			
+		<property name="typeAliasesPackage" value="com.naver.repository.domain" />
 		<property name="mapperLocations" value="classpath:config/query/*.xml" />
-		<property name="configLocation" value="classpath:config/mybatis/sqlMapConfig.xml" />		
+		<property name="configLocation" value="classpath:config/mybatis/sqlMapConfig.xml" />
 	</bean>
-    <bean id="transactionManager"
+	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
-	</bean>    
+	</bean>
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="retrieve*" read-only="true" />
 			<tx:method name="insert*" rollback-for="Exception" />
 		</tx:attributes>
-	</tx:advice> 
+	</tx:advice>
 
 	<aop:config>
 		<aop:pointcut id="tranMethod"
 			expression="execution(public * db.member.service.*Impl.*(..)) " />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="tranMethod" />
 	</aop:config>
-	
+
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.naver.repository.mapper" />
 	</bean>
