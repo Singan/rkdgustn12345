@@ -1,5 +1,5 @@
 package com.naver.repository.mapper;
 
-public interface BoardMapper {
+public interface AnswerMapper {
 	
 }
