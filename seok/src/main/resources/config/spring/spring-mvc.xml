@@ -39,13 +39,13 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
-	<mvc:interceptors>
+	<!-- <mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/sign/**.do" />
 			<bean class="com.naver.sign.login.AuthInterceptor" />
 		</mvc:interceptor>
-	</mvc:interceptors>
+	</mvc:interceptors> -->
 
 	<!-- <mvc:view-controller path="/file/uploadForm.do" view-name="file/fileUploadForm" 
 		/> -->
