@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DiaryController {
 	@RequestMapping("/diary.do")
 	public String diary(){
-	
 		return "/diary/diary";
 	}
 	
