@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 	@RequestMapping("/sign/login") 
 	public void login() {}
-	
-}
 
+}
 
