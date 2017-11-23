@@ -26,10 +26,12 @@
 </head>
 <body>
 <script type="text/javascript">
+	alert(${dList});
+	alert(${test});
     jQuery(document).ready(function() {
         jQuery("#calendar").fullCalendar({
               defaultDate : "2016-05-12"
-            , editable : true
+            , editable : false
             , eventLimit : true
             , events: [
                 {
@@ -87,8 +89,15 @@
                     , start : "2016-05-28"
                 }
             ]
+	        ,  eventRender: function (event, element) {
+	            element.attr('href', 'javascript:void(0);');
+	            element.click(function() {
+	            	alert(${dList})
+	            });
+	        }
         });
     });
+    
 </script>
 
 
