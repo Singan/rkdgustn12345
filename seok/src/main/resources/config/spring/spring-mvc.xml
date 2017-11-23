@@ -81,7 +81,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="typeAliasesPackage" value="com.naver.repository.domain" />			
 		<property name="mapperLocations" value="classpath:config/query/*.xml" />
-		<property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml" />		
+		<property name="configLocation" value="classpath:config/mybatis/sqlMapConfig.xml" />		
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.naver.repository.mapper" />
