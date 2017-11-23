@@ -6,5 +6,5 @@ import java.util.List;
 import com.naver.repository.domain.Diary;
 
 public interface DiaryService {
-	public List<Diary> page(Diary diary);
+	public List<Diary> page(Diary diary) ;
 }

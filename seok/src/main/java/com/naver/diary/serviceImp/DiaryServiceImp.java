@@ -17,7 +17,7 @@ public class DiaryServiceImp implements DiaryService{
 	@Override
 	public List<Diary> page(Diary diary) {
 		
-		return null;
+		return diarymapper.page(diary);
 	}
 
 }

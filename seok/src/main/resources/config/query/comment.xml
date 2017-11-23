@@ -5,7 +5,7 @@
 	
 	<resultMap id="commentMap" type="comment"></resultMap>
 	
-	<select id="listComment" parameterType="int" parameterMap="commentMap">
+	<select id="listComment" parameterType="int" resultMap="commentMap">
 		select * 
 		from to_comment
 		where board_no = #{board_no}
