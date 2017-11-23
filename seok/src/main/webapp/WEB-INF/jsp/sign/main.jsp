@@ -12,6 +12,7 @@
 	<a href="${pageContext.request.contextPath}/board/free.do">free</a></br>
 	<a href="${pageContext.request.contextPath}/board/quiz.do">quiz</a></br>
 	<a href="${pageContext.request.contextPath}/board/question.do">question</a></br>
+	<a href="${pageContext.request.contextPath}/sign/logout.do">로그아웃</a></br>
 	
 	<script>
 		if("${msg}") {

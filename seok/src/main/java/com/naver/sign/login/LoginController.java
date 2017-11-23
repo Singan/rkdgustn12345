@@ -27,5 +27,11 @@ public class LoginController {
 		attr.addFlashAttribute("msg", "로그인 되었습니다.");
 		return "redirect:/sign/main.do";
 	}
+	
+	@RequestMapping("/sign/logout.do")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		
+		return "redirect:/sign/loginForm";
+	}
 }
-
