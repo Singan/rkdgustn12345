@@ -1,7 +1,16 @@
 package com.naver.repository.domain;
+
+import java.util.Calendar;
+
 //달력 스케쥴 테이블
 public class Diary {
-
+	
+	public Diary() {
+		Calendar cal = Calendar.getInstance();
+		diaryMonth = cal.get(Calendar.MONTH);
+		diaryYear = cal.get(Calendar.YEAR);
+	}
+	
  // 년 
  private Integer diaryYear;
 
@@ -55,6 +64,7 @@ public class Diary {
 
  public void setFileGroupNo(Integer fileGroupNo) {
      this.fileGroupNo = fileGroupNo;
+     
  }
 
  // ToDiary 모델 복사

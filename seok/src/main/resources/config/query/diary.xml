@@ -13,7 +13,7 @@
 
 
 <select id="page" parameterType="diary" resultMap="diaryMap">
-	select * from TO_DIARY where DIARY_YEAR=2017 and DIARY_MONTH = 11 order by DIARY_DAY asc;
+	select * from TO_DIARY where DIARY_YEAR=#{diaryYear} and DIARY_MONTH =#{diaryMonth} order by DIARY_DAY asc
 </select>
 
 </mapper>
