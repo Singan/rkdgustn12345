@@ -16,16 +16,17 @@
 	<div class="form-group">
 		<h1>Log in to Seok</h1>
 		<div class="form-group">
-			<form class="form-horizontal">
+			<form class="form-horizontal" action="${pageContext.request.contextPath}/main.jsp"
+						method="post">
 				<div class="form-group">
 					<div>
-					<label>ID</label>
-					<input type="text" name="id">
+						<label>ID</label>
+						<input type="text" name="id">
 					</div>
-						<div>
-					<label>Password</label>
-					<input type="password" name="password">
-						</div>
+					<div>
+						<label>Password</label>
+						<input type="password" name="password">
+					</div>
 				</div>
 				<div>
 					<button>로그인</button>
@@ -37,5 +38,11 @@
 			</div>
 		</form>
 	<div>
+	
+	<script>
+		if("${msg}") {
+			alert("${msg}");
+		}
+	</script>
 </body>
 </html>

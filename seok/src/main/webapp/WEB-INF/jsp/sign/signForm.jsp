@@ -10,7 +10,7 @@
 	<div class="form-group">
 		<h1>Create a Seok Account</h1>
 		<div class="form-group">
-			<form class="form-horizontal">
+			<form class="form-horizontal" action="${pageContext.request.contextPath}/sign/signUp.do">
 				<div class="form-group">
 					<div>
 						<label>ID</label>
