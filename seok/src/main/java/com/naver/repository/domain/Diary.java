@@ -6,9 +6,7 @@ import java.util.Calendar;
 public class Diary {
 	
 	public Diary() {
-		Calendar cal = Calendar.getInstance();
-		diaryMonth = cal.get(Calendar.MONTH);
-		diaryYear = cal.get(Calendar.YEAR);
+		
 	}
 	
  // 년 

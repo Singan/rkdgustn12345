@@ -26,6 +26,10 @@ public class DiaryController {
 	@ResponseBody
 	@RequestMapping("/createDiary.json")
 	public List<Diary> createDiary(Diary diary){
+		System.out.println("제이슨 월"+diary.getDiaryMonth());
+		System.out.println("제이슨 일"+diary.getDiaryDay());
+		System.out.println("제이슨 년"+diary.getDiaryYear());
+		System.out.println("제이슨 접근 성공");
 		return  diaryService.page(diary);
 		
 	}
