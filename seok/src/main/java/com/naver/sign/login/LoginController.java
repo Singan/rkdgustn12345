@@ -23,6 +23,9 @@ public class LoginController {
 		Member member = new Member();
 		member.setMemberId("admin");
 		member.setMemberPass("1234");
+		member.setMemberName("관리자");
+		member.setMemberNo(1);
+		member.setMemberEmail("standoff@naver.com");
 		session.setAttribute("user", member); 
 		attr.addFlashAttribute("msg", "로그인 되었습니다.");
 		return "redirect:/sign/main.do";
