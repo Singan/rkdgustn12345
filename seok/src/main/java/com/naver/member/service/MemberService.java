@@ -1,11 +1,11 @@
-package com.naver.repository.mapper;
+package com.naver.member.service;
 
 import java.util.List;
 
 import com.naver.repository.domain.Member;
 
-public interface MemberMapper {
-	
+
+public interface MemberService {
 	public List<Member> selectMember() throws Exception;
 	
 	public Member detailMember(String id) throws Exception;
@@ -16,3 +16,4 @@ public interface MemberMapper {
 	
 	public void updateMember(Member member) throws Exception;
 }
+

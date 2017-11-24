@@ -1,5 +1,7 @@
 package com.naver.sign.signUp;
 
-public class SignUpServiceImpl {
+public class SignUpServiceImpl implements SignUpService{
 
+	
+	
 }

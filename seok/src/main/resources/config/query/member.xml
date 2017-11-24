@@ -9,4 +9,46 @@
 			To_Member_SEQ.nextval, #{member_id}, #{member_pass}, #{member_email}, #{member_name};
 		);
 	</insert>
+	
+	<resultMap type="member" id="memberMap">
+		<result column="member_no" property="memberNo" /> 
+		<result column="member_id" property="memberId" /> 
+		<result column="member_pass" property="memberPass" /> 
+		<result column="member_email" property="memberEmail" /> 
+		<result column="member_name" property="memberName" /> 
+	</resultMap>
+	
+	<select id="selectMemeber" parameterType="String" resultMap="memberMap">
+		select *
+		from to_member
+	</select>
+	
+	<insert id="insertMember" parameterType="member">
+		insert into to_member(
+			member_no, member_id, member_pass, member_email, member_name
+		)
+		values(
+			member_no_seq.nextval, #{member_id}, #{member_pass}, #{member_email}, #{member_name}
+		)
+	</insert>
+	
+	<delete id="deleteMember" parameterType="String">
+		delete from
+			to_member
+		where member_id = #{member_id} 
+	</delete>	
+	
+	<update id="updateMember" parameterType="String">
+		update to_member 
+		set member_email = #{member_email},
+			member_pass = #{member_pass},
+			member_name = #{member_name}
+		where member_id = #{member_id}
+	</update>
+	
+	<select id="detailMember" parameterType="String" resultType="member">
+		select *
+		from to_member
+		where member_id = #{member_id}
+	</select>
 </mapper>

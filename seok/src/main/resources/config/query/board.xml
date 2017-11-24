@@ -23,7 +23,7 @@
 		order by board_no
 	</select>
 	
-	<insert id="inserBoard" parameterType="member">
+	<insert id="inserBoard" parameterType="board">
 		insert into to_board(
 			board_no, category_no, board_name, board_writer, board_views, member_no,
 			board_content, file_group_no, board_image_path
