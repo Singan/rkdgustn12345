@@ -65,6 +65,7 @@ form {
 	width: 100%;
 }
 
+
 .form-item input:focus {
 	border-bottom: 2px solid #c0c0c0;
 	outline: none;
@@ -117,12 +118,12 @@ form {
 		<h1>Log in to Seok</h1>
 		<form action="${pageContext.request.contextPath}/sign/login.do" method="post">
 			<div class="form-item">
-				<label for="ID"></label> <input type="text" name="name"
+				<label for="ID"></label> <input type="text" name="memberId"
 					required="required" placeholder="ID"></input>
 			</div>
 			<div class="form-item">
 				<label for="password"></label> <input type="password"
-					name="password" required="required" placeholder="Password"></input>
+					name="memberPass" required="required" placeholder="Password"></input>
 			</div>
 			<div class="button-panel">
 				<input type="submit" class="button" title="로그인" value="로그인"></input>

@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.naver.member.controller.MemberController;
 import com.naver.member.service.MemberService;
-import com.naver.member.serviceImp.MemberServiceImp;
 import com.naver.repository.domain.Member;
 
 @Controller
@@ -24,11 +22,12 @@ public class SignUpController {
 	
 	@RequestMapping("/sign/signUp.do")
 	public String signUp(@ModelAttribute("member") Member member, RedirectAttributes attr) {
-		String id = member.getMemberId();
+		System.out.println(member.getMemberPass());
+		System.out.println(member.getMemberEmail());
 		System.out.println(member.getMemberId());
-		
+		System.out.println(member.getMemberName());
 		try {
-			//memberService.insertMember(member);
+			memberService.insertMember(member);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

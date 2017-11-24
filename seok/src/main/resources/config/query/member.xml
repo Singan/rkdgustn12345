@@ -2,14 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.naver.repository.mapper.MemberMapper">
-	<insert id="listMember" parameterType="member">
-		insert into to_member(
-			member_no, memeber_id, member_pass, member_email, member_name
-		) values(
-			To_Member_SEQ.nextval, #{member_id}, #{member_pass}, #{member_email}, #{member_name};
-		);
-	</insert>
-	
 	<resultMap type="member" id="memberMap">
 		<result column="member_no" property="memberNo" /> 
 		<result column="member_id" property="memberId" /> 
@@ -28,27 +20,31 @@
 			member_no, member_id, member_pass, member_email, member_name
 		)
 		values(
-			member_no_seq.nextval, #{member_id}, #{member_pass}, #{member_email}, #{member_name}
+			to_member_no_seq.nextval, 
+			#{memberId}, 
+			#{memberPass},
+			 #{memberEmail},
+			  #{memberName}
 		)
 	</insert>
 	
 	<delete id="deleteMember" parameterType="String">
 		delete from
 			to_member
-		where member_id = #{member_id} 
+		where member_id = #{memberId} 
 	</delete>	
 	
 	<update id="updateMember" parameterType="String">
 		update to_member 
-		set member_email = #{member_email},
-			member_pass = #{member_pass},
-			member_name = #{member_name}
-		where member_id = #{member_id}
+		set member_email = #{memberEmail},
+			member_pass = #{memberPass},
+			member_name = #{memberName}
+		where member_id = #{memberId}
 	</update>
 	
-	<select id="detailMember" parameterType="String" resultType="member">
+	<select id="detailMember" parameterType="String" resultMap="memberMap">
 		select *
 		from to_member
-		where member_id = #{member_id}
+		where member_id = #{memberId}
 	</select>
 </mapper>
