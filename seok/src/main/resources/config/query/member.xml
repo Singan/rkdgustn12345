@@ -20,7 +20,7 @@
 			member_no, member_id, member_pass, member_email, member_name
 		)
 		values(
-			to_member_no_seq.nextval, 
+			to_member_seq.nextval, 
 			#{memberId}, 
 			#{memberPass},
 			 #{memberEmail},
