@@ -4,7 +4,7 @@
 <mapper namespace="com.naver.repository.mapper.DiaryMapper">
 <resultMap type="diary" id="diaryMap">
 		<result column="DIARY_YEAR" property="diaryYear" />
-		<result column="DIARY_MOMTH" property="diaryMonth" />
+		<result column="DIARY_MONTH" property="diaryMonth" />
 		<result column="DIARY_DAY" property="diaryDay" />
 		<result column="DIARY_CONTENT" property="diaryContent" />
 		<result column="FILE_GROUP_NO" property="fileGroupNo" />

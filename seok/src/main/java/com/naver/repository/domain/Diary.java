@@ -12,7 +12,13 @@ public class Diary {
  // 년 
  private Integer diaryYear;
 
- // 월 
+ @Override
+public String toString() {
+	return "Diary [diaryYear=" + diaryYear + ", diaryMonth=" + diaryMonth + ", diaryDay=" + diaryDay + ", diaryContent="
+			+ diaryContent + ", fileGroupNo=" + fileGroupNo + "]";
+}
+
+// 월 
  private Integer diaryMonth;
 
  // 일 
