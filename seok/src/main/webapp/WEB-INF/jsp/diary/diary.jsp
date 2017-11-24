@@ -68,7 +68,7 @@ body {
 			dataType:"json",
 			success:function(data){
 				console.log("실행됨")
-				diaryFulling(data);
+				diaryFulling(data,da);
 			}
 		})
 	})

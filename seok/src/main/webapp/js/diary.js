@@ -25,7 +25,7 @@
 
 
 // 달력채우기
-function diaryFulling(data){
+function diaryFulling(data,date){
 		for(var i = 0;i<data.length;i++){
 			var day = {	
 			}
@@ -61,7 +61,7 @@ function diaryFulling(data){
 			 	   day: "yyyy년 MMM d일 dddd"
 			 	   },  */
 			 	// 오늘,드래그 , 모르는거
-	              defaultDate :  data[0].diaryYear+"-"+tenLg(data[0].diaryMonth)+"-"+tenLg(data[0].diaryDay),
+	              defaultDate :  (date.getYear()+1900)+"-"+tenLg(date.getMonth()+1)+"-"+tenLg(date.getDate()),
 	             editable : false,
 	             eventLimit : true,
 	             eventLimitText:"더보기",
@@ -83,7 +83,7 @@ function diaryFulling(data){
 		            element.click(function() {
 		            	
 		            	$("#eventContent").dialog({ 
-		            	modal: true, width:350,
+		            	modal: false, width:350,
 		            	title: event.year + "년도 " +tenLg(event.month) +"월 " + tenLg(event.day) + "일",
 		                resizable: true,
 		            	});
