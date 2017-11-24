@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<a href="${pageContext.request.contextPath}/sign/logout.do">.</a></br>
 	<a href="${pageContext.request.contextPath}/sign/signForm.do">signUp</a></br>
 	<a href="${pageContext.request.contextPath}/sign/login.do">login</a></br>
 	<a href="${pageContext.request.contextPath}/board/free.do">free</a></br>
@@ -18,7 +19,8 @@
 		if("${msg}") {
 			alert("${msg}");
 		}
-	
+		console.dir("${sessionScope.user.memberId}");
+		
 	</script>
 </body>
 </html>
