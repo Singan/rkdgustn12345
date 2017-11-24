@@ -10,15 +10,13 @@ import com.naver.repository.domain.Member;
 
 @Controller
 public class LoginController {
-	@RequestMapping("/sign/loginForm") 
+	@RequestMapping("/sign/loginForm.do") 
 	public String loginForm() {
 		return "redirect:/loginForm.jsp";
 	}
 
-	@RequestMapping("/sign/main") 
-	public String sign() {
-		return "redirect:/main/main.jsp";
-	}
+	@RequestMapping("/main/main") 
+	public void sign() {}
 	
 	@RequestMapping("/sign/login.do")
 	public String login(HttpSession session, RedirectAttributes attr) {
@@ -30,7 +28,7 @@ public class LoginController {
 		member.setMemberEmail("standoff@naver.com");
 		session.setAttribute("user", member); 
 		attr.addFlashAttribute("msg", "로그인 되었습니다.");
-		return "redirect:/sign/main.do";
+		return "redirect:/main/main.do";
 	}
 	
 	@RequestMapping("/sign/logout.do")

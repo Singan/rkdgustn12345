@@ -16,7 +16,7 @@ public class SignUpController {
 	@RequestMapping("/sign/signForm")
 	public void signForm() {}
 	
-	@RequestMapping("/sign/signUp.do")
+	@RequestMapping("/sign/signUp.json")
 	public String signUp(Member member, RedirectAttributes attr) {
 		String id = member.getMemberId();
 		System.out.println(member.getMemberId());
