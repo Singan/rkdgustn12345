@@ -35,6 +35,6 @@ public class LoginController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		
-		return "redirect:/sign/loginForm";
+		return "redirect:/sign/loginForm.do";
 	}
 }
