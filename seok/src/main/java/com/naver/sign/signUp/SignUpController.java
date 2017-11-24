@@ -19,7 +19,7 @@ public class SignUpController {
 	@RequestMapping("/sign/signUp.do")
 	public String signUp(Member member, RedirectAttributes attr) {
 		String id = member.getMemberId();
-		
+		System.out.println(member.getMemberId());
 		MemberController memberCon = new MemberController();
 		
 		try {

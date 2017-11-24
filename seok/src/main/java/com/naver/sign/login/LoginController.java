@@ -16,7 +16,9 @@ public class LoginController {
 	}
 
 	@RequestMapping("/sign/main") 
-	public void sign() {}
+	public String sign() {
+		return "redirect:/main/main.jsp";
+	}
 	
 	@RequestMapping("/sign/login.do")
 	public String login(HttpSession session, RedirectAttributes attr) {
