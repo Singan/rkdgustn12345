@@ -65,6 +65,7 @@ form {
 	width: 100%;
 }
 
+
 .form-item input:focus {
 	border-bottom: 2px solid #c0c0c0;
 	outline: none;
