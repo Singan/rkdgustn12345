@@ -1,4 +1,4 @@
-package com.naver.member.controller;
+package com.naver.member.mypage;
 
 import java.util.List;
 
@@ -11,18 +11,15 @@ import com.naver.member.service.MemberService;
 import com.naver.repository.domain.Member;
 
 @Controller
-public class MemberController {
+@RequestMapping("/member")
+public class MypageController {
 	
 	@Autowired
 	private MemberService memberService;
 	
-	@Transactional
-	public void selectMember() throws Exception {
-		List<Member> list = memberService.selectMember(); 
-	}
-	
-	@Transactional
-	public void insertMember(Member member) throws Exception {
-		memberService.insertMember(member);
+	@RequestMapping("/myPage.do")
+	public String myPage(){
+		
+		return "/member/myPage";
 	}
 }

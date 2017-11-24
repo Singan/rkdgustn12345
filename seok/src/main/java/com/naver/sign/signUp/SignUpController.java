@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.naver.member.controller.MemberController;
 import com.naver.member.service.MemberService;
-import com.naver.member.serviceImp.MemberServiceImp;
 import com.naver.repository.domain.Member;
 
 @Controller
