@@ -11,8 +11,7 @@ import com.naver.repository.domain.Member;
 @Controller
 public class LoginController {
 	@RequestMapping("/sign/loginForm.do") 
-	public String loginForm() {
-		return "redirect:/loginForm.jsp";
+	public void loginForm() {
 	}
 
 	@RequestMapping("/main/main") 

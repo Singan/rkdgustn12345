@@ -113,7 +113,7 @@ form {
 <body>
 	<div class="form-wrapper">
 		<h1>Create a Seok Account</h1>
-		<form action="${pageContext.request.contextPath}/sign/signUp.json" method="post">
+		<form action="${pageContext.request.contextPath}/sign/signUp.do" method="post">
 			<div class="form-item">
 				<label for="ID"></label> <input type="text" name="name"
 					required="required" placeholder="ID"></input>

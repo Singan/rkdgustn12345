@@ -2,7 +2,9 @@ package com.naver.sign.signUp;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -13,17 +15,20 @@ import com.naver.repository.domain.Member;
 
 @Controller
 public class SignUpController {
+	
+	@Autowired
+	private MemberService memberService;
+
 	@RequestMapping("/sign/signForm")
 	public void signForm() {}
 	
-	@RequestMapping("/sign/signUp.json")
-	public String signUp(Member member, RedirectAttributes attr) {
+	@RequestMapping("/sign/signUp.do")
+	public String signUp(@ModelAttribute("member") Member member, RedirectAttributes attr) {
 		String id = member.getMemberId();
 		System.out.println(member.getMemberId());
-		MemberController memberCon = new MemberController();
 		
 		try {
-			memberCon.insertMember(member);
+			//memberService.insertMember(member);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
