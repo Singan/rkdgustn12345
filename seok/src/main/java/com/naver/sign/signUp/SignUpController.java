@@ -22,11 +22,12 @@ public class SignUpController {
 	
 	@RequestMapping("/sign/signUp.do")
 	public String signUp(@ModelAttribute("member") Member member, RedirectAttributes attr) {
-		String id = member.getMemberId();
+		System.out.println(member.getMemberPass());
+		System.out.println(member.getMemberEmail());
 		System.out.println(member.getMemberId());
-		
+		System.out.println(member.getMemberName());
 		try {
-			//memberService.insertMember(member);
+			memberService.insertMember(member);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

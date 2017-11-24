@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -113,18 +113,23 @@ form {
 <body>
 	<div class="form-wrapper">
 		<h1>Create a Seok Account</h1>
-		<form action="${pageContext.request.contextPath}/sign/signUp.do" method="post">
+		<form action="${pageContext.request.contextPath}/sign/signUp.do"
+			method="post">
 			<div class="form-item">
-				<label for="ID"></label> <input type="text" name="name"
+				<label for="ID"></label> <input type="text" name="memberId"
 					required="required" placeholder="ID"></input>
 			</div>
 			<div class="form-item">
-				<label for="Email"></label> <input type="email" name="email"
+				<label for="이름"></label> <input type="text" name="memberName"
+					required="required" placeholder="이름"></input>
+			</div>
+			<div class="form-item">
+				<label for="Email"></label> <input type="email" name="memberEmail"
 					required="required" placeholder="Email"></input>
 			</div>
 			<div class="form-item">
 				<label for="password"></label> <input type="password"
-					name="password" required="required" placeholder="Password"></input>
+					name="memberPass" required="required" placeholder="Password"></input>
 			</div>
 			<div class="button-panel">
 				<input type="submit" class="button" title="회원가입" value="회원가입"></input>
