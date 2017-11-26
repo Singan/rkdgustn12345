@@ -1,5 +1,9 @@
 package com.naver.board.free;
 
-public class FreeController {
+import org.springframework.stereotype.Controller;
 
+@Controller
+public class FreeController {
+	
+	
 }
