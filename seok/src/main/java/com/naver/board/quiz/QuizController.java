@@ -1,12 +1,12 @@
-package com.naver.board.question;
+package com.naver.board.quiz;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class QuestionController {
+public class QuizController {
 	
-	@RequestMapping("/board/question")
-	public void question() {}
+	@RequestMapping("/board/quiz")
+	public void quiz() {}
 	
 }
