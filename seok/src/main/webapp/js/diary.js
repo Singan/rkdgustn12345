@@ -25,7 +25,7 @@
 
 
 // 달력채우기
-function diaryFulling(data){
+function diaryFulling(data,date){
 		for(var i = 0;i<data.length;i++){
 			var day = {	
 			}
@@ -34,34 +34,14 @@ function diaryFulling(data){
 			day.day=data[i].diaryDay;
 			day.year = data[i].diaryYear;
 			day.month = data[i].diaryMonth;
-			dList[i]=day;		
-			
-			for(var i = 0;i<data.length;i++){
-				var day = {	
-				}
-				day.title = data[i].diaryContent
-				day.start=data[i].diaryYear+"-"+tenLg(data[i].diaryMonth)+"-"+tenLg(data[i].diaryDay)
-				day.day=data[i].diaryDay;
-				day.year = data[i].diaryYear;
-				day.month = data[i].diaryMonth;
-				dList[i]=day;		
-				
-			}
-			
+			dList[i]=day;
+		}
 			 jQuery("#calendar").fullCalendar({
-				 // 헤더
 			 	header:{
 			 		center:"title",
 			 		left:""
 			 	},
-			 	// 날짜포맷
-			 	/*  titleFormat: {
-			 	   month: "yyyy년 MMMM",
-			 	   week: "[yyyy] MMM dd일{ [yyyy] MMM dd일}",
-			 	   day: "yyyy년 MMM d일 dddd"
-			 	   },  */
-			 	// 오늘,드래그 , 모르는거
-	              defaultDate :  data[0].diaryYear+"-"+tenLg(data[0].diaryMonth)+"-"+tenLg(data[0].diaryDay),
+	             defaultDate :  (date.getYear()+1900)+"-"+tenLg(date.getMonth()+1)+"-"+tenLg(date.getDate()),
 	             editable : false,
 	             eventLimit : true,
 	             eventLimitText:"더보기",
@@ -78,18 +58,33 @@ function diaryFulling(data){
 	            lang:"ko"
 	            , events: dList
 		        ,  eventRender: function (event, element) {
-//			        	element.find('.fc-title').prepend(event.day); 
-		            /* element.attr('href', 'javascript:void(1);'); */
+		        	console.log("언제실행되지")
 		            element.click(function() {
-		            	
-		            	$("#eventContent").dialog({ 
-		            	modal: true, width:350,
-		            	title: event.year + "년도 " +tenLg(event.month) +"월 " + tenLg(event.day) + "일",
-		                resizable: true,
-		            	});
+		            	dialogCreate(event.year+"-"+event.month+"-"+event.day);
 		            });
-		        }
+		            
+		        },
+			 
 	        })
 			
+		
+	}
+	function dialogCreate(event){
+		$("#eventContent").dialog({ 
+        	modal: false, width:350,
+        	title: event,
+            resizable: true,
+        	});
+		if(event.title){
+		$("#eventInfo").html(event.title);
 		}
 	}
+	
+	$("#evenContent").click(function (){
+		console.log("일단 먹음")
+		if($("p#eventInfo").is()){
+			console.log("일단 있슴")
+		$("#eventInfo").replaceWith("<textarea>"+$("#eventInfo").html()+"</textarea>")
+		}
+	});
+
