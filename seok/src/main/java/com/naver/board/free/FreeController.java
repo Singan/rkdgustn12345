@@ -10,17 +10,10 @@ public class FreeController {
 	@RequestMapping("/free")
 	public void free() {}
 	
-	
-	@RequestMapping("/freeDetailForm.do")
+	@RequestMapping("/freeDetailForm") 
 	public void freeDetailForm() {}
 	
-	@RequestMapping("/freeDetail.do") 
-	public String freeDetail() {
-		
-		return "redirect:/board/freeDetailForm.do";
-	}
-	
-	
-	
+	@RequestMapping("/freeWriteForm")
+	public void freeWriteForm() {}
 	
 }

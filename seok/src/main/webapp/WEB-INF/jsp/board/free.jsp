@@ -37,7 +37,7 @@
 			<tbody>
 				<tr>
 					<td>
-						<a href="${pageContext.request.contextPath}/board/freeDetail.do">01</a>
+						<a href="${pageContext.request.contextPath}/board/freeDetailForm.do">01</a>
 					</td>
 					<td>18</td>
 					<td>Alemanha</td>
@@ -91,7 +91,7 @@
 							</div>
 						</div>
 						<div class="pull-right">
-							<a href="" class="btn btn-default">글쓰기</a>
+							<a href="${pageContext.request.contextPath}/board/freeWriteForm.do" class="btn btn-default">글쓰기</a>
 						</div>
 					</td>
 				</tr>
