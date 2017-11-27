@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
-<script src='/seok/node_modules/jquery/dist/jquery.min.js?1=1999'></script>
+<script src='/seok/node_modules/jquery/dist/jquery.min.js?1=199'></script>
 <script src='/seok/node_modules/jquery-ui-1.12.1/jquery-ui.js'></script>
 
 <link href='/seok/node_modules/fullcalendar/dist/fullcalendar.css'
@@ -17,7 +17,7 @@
 
 <script src='/seok/node_modules/moment/min/moment.min.js'></script>
 <script src='/seok/node_modules/fullcalendar/dist/fullcalendar.js'></script>
-<script src='/seok/js/diary.js?1231=12312321'></script>
+<script src='/seok/js/diary.js?121=121'></script>
 <link href='/seok/node_modules/jquery-ui-1.12.1/jquery-ui.css'
 	rel='stylesheet'></link>
 <style type="text/css">
@@ -27,30 +27,38 @@ body {
 	font-family: "consolas", Helvetica, Arial, Verdana, sans-serif;
 	font-size: 14px;
 }
-
+html,body{
+	height:100%;
+}
 #calendar {
 	max-width: 900px;
 	margin: 0 auto;
 }
-
-.fc-content {
-	height: 50px;
+#eventInfo{
+	height: 100%;
 }
-
+.fc-content {
+	height: 60px;
+}
+span.fc-title{
+	display: inline-block;
+	height: 100%;
+}
 .fc-sat {
 	color: #0000FF;
 } /* 토요일 */
 .fc-sun {
 	color: #FF0000;
 }
+
+
 </style>
 </head>
 <body>
 
 	<div id="calendar"></div>
 	<div id="eventContent" title="" style="display: none;">
-
-		<p id="eventInfo"></p>
+	<div id="eventInfo" contenteditable="true"></div>
 	</div>
 	<script type="text/javascript">
 	
@@ -62,7 +70,7 @@ body {
 		}
 		;
 		var eve;
-	
+		
 		$(document).ready(function() {
 			da = new Date();
 			$.ajax({
@@ -74,18 +82,17 @@ body {
 				},
 				dataType : "json",
 				success : function(data) {
-				diaryFulling(data, da);
-				$(".fc-day").on("click", function() {
-					console.log($(this).data("date"));
-					dialogCreate($(this).data("date"));
-				});
+					diaryFulling(data, da);
+					$(".fc-day").on("click", function() {
+						console.log($("#e"+$(this).data("date")));
+						dialogCreate($(this).data("date"),$("#e"+$(this).data("date")));
+					});
+					$("td.fc-day-top").off();
+				
+					console.log($(".fc-day-top"));
 				}
 			})
 		})
-		
 	</script>
-
-
-
 </body>
 </html>

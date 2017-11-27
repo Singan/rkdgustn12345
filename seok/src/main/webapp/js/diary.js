@@ -31,9 +31,9 @@ function diaryFulling(data,date){
 			}
 			day.title = data[i].diaryContent
 			day.start=data[i].diaryYear+"-"+tenLg(data[i].diaryMonth)+"-"+tenLg(data[i].diaryDay)
-			day.day=data[i].diaryDay;
+			day.day=tenLg(data[i].diaryDay);
 			day.year = data[i].diaryYear;
-			day.month = data[i].diaryMonth;
+			day.month = tenLg(data[i].diaryMonth);
 			dList[i]=day;
 		}
 			 jQuery("#calendar").fullCalendar({
@@ -55,14 +55,18 @@ function diaryFulling(data,date){
 	            month : "월별",
 	            week : "주별",
 	            day : "일별",
-	            lang:"ko"
+	            lang:"ko",
+	            	dayClick:function(date, jsEvent, view) {
+	            		dialogCreate(date.format())
+			        }
 	            , events: dList
 		        ,  eventRender: function (event, element) {
-		        	console.log("언제실행되지")
+		        	element.children()[0].id = "e" + event.year+"-"+event.month+"-"+event.day;
+		        	element.off("click");
 		            element.click(function() {
 		            	dialogCreate(event.year+"-"+event.month+"-"+event.day);
 		            });
-		            
+		           
 		        },
 			 
 	        })
@@ -70,21 +74,29 @@ function diaryFulling(data,date){
 		
 	}
 	function dialogCreate(event){
+		$("#eventInfo").html("");
 		$("#eventContent").dialog({ 
         	modal: false, width:350,
         	title: event,
             resizable: true,
+            close:function(){
+          
+            	$("#e"+event).children().html($("#eventInfo").html());      
+            },
+			buttons:{
+				"저장":save
+			}
         	});
-		if(event.title){
-		$("#eventInfo").html(event.title);
+		if($("#e"+event)){
+			console.log($("#e"+event));
+		$("#eventInfo").html($("#e"+event).children().html());
 		}
 	}
-	
+	function save(){
+		console.log("asdasdasd")
+	}
 	$("#evenContent").click(function (){
 		console.log("일단 먹음")
-		if($("p#eventInfo").is()){
-			console.log("일단 있슴")
-		$("#eventInfo").replaceWith("<textarea>"+$("#eventInfo").html()+"</textarea>")
-		}
+		
 	});
 
