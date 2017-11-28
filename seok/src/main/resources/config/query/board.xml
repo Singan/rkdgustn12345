@@ -5,6 +5,7 @@
 	
 	<resultMap id="boardMap" type="board">
 		<result column="category_no" property="categoryNo" />
+		<result column="board_no" property="boardNo" />
 		<result column="board_name" property="boardName" />
 		<result column="board_writer" property="boardWriter" />
 		<result column="board_views" property="boardViews" />
@@ -16,20 +17,32 @@
 	</resultMap>
 	
 	
-	<select id="listBoard" parameterType="int" resultMap="boardMap">
+	<select id="selectBoard" parameterType="int" resultMap="boardMap">
 		select  *
 		 from to_board
-		where board_no = #{board_no}
-		order by board_no
+		where category_no = #{categoryNo}
+		order by board_no desc
 	</select>
 	
-	<insert id="inserBoard" parameterType="board">
+	<insert id="insertBoard" parameterType="board">
 		insert into to_board(
-			board_no, category_no, board_name, board_writer, board_views, member_no,
-			board_content, file_group_no, board_image_path
+			board_no, category_no, board_name, board_writer, member_no,
+			board_content
+			 <if test='fileGroupNo != null'>
+			 	, file_group_no
+			 </if>
+			 <if test='boardImagePath != null'>
+			  	 ,board_image_path
+			 </if> 
 		) values(
-			board_no_seq.nextval, #{category_no}, #{board_name}, #{board_writer}, #{board_views}, #{member_no},
-			#{board_content}, #{file_group_no}, #{board_image_path} 
+			To_Board_SEQ.nextval, #{categoryNo}, #{boardName}, #{boardWriter}, #{memberNo},
+			#{boardContent}
+			 <if test='fileGroupNo != null'>
+			 	,#{fileGroupNo}
+			 </if>
+			 <if test='boardImagePath != null'>
+			  	 ,#{boardImagePath} 
+			 </if> 
 		) 
 	</insert>
 	

@@ -17,7 +17,7 @@ public class SignUpController {
 	@Autowired
 	private MemberService memberService;
 
-	@RequestMapping("/sign/signForm")
+	@RequestMapping("/sign/signForm.do")
 	public void signForm() {}
 	
 	@RequestMapping("/sign/signUp.do")

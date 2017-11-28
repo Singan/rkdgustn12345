@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,41 +36,18 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>
-						<a href="${pageContext.request.contextPath}/board/freeDetailForm.do">01</a>
-					</td>
-					<td>18</td>
-					<td>Alemanha</td>
-					<td>Berlin</td>
-					<td>MT</td>
-					<td>Foto | Excluir</td>
-				</tr>
-				<tr>
-					<td>02</td>
-					<td>55</td>
-					<td>Brasil</td>
-					<td>Rio Grande</td>
-					<td>RS</td>
-					<td>Foto | Excluir</td>
-				</tr>
-				<tr>
-					<td>03</td>
-					<td>42</td>
-					<td>Estados Unidos</td>
-					<td>Saint Louis</td>
-					<td>OK</td>
-					<td>Foto | Excluir</td>
-				</tr>
-
-				<tr>
-					<td>01</td>
-					<td>18</td>
-					<td>Alemanha</td>
-					<td>Berlin</td>
-					<td>MT</td>
-					<td>Foto | Excluir</td>
-				</tr>
+				<c:forEach var='list' items="${list}">
+					<tr>
+						<td>
+							<a href="${pageContext.request.contextPath}/board/freeDetailForm.do">${list.boardNo}</a>
+						</td>
+						<td>${list.boardName}</td>
+						<td>${list.memberName}</td>
+						<td>${list.boardDate}</td>
+						<td>${list.boardViews}</td>
+						<td>${list.boardUp} | -${list.boardDown }</td>
+					</tr>
+				</c:forEach>
 				<tr>
 					<td colspan="6" align="center">
 						<div id="toolbar" class="btn-group" class="pull-left">

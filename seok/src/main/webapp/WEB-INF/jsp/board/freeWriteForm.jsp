@@ -19,24 +19,24 @@
 	<br>
 	<form class="form-inline" action="${pageContext.request.contextPath}/board/freeWrite.do">
 	<div class="form-group container-fluid">
-		<table class="table table-striped table-bordered table-responsive">
+		<table class="table table-striped table-bordered">
 			<thead>
 				<tr>
- 						<div padding="30px" class="container-fluid">
-							<div class="pull-left">
-								<a href="${pageContext.request.contextPath}/board/free.do">
-									<img src="${pageContext.request.contextPath}/css/backlist.jpg" width="100px">
-								</a>	
-							</div>
-							
-							<div class="col-xs-7">
-								<input type="text" class="form-control" placeholder="제목">
-							</div>
-							 	
-							<div class="pull-right">
-								<button class="btn btn-default">작성</button>				
-							</div>
+					<div padding="30px" class="container-fluid">
+						<div class="pull-left">
+							<a href="${pageContext.request.contextPath}/board/free.do">
+								<img src="${pageContext.request.contextPath}/css/backlist.jpg" width="100px">
+							</a>	
 						</div>
+						
+						<div class="col-xs-7">
+							<input type="text" name="boardName" class="form-control" placeholder="제목">
+						</div>
+						 	
+						<div class="pull-right">
+							<button class="btn btn-default">작성</button>				
+						</div>
+					</div>
 				</tr>
 			</thead>
 			<tbody>
@@ -57,7 +57,7 @@
 				<tr>
 					<td>
 						<div>
-							<textarea class="form-control col-sm-5" rows="10" style='overflow:hidden;'></textarea>
+							<textarea class="form-control col-sm-5" name="boardContent" rows="10" style='overflow:hidden;'></textarea>
 						</div>
 					</td>
 				</tr>

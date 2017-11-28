@@ -18,10 +18,9 @@ public class LoginController {
 	private MemberService memberService;
 	
 	@RequestMapping("/sign/loginForm.do") 
-	public void loginForm() {
-	}
+	public void loginForm() {}
 
-	@RequestMapping("/main/main") 
+	@RequestMapping("/main/main.do") 
 	public void sign() {}
 	
 	@RequestMapping("/sign/login.do")
@@ -33,7 +32,7 @@ public class LoginController {
 			member = memberService.detailMember(id);
 			if(member == null) {
 				attr.addFlashAttribute("msg", "없는 아이디 입니다.");
-				return "redirect:/sign/loginForm.do";
+				return "redirect:/sign/loginform.do";
 			}
 			
 		} catch (Exception e) {
