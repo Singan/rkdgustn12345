@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src='/seok/node_modules/jquery/dist/jquery.min.js?1=1991'></script>
+<script src='/seok/node_modules/jquery/dist/jquery.min.js?1=11'></script>
 <script src='/seok/node_modules/jquery-ui-1.12.1/jquery-ui.js'></script>
 
 <link href='/seok/node_modules/fullcalendar/dist/fullcalendar.css'
@@ -58,10 +58,9 @@ span.fc-title{
 
 	<div id="calendar"></div>
 	<div id="eventContent" title="" style="display: none;">
-	<div id="eventInfo" contenteditable="true"></div>
+	<div id="eventInfo" contenteditable="true"></div><div id="filezone"></div>
 	<form id="diaryForm" action="${pageContext.request.contextPath}/diary/save.json" enctype="multipart/form-data">
 	<input name="attach" type="file" multiple="multiple"/>
-
 	</form>
 	</div>
 	<script type="text/javascript">

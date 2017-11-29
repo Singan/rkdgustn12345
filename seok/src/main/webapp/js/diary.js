@@ -30,6 +30,7 @@ var content;
 var currYear,
 	currMonth;
 var currDate;
+var currEvent;
 // 달력채우기
 function diaryFulling(data, date) {
 	for (var i = 0; i < data.length; i++) {
@@ -40,6 +41,7 @@ function diaryFulling(data, date) {
 		day.day = tenLg(data[i].diaryDay);
 		day.year = data[i].diaryYear;
 		day.month = tenLg(data[i].diaryMonth);
+		day.fileList = data[i].file;
 		dList[i] = day;
 	}
 	jQuery("#calendar").fullCalendar({
@@ -62,68 +64,96 @@ function diaryFulling(data, date) {
 		week : "주별",
 		day : "일별",
 		lang : "ko",
-		dayClick : function(date, jsEvent, view) {
-			dialogCreate(date.format())
-			console.dir(date.year)
+		dayClick : function(date, jsEvent, view,event) {
+			var da = date.format();
+			dialogCreate(da)
+			currDate = da.split("-")[2];
+			currMonth = da.split("-")[1];
+			currYear = da.split("-")[0];
 		},
 		events : dList,
-		eventRender : function(event, element) {
+		eventAfterRender : function(event, element, view) {
+			
+			$(".fc-content").children().each(function(a,b){
+				$(b).html($(b).html());
+			})
 			element.children()[0].id = "e" + event.year + "-" + event.month + "-" + event.day;
 			element.off("click");
 			element.click(function(c) {
-				console.log("이벤트", c)
+				currEvent = event;
 				currYear = event.year;
 				currMonth = event.month ;
 				currDate = event.day;
-				/*currDate = event.day;*/
-				dialogCreate(currYear + "-" + currMonth + "-" + currDate);
+				dialogCreate(currYear + "-" + currMonth + "-" + currDate,event);
 			});
-
 		},
+		eventRender : function(event, element) {
+			
+		},
+		
 	})
 }
-function dialogCreate(event) {
-	content = $("#e" + event).children().html();
+function dialogCreate(event,eveObj) {
+	content = $("#e" + event).children().text();
+	if(eveObj){
+	for(var key in eveObj.fileList){
+		console.log(eveObj.fileList[key]);
+	}}
 	$("#eventInfo").html("");
 	$("#eventContent").dialog({
 		modal : false,
 		width : 350,
 		title : event,
 		resizable : true,
-		close : function() {
-			$("#e" + event).children().html(content);
-		},
+		close : function() {},
 		buttons : {
-			"저장" : save
+			"저장" : function save() {
+				content = $("#eventInfo").html();
+				/*$("#e" + currYear + "-" + currMonth + "-" + currDate).children().remove();*/
+				var fd = new FormData($("#diaryForm")[0]);
+				fd.append("diaryMonth", currMonth);
+				fd.append("diaryYear", currYear);
+				fd.append("diaryDay", currDate);
+				fd.append("diaryContent", content);
+				$.ajax({
+					processData : false,
+					contentType : false,
+					type : "POST",
+					url : getContextPath() + "/diary/save.json",
+					data : fd,
+					error : function(e) {
+						console.log("에러다이개")
+					},
+					success : function(data) {
+						alert("저장 하였습니다.")
+						if(eveObj){
+							$('#calendar').fullCalendar('removeEvents', eveObj._id);
+							
+						}
+						$("#calendar").fullCalendar('addEventSource',
+							[ {
+								title : content,
+								start : currYear + "-" + currMonth + "-" + currDate,
+								year : currYear,
+								month : currMonth,
+								day : currDate
+							} ])
+						$(".fc-content").children().each(function(a,b){
+							$(b).html($(b).html());
+						})
+						
+					}
+				}
+				)
+
+			}
 		}
 	});
 	if ($("#e" + event)) {
 		$("#eventInfo").html(content);
 	}
 }
-function save() {
-	content = $("#eventInfo").html();
-	var fd = new FormData($("#diaryForm")[0]);
-	fd.append("diaryMonth",currMonth);
-	fd.append("diaryYear",currYear);
-	fd.append("diaryDay",currDate);
-	fd.append("diaryContent",content);
-	$.ajax({
-		processData : false,
-		contentType : false,
-		type : "POST",
-		dataType : "json",
-		url : getContextPath() + "/diary/save.json",
-		data : fd,
-		error : function(e) {
-			console.log("에러에러에러에러", e);
-		},
-		success : function(event) {
-			console.log("성공")
-		}
-	})
 
-}
 $("#evenContent").click(function() {
 	console.log("일단 먹음")
 

@@ -31,6 +31,7 @@ public class DiaryServiceImp implements DiaryService {
 	public List<Diary> page(Diary diary) {
 		List<Diary> listDiary = diarymapper.page(diary);
 		for (Diary dia : listDiary) {
+			if(dia.getFileGroupNo() == null) continue;
 			dia.setFile(filemapper.selectFileList(dia.getFileGroupNo()));
 		}
 		return listDiary;
@@ -42,7 +43,6 @@ public class DiaryServiceImp implements DiaryService {
 		Date d = new Date();
 		String uploadDir = servletContext.getRealPath("/upload/"+d.getYear()+"/"+d.getMonth()+"/"+d.getDate());
 		java.io.File ff = new java.io.File(uploadDir);
-		
 		for(MultipartFile file : diary.getAttach()){
 			File f = new File();
 			String originName = file.getOriginalFilename();
@@ -50,6 +50,7 @@ public class DiaryServiceImp implements DiaryService {
 				continue;}
 			if(!ff.exists()) ff.mkdirs();
 			groupNo=diary.getFileGroupNo()==null?filemapper.selectGroupNo():diary.getFileGroupNo();
+			diary.setFileGroupNo(groupNo);
 			f.setFileGroupNo(groupNo); // 그룹넘버
 			f.setFileOriginName(originName); // 원래이름
 			// 확장자 빼기용
@@ -75,7 +76,7 @@ public class DiaryServiceImp implements DiaryService {
 			}
 		}
 		System.out.println(groupNo);
-		diary.setFileGroupNo(groupNo);
+		
 		diarymapper.insertAndUpset(diary);
 	}
 }

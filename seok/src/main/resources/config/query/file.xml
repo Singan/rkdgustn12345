@@ -11,7 +11,7 @@
 	</resultMap>
 	
 	<insert id="insertFile" parameterType="file">
-		insert into TO_FILE(file_no,file_group_no,file_path,file_origin_name,file_system.name) values(
+		insert into TO_FILE(file_no,file_group_no,file_path,file_origin_name,file_system_name) values(
 		TO_FILE_SEQ.nextval,#{fileGroupNo},#{filePath},#{fileOriginName},#{fileSystemName})
 	</insert>
 	<select id="selectFileList" parameterType="int" resultMap="fileMap">
