@@ -1,9 +1,12 @@
 package com.naver.repository.domain;
 
 import java.util.Calendar;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 //달력 스케쥴 테이블
-public class Diary {
+public class Diary{
 	
 	public Diary() {
 		
@@ -11,7 +14,23 @@ public class Diary {
 	
  // 년 
  private Integer diaryYear;
+ private List<File> file;
+ public List<File> getFile() {
+	return file;
+}
 
+public void setFile(List<File> file) {
+	this.file = file;
+}
+
+private MultipartFile[] attach;
+ public MultipartFile[] getAttach() {
+	return attach;
+}
+
+public void setAttach(MultipartFile[] attach) {
+	this.attach = attach;
+}
  @Override
 public String toString() {
 	return "Diary [diaryYear=" + diaryYear + ", diaryMonth=" + diaryMonth + ", diaryDay=" + diaryDay + ", diaryContent="

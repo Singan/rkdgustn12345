@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.naver.repository.mapper.FileMapper">
+	<resultMap type="file" id="fileMap">
+	<result column="FILE_NO" property="fileNo"/>
+	<result column="file_system_name" property="fileSystemName"/>
+	<result column="file_path" property="filePath"/>
+	<result column="file_origin_name" property="fileOriginName"/>
+	<result column="file_group_no" property="fileGroupNo"/>
+	</resultMap>
+	
+	<insert id="insertFile" parameterType="file">
+		insert into TO_FILE(file_no,file_group_no,file_path,file_origin_name,file_system.name) values(
+		TO_FILE_SEQ.nextval,#{fileGroupNo},#{filePath},#{fileOriginName},#{fileSystemName})
+	</insert>
+	<select id="selectFileList" parameterType="int" resultMap="fileMap">
+		select * from to_file where FILE_GROUP_NO = #{fileGroupNO}
+	</select>
+	<select id="selectGroupNo"  resultType="int">
+		select TO_FILE_GROUP_NO_SEQ.NEXTVAL from dual
+	</select>
+</mapper>

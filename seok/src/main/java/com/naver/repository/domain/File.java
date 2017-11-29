@@ -1,12 +1,19 @@
 package com.naver.repository.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 //파일 파일 정보 테이블
 public class File {
+	
+	public File() {
+		// TODO Auto-generated constructor stub
+	}
 
  // 파일 번호 
  private Integer fileNo;
 
- // 파일 그룹 번호 
+
+// 파일 그룹 번호 
  private Integer fileGroupNo;
 
  // 파일 경로 첨부 파일 경로, ;를 구분자로 사용
@@ -18,8 +25,17 @@ public class File {
  public Integer getFileNo() {
      return fileNo;
  }
+ public String fileSystemName;
 
- public void setFileNo(Integer fileNo) {
+ public String getFileSystemName() {
+	return fileSystemName;
+}
+
+public void setFileSystemName(String fileSystemName) {
+	this.fileSystemName = fileSystemName;
+}
+
+public void setFileNo(Integer fileNo) {
      this.fileNo = fileNo;
  }
 
