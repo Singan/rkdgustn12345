@@ -43,7 +43,7 @@
 							<a href="${pageContext.request.contextPath}/board/${b.boardNo}/freeDetail.do">
 								${b.boardName}</a>
 						</td>
-						<td>${b.boardName}</td>
+						<td>${b.boardWriter}</td>
 						<td>${b.boardDate}</td>
 						<td>${b.boardViews}</td>
 						<td>${b.boardUp}</td>

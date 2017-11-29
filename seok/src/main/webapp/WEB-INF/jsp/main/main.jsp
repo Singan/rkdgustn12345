@@ -16,8 +16,10 @@
 	<a href="${pageContext.request.contextPath}/sign/logout.do">로그아웃</a></br>
 	
 	<script>
-		$(document).ready(function () {
-			alert("${msg}");
+		$(function(){
+			if ("${msg}") {
+				alert("${msg}");
+			}
 		});
 	</script>
 </body>

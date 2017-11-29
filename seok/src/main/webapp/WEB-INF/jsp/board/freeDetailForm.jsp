@@ -115,7 +115,7 @@ p {
 						<tbody>
 							<div class="form-group container-fluid">
 								<c:if test="${commentList != null}">
-									<c:forEach var='c' items='commentList'>
+									<c:forEach var='c' items='${commentList}'>
 										<tr>
 											<th>${c.memberName}</th>
 											<td>${c.commentContent}</td>

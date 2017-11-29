@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -28,6 +29,7 @@ public class LoginController {
 	public String login(
 			@ModelAttribute("member") Member member,
 			HttpSession session, 
+			Model model,
 			RedirectAttributes attr) throws Exception{
 		
 		
@@ -35,20 +37,19 @@ public class LoginController {
 		List<Member> memberList = memberService.selectMember();
 		Iterator<Member> iterator =  memberList.iterator();
 		
+		
 		while(iterator.hasNext()) {
 			if(iterator.next().getMemberId().equals(id)) {
-				
 				member = memberService.detailMember(id);
-				
 				session.setAttribute("user", member); 
-				attr.addFlashAttribute("msg", member.getMemberId()+ "님이 로그인 되었습니다.");
+				// attr.addFlashAttribute("msg", member.getMemberId()+ "님이 로그인 되었습니다.");
+				model.addAttribute("msg", member.getMemberId()+ "님이 로그인 되었습니다.");
 				return "/main/main";
 			}
 		}
 		
 		attr.addFlashAttribute("msg", "없는 아이디 입니다.");
 		return "redirect:/sign/loginForm.do";
-		
 	}
 	
 	@RequestMapping("/logout.do")

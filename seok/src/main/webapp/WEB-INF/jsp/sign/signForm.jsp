@@ -143,9 +143,18 @@ form {
 		</div>
 	</div>
 	<script>
+	$(document).ready(function () {
+		$("input[name=memberId]").keyup(function(event){
+			if(!(event.keyCode >= 37 && event.keyCode <= 40)) {
+				var inputVal = $(this).val();
+				$(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
+			}
+		});
 		if ("${msg}") {
 			alert("${msg}");
 		}
+	});
+	
 	</script>
 </body>
 </html>
