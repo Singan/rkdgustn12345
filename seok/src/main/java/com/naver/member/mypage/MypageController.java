@@ -21,7 +21,11 @@ public class MypageController {
 	public void myPage(){}
 	
 	@RequestMapping("/profile.do")
-	public String profile(){
-		return "/member/profile";
-	}
+	public void profile(){}
+	
+	@RequestMapping("/message.do")
+	public void message(){}
+	
+	@RequestMapping("/friend.do")
+	public void friend(){}
 }
