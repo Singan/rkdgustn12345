@@ -18,8 +18,10 @@ public class MypageController {
 	private MemberService memberService;
 	
 	@RequestMapping("/myPage.do")
-	public String myPage(){
-		
-		return "/member/myPage";
+	public void myPage(){}
+	
+	@RequestMapping("/profile.do")
+	public String profile(){
+		return "/member/profile";
 	}
 }

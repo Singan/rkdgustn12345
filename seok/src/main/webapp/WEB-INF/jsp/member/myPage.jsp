@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,7 +19,7 @@
 		
 		<div id="body"> 
 			<div id="menubar">
-				<div class="menutab selected">프로필</div>  
+				<div class="menutab">프로필</div>  
 				<div class="menutab">쪽지함</div>
 				<div class="menutab">친구</div>
 			</div>
@@ -51,10 +52,13 @@
 		
 		<script>
 			var $content = $("#content");
-			var $menutab = $(".menutab");
+			var $import = $("c:import");
 			
+			var $menutab = $(".menutab");
 			$menutab.click(function(){
-				
+				$menutab.removeClass("selected");
+				$(this).addClass("selected");
+				$("#testtest").load("profile.do");
 			});
 			
 			$("#testtest").click(function(){
