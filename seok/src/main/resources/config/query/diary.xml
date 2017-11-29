@@ -2,18 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.naver.repository.mapper.DiaryMapper">
-<resultMap type="diary" id="diaryMap">
+	<resultMap type="diary" id="diaryMap">
 		<result column="DIARY_YEAR" property="diaryYear" />
 		<result column="DIARY_MONTH" property="diaryMonth" />
 		<result column="DIARY_DAY" property="diaryDay" />
 		<result column="DIARY_CONTENT" property="diaryContent" />
 		<result column="FILE_GROUP_NO" property="fileGroupNo" />
-</resultMap>
-
-
-
-<select id="page" parameterType="diary" resultMap="diaryMap">
-	select * from TO_DIARY where DIARY_YEAR=#{diaryYear} and DIARY_MONTH =#{diaryMonth} order by DIARY_DAY asc
-</select>
+	</resultMap>
+	<select id="page" parameterType="diary" resultMap="diaryMap">
+		select * from
+		TO_DIARY where DIARY_YEAR=#{diaryYear} and DIARY_MONTH=#{diaryMonth}
+		order by DIARY_DAY asc
+	</select>
+	<insert id="insertAndUpset" parameterType="diary">
+		MERGE INTO to_diary td
+		USING dual
+		ON (td.DIARY_YEAR=#{diaryYear} and
+		td.DIARY_MONTH = #{diaryMonth} and
+		td.DIARY_DAY = #{diaryDay})
+		WHEN
+		MATCHED THEN
+		UPDATE SET
+		td.DiARY_CONTENT = #{diaryContent}
+		<if test="fileGroupNo != null">
+			,td.FILE_GROUP_NO = #{fileGroupNo}
+		</if>
+		WHEN NOT
+		MATCHED THEN
+		INSERT
+		(td.DIARY_YEAR,td.DIARY_MONTH,td.DIARY_DAY,td.DIARY_CONTENT
+		<if test="fileGroupNo != null">
+			,td.FILE_GROUP_NO
+		</if>)
+		VALUES(#{diaryYear},#{diaryMonth},#{diaryDay},#{diaryContent}
+		<if test="fileGroupNo != null">,#{fileGroupNo}
+		</if>)
+	</insert>
 
 </mapper>
