@@ -2,15 +2,15 @@
 <div class="table">
 	<div class="tbody">
 		<div class="trow">
-			<div class="tfield tcell">느그 아이디</div>
+			<div class="tfield tcell">아이디</div>
 			<div class="tcell">${user.memberId}</div>
 		</div>
 		<div class="trow">
-			<div class="tfield tcell">느그 이름</div>
+			<div class="tfield tcell">이름</div>
 			<div class="tcell">${user.memberName}</div>
 		</div>
 		<div class="trow">
-			<div class="tfield tcell">느그 이메일</div>
+			<div class="tfield tcell">이메일</div>
 			<div class="tcell">${user.memberEmail}</div>
 		</div>
 	</div>

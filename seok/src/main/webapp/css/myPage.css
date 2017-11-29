@@ -56,12 +56,12 @@
 		.menutab:hover{
 			cursor: pointer;
 			background: rgba(0,0,0,0.9);
+			transition: .2S;
 		}
 		.menutab.selected{
 			background: rgba(255,255,255,0.9);
 			color: black;
 			border-bottom: .5vh solid rgba(255,255,255,0.5);
-			transition: .25S;
 		}
 		
 		#content{
@@ -73,6 +73,9 @@
 			display: table;
 			border-radius: 0.2vh;
 			background: rgba(0,0,0,0.5);
+			
+			width:100%;
+			font-size: 1.5em;
 			text-align: center;
 		}
 		.tbody {display: table-row-group;}
