@@ -17,7 +17,7 @@
 </head>
 <body>
 	<br>
-	<form class="form-inline" action="${pageContext.request.contextPath}/board/freeWrite.do">
+	<form class="form-inline"  method="post" enctype="multipart/form-data">
 	<div class="form-group container-fluid">
 		<table class="table table-striped table-bordered">
 			<thead>
@@ -44,11 +44,11 @@
 					<td>
 						<div>
 							<div class="pull-right">
-								<input type="image" class="form-control" value="이미지">
+								<input type="file" name="imageFiles" multiple="multiple" class="form-control" value="이미지">
 								<i class="fa fa-picture-o" aria-hidden="true"></i>
 							</div>	
 							<div class="pull-right">
-								<input type="file" class="form-control" value="파일">
+								<input type="file" name="attachFiles" multiple="multiple" class="form-control" value="파일">
 								<i class="fa fa-file-o" aria-hidden="true"></i>
 							</div>	
 						</div>
@@ -68,5 +68,34 @@
 	<br>
 	<br>
 	<br>
+	
+	<script>
+		$("button").click(function () {
+			var fd = new FormData();
+			fd.append("boardName", $("input[name='boardName']").val());
+			fd.append("boardContent",$("input[name='boardContent']").val());
+			
+			var imageFiles = $("input[name='imageFiles']");
+			var attachFiles = $("input[name='attachFiles']");
+			
+			for (var i = 0; i<imageFiles.length; i++) {
+				fd.append("imageFile" + i, imageFiles[i]);
+			}
+			for (var i = 0; i<attachFiles.length; i++) {
+				fd.append("attachFile" + i, attachFiles[i]);
+			}
+			
+			$.ajax({
+				url: "/seok/board/freeWrite.do",
+				data: fd,
+				type:"POST",
+				processData: false,
+				contentType: false,
+				success: function() {
+					alert("글을 작성하였습니다.);
+				}
+			})
+		});
+	</script>
 </body>
 </html>

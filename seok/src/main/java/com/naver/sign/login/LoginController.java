@@ -25,6 +25,8 @@ public class LoginController {
 	@RequestMapping("/loginForm.do")
 	public void loginForm() {} 
 	
+	
+	
 	@RequestMapping("/login.do")
 	public String login(
 			@ModelAttribute("member") Member member,
@@ -44,7 +46,7 @@ public class LoginController {
 				session.setAttribute("user", member); 
 				// attr.addFlashAttribute("msg", member.getMemberId()+ "님이 로그인 되었습니다.");
 				model.addAttribute("msg", member.getMemberId()+ "님이 로그인 되었습니다.");
-				return "/main/main";
+				return "redirect:/main/main";
 			}
 		}
 		
