@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.naver.board.comment.service.CommentService;
 import com.naver.board.free.service.BoardService;
@@ -53,6 +54,7 @@ public class FreeController {
 	@RequestMapping("/freeWrite.do")
 	public String freeWrite(HttpServletRequest request, HttpSession session,
 			@ModelAttribute("board") Board board) throws Exception{
+		
 		
 		Member member = (Member)session.getAttribute("user");
 		

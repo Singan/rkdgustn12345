@@ -46,7 +46,7 @@ public class LoginController {
 				session.setAttribute("user", member); 
 				// attr.addFlashAttribute("msg", member.getMemberId()+ "님이 로그인 되었습니다.");
 				model.addAttribute("msg", member.getMemberId()+ "님이 로그인 되었습니다.");
-				return "redirect:/main/main";
+				return "redirect:/main/main.do";
 			}
 		}
 		
