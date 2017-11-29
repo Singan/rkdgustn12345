@@ -9,7 +9,6 @@
 <body>
 	<a href="${pageContext.request.contextPath}/member/myPage.do">myPage</a></br>
 	<a href="${pageContext.request.contextPath}/sign/signForm.do">signUp</a></br>
-	<a href="${pageContext.request.contextPath}/sign/login.do">login</a></br>
 	<a href="${pageContext.request.contextPath}/board/free.do">free</a></br>
 	<a href="${pageContext.request.contextPath}/board/quiz.do">quiz</a></br>
 	<a href="${pageContext.request.contextPath}/board/question.do">question</a></br>
@@ -17,11 +16,9 @@
 	<a href="${pageContext.request.contextPath}/sign/logout.do">로그아웃</a></br>
 	
 	<script>
-		if("${msg}") {
+		$(document).ready(function () {
 			alert("${msg}");
-		}
-		console.dir("${sessionScope.user.memberId}");
-		
+		});
 	</script>
 </body>
 </html>

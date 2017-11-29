@@ -25,4 +25,9 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.selectBoard(categoryNo);
 	}
 	
+	@Override
+	public Board detailBoard(int boardNo) throws Exception {
+		return boardMapper.detailBoard(boardNo);
+	}
+	
 }

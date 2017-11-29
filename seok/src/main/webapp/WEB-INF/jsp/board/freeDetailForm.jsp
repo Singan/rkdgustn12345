@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,7 +24,8 @@ p {
 </style>
 </head>
 <body>
-	<br>
+<c:if test="${board != null}">
+	<br> 
 	<div style="width: 100%; padding: 10px;" class="container-fluid">
 		<table width=100% class="table table-striped table-bordered">
 			<thead>
@@ -37,20 +39,24 @@ p {
 						</div>
 						<div class="col-xs-7">
 							<div>
-								제목: 제목
+							
+								<strong>제목: </strong>${board.boardName}
 							</div>
 							
 							<div>
-								작성자: 석성희 | 조회수: 70 | 댓글수: 5 | 추천수: 7						
+								<strong>작성자: </strong>${board.boardWriter}
+								<strong>| 조회수: </strong>${board.boardViews}
+								<strong>| 댓글수: </strong>${board.boardContent}						
+								<strong>| 추천수: </strong>${board.boardUp}						
 							</div>
 						</div>
 						<div class="pull-right">
 							<div>
-								번호: 2
+								<strong>번호: </strong>${board.boardNo}	
 							</div>
 							
 							<div>
-								작성일: 2017-01-01 12:00:00						
+								<strong>작성일: </strong>${board.boardDate}
 							</div>
 						</div>
 					</div>
@@ -61,11 +67,13 @@ p {
 					<td>
 						<div class="container-fluid">
 							<div>
-								<div>	
-									내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용
+								<div>
+									${board.boardContent}	
 							 	</div>
 							 	<div>
-									이미지
+							 		<c:if test="${boardImagePath != null}">
+										이미지
+									</c:if>
 								</div>
 							</div>
 							<div  class="pull-right" >
@@ -82,7 +90,9 @@ p {
 								<i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>
 							</div>
 							
-							<div class="pull-left col-sm-1"><strong>10</strong></div>
+							<div class="pull-left col-sm-1">
+								<h4><strong>${board.boardUp}</strong></h4>
+							</div>
 							
 							<div class="pull-left col-sm-2">
 								<button type="button" class="btn btn-default">추천</button>
@@ -95,41 +105,34 @@ p {
 								<i class="fa fa-thumbs-o-down fa-2x" aria-hidden="true"></i>
 							</div>
 							
-							<div class="pull-left col-sm-1"><strong>-10</strong></div>
+							<div class="pull-left col-sm-1"><h4><strong>-${board.boardDown}</strong></h4></div>
 						</div>
 					</td>
 				</tr>
 				<tr>
-			
+				
 					<table class="table table-striped table-condensed table-responsive">
 						<tbody>
 							<div class="form-group container-fluid">
-							<tr>
-								<th>이름</th>
-								<td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-								<td>2017-01-01 12:00:00 수정 | 삭제</td>
-							
-							<tr>
-							<tr>
-								<th>이름</th>
-								<td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-								<td>2017-01-01 12:00:00</td>
-							<tr>
-							<tr>
-								<th>이름</th>
-								<td>내용내용내용내용내용내용내용내용내용내용내용내용내용내용</td>
-								<td>2017-01-01 12:00:00</td>
-							<tr/>
+								<c:if test="${commentList != null}">
+									<c:forEach var='c' items='commentList'>
+										<tr>
+											<th>${c.memberName}</th>
+											<td>${c.commentContent}</td>
+											<td>${c.commentDate} 수정 | 삭제</td>
+										</tr>
+									</c:forEach>
+								</c:if>
 							</div>
 							<tr>
 							<table class="table table-striped table-condensed table-responsive">
 								<div class="form-group">
-									<form class="form-inline">
+									<form class="form-inline" action="${pageContext.request.contextPath}/board/${board.boardNo}/commentWrite.do" method="post">
 										<td colspan="2" width="100%">
-											<input type="text" class="form-control">
+											<input type="text" name="commentContent" class="form-control">
 										</td>
 										<td>
-											<a href="${pageContext.request.contextPath}/board/freeWriteForm.do" class="btn btn-default">글쓰기</button>
+											<button class="btn btn-default">글쓰기</button>
 										</td>
 									</form>
 								</div>
@@ -144,5 +147,6 @@ p {
 	<br>
 	<br>
 	<br>
+	</c:if>
 </body>
 </html>

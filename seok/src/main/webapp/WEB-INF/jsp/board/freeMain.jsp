@@ -36,16 +36,17 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var='list' items="${list}">
+				<c:forEach var='b' items='${list}'>
 					<tr>
+						<td>${b.boardNo}</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/board/freeDetailForm.do">${list.boardNo}</a>
+							<a href="${pageContext.request.contextPath}/board/${b.boardNo}/freeDetail.do">
+								${b.boardName}</a>
 						</td>
-						<td>${list.boardName}</td>
-						<td>${list.memberName}</td>
-						<td>${list.boardDate}</td>
-						<td>${list.boardViews}</td>
-						<td>${list.boardUp} | -${list.boardDown }</td>
+						<td>${b.boardName}</td>
+						<td>${b.boardDate}</td>
+						<td>${b.boardViews}</td>
+						<td>${b.boardUp}</td>
 					</tr>
 				</c:forEach>
 				<tr>

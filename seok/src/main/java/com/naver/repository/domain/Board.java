@@ -1,5 +1,6 @@
 package com.naver.repository.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 //게시판 게시글 테이블
@@ -24,7 +25,7 @@ public class Board {
  private Integer memberNo;
 
  // 게시글 작성일 
- private Date boardDate;
+ private String boardDate;
 
  // 게시글 추천 
  private Integer boardUp;
@@ -89,15 +90,18 @@ public class Board {
      this.memberNo = memberNo;
  }
 
- public Date getBoardDate() {
+ public String getBoardDate() {
      return boardDate;
  }
 
  public void setBoardDate(Date boardDate) {
-     this.boardDate = boardDate;
+	 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:dd:ss");
+	 
+	 String date = sdf.format(boardDate);
+     this.boardDate = date;
  }
 
- public Integer getBoardUp() {
+public Integer getBoardUp() {
      return boardUp;
  }
 

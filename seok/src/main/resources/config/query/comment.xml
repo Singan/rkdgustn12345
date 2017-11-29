@@ -3,25 +3,31 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.naver.repository.mapper.CommentMapper">
 	
-	<resultMap id="commentMap" type="comment"></resultMap>
+	<resultMap id="commentMap" type="comment">
+		<result column="comment_no" property="commentNo" />
+		<result column="board_no" property="boardNo" />
+		<result column="comment_content" property="commentContent" />
+		<result column="comment_date" property="commentDate" />
+		<result column="member_name" property="memberName" />
+	</resultMap>
 	
-	<select id="listComment" parameterType="int" resultMap="commentMap">
+	<select id="selectComment" parameterType="int" resultMap="commentMap">
 		select * 
 		from to_comment
-		where board_no = #{board_no}
+		where board_no = #{boardNo}
 	</select>
 		
 	<insert id="insertComment" parameterType="comment">
 		insert into to_comment(
 			comment_no, board_no, comment_content, member_name
 		) values(
-			comment_no_seq.nextval, #{board_no}, #{comment_content}, #{member_name}
+			to_comment_seq.nextval, #{boardNo}, #{commentContent}, #{memberName}
 		)
 	</insert>
 	
 	<delete id="deleteComment" parameterType="int">
 		delete 
 		from to_comment
-		where comment_no = #{comment_no}
+		where comment_no = #{commentNo}
 	</delete>
 </mapper>

@@ -4,13 +4,15 @@
 <mapper namespace="com.naver.repository.mapper.BoardMapper">
 	
 	<resultMap id="boardMap" type="board">
-		<result column="category_no" property="categoryNo" />
 		<result column="board_no" property="boardNo" />
+		<result column="category_no" property="categoryNo" />
 		<result column="board_name" property="boardName" />
 		<result column="board_writer" property="boardWriter" />
 		<result column="board_views" property="boardViews" />
 		<result column="member_no" property="memberNo" />
 		<result column="board_date" property="boardDate" />
+		<result column="board_up" property="boardUp" />
+		<result column="board_down" property="boardDown" />
 		<result column="board_content" property="boardContent" />
 		<result column="file_group_no" property="fileGroupNo" />
 		<result column="board_image_path" property="boardImagePath" />
@@ -45,6 +47,12 @@
 			 </if> 
 		) 
 	</insert>
+	
+	<select id="detailBoard" parameterType="int" resultMap="boardMap">
+		select  *
+		 from to_board
+		where board_no = #{boardNo}
+	</select>
 	
 	<delete id="deleteBoard" parameterType="int">
 		delete

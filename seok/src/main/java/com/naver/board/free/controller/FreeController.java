@@ -1,5 +1,6 @@
 package com.naver.board.free.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.naver.board.comment.service.CommentService;
 import com.naver.board.free.service.BoardService;
 import com.naver.repository.domain.Board;
+import com.naver.repository.domain.Comment;
 import com.naver.repository.domain.Member;
 
 @Controller
@@ -22,41 +26,36 @@ public class FreeController {
 	@Autowired
 	private BoardService boardService;
 	
-	@RequestMapping("/freeMain.do")
-	public void freeMain() {}
+	@Autowired
+	private CommentService commentService;
 	
 	@RequestMapping("/free.do")
-	public String free(Model model) {
-		List<Board> list=null;
-		
-		int categoryNo = 1;
-		try {
-			list = boardService.selectBoard(categoryNo);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		model.addAllAttributes(list);
-		return "/freeMain.do";
+	public String free(Model model) throws Exception{
+		model.addAttribute("list",boardService.selectBoard(1));
+		return "/board/freeMain";
 	}
 	
-	@RequestMapping("/freeDetailForm.do") 
-	public void freeDetailForm() {}
+	@RequestMapping("/{boardNo}/freeDetail.do") 
+	public String freeDetailForm(Model model, 
+			@PathVariable int boardNo) throws Exception{
+		// boardNo 로 comment 뽑는다.
+		List<Comment> commentList = commentService.selectComment((int)boardNo);
+		if(!commentList.isEmpty())
+			model.addAttribute("commentList", commentList);
+		
+		model.addAttribute("board",boardService.detailBoard((int)boardNo));
+		return "/board/freeDetailForm";
+	}
 	
 	@RequestMapping("/freeWriteForm.do")
 	public void freeWriteForm() {}
 	
 	@RequestMapping("/freeWrite.do")
 	public String freeWrite(HttpServletRequest request, HttpSession session,
-			@ModelAttribute("board") Board board) {
+			@ModelAttribute("board") Board board) throws Exception{
 		
 		Member member = (Member)session.getAttribute("user");
 		
-		System.out.println(board.getBoardName());
-		System.out.println(board.getBoardContent());
-		System.out.println(board.getBoardImagePath());
-		System.out.println(board.getFileGroupNo());
-
 		int categoryNo = 1;
 		String boardWriter = member.getMemberName();
 		int memberNo = member.getMemberNo();
@@ -65,11 +64,7 @@ public class FreeController {
 		board.setBoardWriter(boardWriter);
 		board.setMemberNo(memberNo);
 		
-		try {
-			boardService.insertBoard(board);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		boardService.insertBoard(board);
 		
 		return "redirect:/board/free.do";
 	}
