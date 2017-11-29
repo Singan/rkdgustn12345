@@ -10,7 +10,7 @@
 		<result column="member_name" property="memberName" /> 
 	</resultMap>
 	
-	<select id="selectMemeber" parameterType="String" resultMap="memberMap">
+	<select id="selectMember" parameterType="String" resultMap="memberMap">
 		select *
 		from to_member
 	</select>

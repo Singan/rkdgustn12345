@@ -34,7 +34,7 @@ p {
 						<div class="pull-left">
 						
 							<a href="${pageContext.request.contextPath}/board/free.do">
-								<img src="${pageContext.request.contextPath}/css/backlist.jpg" width="100px">
+								<img src="${pageContext.request.contextPath}/images/backlist.jpg" width="100px">
 							</a>	
 						</div>
 						<div class="col-xs-7">
