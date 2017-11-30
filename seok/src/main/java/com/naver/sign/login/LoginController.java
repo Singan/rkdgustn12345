@@ -52,8 +52,8 @@ public class LoginController {
 				member = memberService.detailMember(id);
 				session.setAttribute("user", member); 
 				// attr.addFlashAttribute("msg", member.getMemberId()+ "님이 로그인 되었습니다.");
-				
-				if(url != null) {
+				System.out.println(url);
+				if(url.contains("main")) {
 					return "redirect:/main/chatMove.do";
 				}
 				
