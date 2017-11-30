@@ -16,4 +16,4 @@ drop sequence to_comment_seq;
 drop sequence to_file_seq;
 drop sequence to_lunch_seq;
 drop sequence to_member_seq;
-drop sequence to_amessage_seq;
+drop sequence to_message_seq;
