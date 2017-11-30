@@ -150,7 +150,7 @@ COMMENT ON COLUMN To_File.file_system_name IS '서버 기준 파일 이름';
 CREATE TABLE To_Lunch
 (
     lunch_no        NUMBER            NOT NULL, 
-    member_name     NUMBER            NULL, 
+    member_name     VARCHAR2(60)      NULL, 
     lng             FLOAT             NULL, 
     lat             FLOAT             NULL, 
     lunch_review    VARCHAR2(4000)    NULL, 
@@ -164,7 +164,7 @@ CREATE SEQUENCE To_Lunch_SEQ;
 
 COMMENT ON TABLE To_Lunch IS '식당 정보 테이블';
 COMMENT ON COLUMN To_Lunch.lunch_no IS '점심 번호';
-COMMENT ON COLUMN To_Lunch.member_name IS '식당 정보 작성자의 회원번호';
+COMMENT ON COLUMN To_Lunch.member_name IS '식당 정보 작성자 이름';
 COMMENT ON COLUMN To_Lunch.lng IS '위도';
 COMMENT ON COLUMN To_Lunch.lat IS '경도';
 COMMENT ON COLUMN To_Lunch.lunch_review IS '식당 리뷰';
