@@ -84,7 +84,6 @@ p {
 									</div>
 									</c:forEach>
 								</c:if>
-							 	 
 							</div>
 							<div  class="pull-right" >
 								<button type="button" class="btn btn-default">수정</button>

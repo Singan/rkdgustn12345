@@ -51,54 +51,42 @@ public class FreeController {
 	@RequestMapping("/{boardNo}/freeDetail.do") 
 	public String freeDetailForm(Model model, 
 			@PathVariable int boardNo) throws Exception{
-		// boardNo 로 comment 뽑는다.
+		boardService.viewUpBoard(boardNo);
+
 		List<Comment> commentList = commentService.selectComment((int)boardNo);
 		List<String> imageList = new ArrayList<>();
 		List<String> fileList = new ArrayList<>();
-		
-		boardService.viewUpBoard(boardNo);
-		
+
 		Board board = boardService.detailBoard((int)boardNo);
-		
 		int fileGroupNo = board.getFileGroupNo();
-		
-		System.out.println("filegroupno : " + fileGroupNo);
 		List<File> list = fileService.selectFileList(fileGroupNo);
 		
-		System.out.println(list.size());
 		Iterator<File> it = list.iterator();
 
 		while(it.hasNext()) {
-			String cate = it.next().getFilePath(); // /image, /file
-			//String path = it.next().getFileSystemName(); 
-			System.out.println(it.next().getFileSystemName());
+			File file  = it.next();
+			String cate = file.getFilePath();   // /image, /file
+			String path = file.getFileSystemName();  // uuid.ext
 			
-			/*if(cate.equals("/image")) {
+			if(cate.equals("/image")) {
 				imageList.add(path);
 			}
 			else if(cate.equals("/file")) {
 				fileList.add(path);
-			}*/
+			}
 		}
-		/*System.out.println("1 :" + !commentList.isEmpty());
-		System.out.println("2 :" + !imageList.isEmpty());
-		System.out.println("3 :" + !fileList.isEmpty());
-		*/
+		
 		if(!commentList.isEmpty()) {
-			System.out.println("11 :" + !commentList.isEmpty());
 			model.addAttribute("commentList", commentList);
 		}
-		if(imageList.size() == 0) {
-			System.out.println("22 :" + !imageList.isEmpty());
+		if(!imageList.isEmpty()) {
 			model.addAttribute("imageList", imageList);
 		}	
-		if(fileList.size() == 0) {
-			System.out.println("33 :" + !fileList.isEmpty());
+		if(!fileList.isEmpty()) {
 			model.addAttribute("fileList", fileList);
 		}
 		model.addAttribute("board", board);
 		return "/board/freeDetailForm";
-		
 	}
 	
 	@RequestMapping("/freeWriteForm.do")
