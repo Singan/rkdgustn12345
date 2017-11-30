@@ -38,5 +38,9 @@
 		<if test="fileGroupNo != null">,#{fileGroupNo}
 		</if>)
 	</insert>
-
+	<select id="selectOne" parameterType="diary" resultMap="diaryMap">
+		select * from
+		TO_DIARY where DIARY_YEAR=#{diaryYear} and DIARY_MONTH=#{diaryMonth} and DIARY_DAY = #{diaryDay}
+		order by DIARY_DAY asc
+	</select>
 </mapper>

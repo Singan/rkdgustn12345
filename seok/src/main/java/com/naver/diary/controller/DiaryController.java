@@ -39,10 +39,10 @@ public class DiaryController {
 	}
 	@ResponseBody
 	@RequestMapping("/save.json" /* method=RequestMethod.POST*/)
-	public void fileSave(Diary diary){
-	
+	public Diary fileSave(Diary diary){
 		System.out.println(diary.toString());
-		diaryService.save(diary);
+		
+		return diaryService.save(diary);
 	}
 	
 	

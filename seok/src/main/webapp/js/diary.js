@@ -42,6 +42,7 @@ function diaryFulling(data, date) {
 		day.year = data[i].diaryYear;
 		day.month = tenLg(data[i].diaryMonth);
 		day.fileList = data[i].file;
+		day.fileGroupNo = data[i].fileGroupNo;
 		dList[i] = day;
 	}
 	jQuery("#calendar").fullCalendar({
@@ -67,6 +68,7 @@ function diaryFulling(data, date) {
 		dayClick : function(date, jsEvent, view,event) {
 			var da = date.format();
 			dialogCreate(da)
+			console.dir(jsEvent);
 			currDate = da.split("-")[2];
 			currMonth = da.split("-")[1];
 			currYear = da.split("-")[0];
@@ -90,31 +92,44 @@ function diaryFulling(data, date) {
 		eventRender : function(event, element) {
 			
 		},
-		
+		 eventClick: function(calEvent, jsEvent, view) {
+		       
+		    }
 	})
 }
 function dialogCreate(event,eveObj) {
 	content = $("#e" + event).children().text();
-	if(eveObj){
-	for(var key in eveObj.fileList){
-		console.log(eveObj.fileList[key]);
-	}}
+	console.log("asdasdasdas");
 	$("#eventInfo").html("");
+	$("#filezone").html("");
 	$("#eventContent").dialog({
 		modal : false,
 		width : 350,
 		title : event,
 		resizable : true,
 		close : function() {},
+		open:function(){
+			console.log("ㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴ")
+			if ($("#e" + event)) {
+				$("#eventInfo").html(content);
+			}
+			if(eveObj){
+			for(var key in eveObj.fileList){
+				console.log(eveObj.fileList[key]);
+				$("#filezone").html($("#filezone").html()+"<div><a href='"+getContextPath()+eveObj.fileList[key].filePath+"/"+eveObj.fileList[key].fileSystemName+"'download>"+eveObj.fileList[key].fileOriginName+"</a></div>");
+			}}
+		},
 		buttons : {
 			"저장" : function save() {
 				content = $("#eventInfo").html();
-				/*$("#e" + currYear + "-" + currMonth + "-" + currDate).children().remove();*/
 				var fd = new FormData($("#diaryForm")[0]);
 				fd.append("diaryMonth", currMonth);
 				fd.append("diaryYear", currYear);
 				fd.append("diaryDay", currDate);
 				fd.append("diaryContent", content);
+				if(eveObj){
+				fd.append("fileGroupNo", eveObj.fileGroupNo);
+				}
 				$.ajax({
 					processData : false,
 					contentType : false,
@@ -127,8 +142,8 @@ function dialogCreate(event,eveObj) {
 					success : function(data) {
 						alert("저장 하였습니다.")
 						if(eveObj){
+							console.log(eveObj._id);
 							$('#calendar').fullCalendar('removeEvents', eveObj._id);
-							
 						}
 						$("#calendar").fullCalendar('addEventSource',
 							[ {
@@ -136,12 +151,14 @@ function dialogCreate(event,eveObj) {
 								start : currYear + "-" + currMonth + "-" + currDate,
 								year : currYear,
 								month : currMonth,
-								day : currDate
+								day : currDate,
+								fileList : data.file
 							} ])
 						$(".fc-content").children().each(function(a,b){
 							$(b).html($(b).html());
 						})
-						
+						$("#eventContent").dialog("close");
+						$("#eventContent").dialog("open");
 					}
 				}
 				)
@@ -149,9 +166,7 @@ function dialogCreate(event,eveObj) {
 			}
 		}
 	});
-	if ($("#e" + event)) {
-		$("#eventInfo").html(content);
-	}
+	
 }
 
 $("#evenContent").click(function() {

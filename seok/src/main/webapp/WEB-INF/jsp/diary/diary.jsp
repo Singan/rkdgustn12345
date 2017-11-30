@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src='/seok/node_modules/jquery/dist/jquery.min.js?1=11'></script>
 <script src='/seok/node_modules/jquery-ui-1.12.1/jquery-ui.js'></script>
 
@@ -50,8 +58,6 @@ span.fc-title{
 .fc-sun {
 	color: #FF0000;
 }
-
-
 </style>
 </head>
 <body>
@@ -60,15 +66,15 @@ span.fc-title{
 	<div id="eventContent" title="" style="display: none;">
 	<div id="eventInfo" contenteditable="true"></div><div id="filezone"></div>
 	<form id="diaryForm" action="${pageContext.request.contextPath}/diary/save.json" enctype="multipart/form-data">
-	<input name="attach" type="file" multiple="multiple"/>
+	<label class="btn btn-danger" id="product-images-add" for="product-images-files" style="float:right">
+      <input class="hide" id="product-images-files" type="file" name="attach" accept="image/*" multiple="multiple">
+                                        <i class="fa fa-file-image-o" aria-hidden="true"></i> 이미지 추가
+                                   </label>
 	</form>
 	</div>
 	<script type="text/javascript">
-	
 		var da;
 		var dList = [];
-		
-		
 		var eve;
 		
 		$(document).ready(function() {

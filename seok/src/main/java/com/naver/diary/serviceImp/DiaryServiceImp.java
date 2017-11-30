@@ -38,16 +38,20 @@ public class DiaryServiceImp implements DiaryService {
 	}
 
 	@Override
-	public void save(Diary diary) {
+	public Diary save(Diary diary) {
 		Integer groupNo =null;
 		Date d = new Date();
-		String uploadDir = servletContext.getRealPath("/upload/"+d.getYear()+"/"+d.getMonth()+"/"+d.getDate());
-		java.io.File ff = new java.io.File(uploadDir);
+		String uploadDir ="/upload/"+d.getYear()+"/"+d.getMonth()+"/"+d.getDate();
+		String rePath = servletContext.getRealPath(uploadDir);
+		System.out.println("여기까지왔나1");
+		java.io.File ff = new java.io.File(rePath);
 		for(MultipartFile file : diary.getAttach()){
 			File f = new File();
 			String originName = file.getOriginalFilename();
+			System.out.println("여기까지왔나2");
 			if(file.isEmpty()){
 				continue;}
+			System.out.println("여기까지왔나3");
 			if(!ff.exists()) ff.mkdirs();
 			groupNo=diary.getFileGroupNo()==null?filemapper.selectGroupNo():diary.getFileGroupNo();
 			diary.setFileGroupNo(groupNo);
@@ -62,11 +66,12 @@ public class DiaryServiceImp implements DiaryService {
 				ext = originName.substring(index);
 			}
 			f.setFilePath(uploadDir);
-			String systemName = UUID.randomUUID().toString() + d.getTime() + ext;
+			String systemName = UUID.randomUUID().toString()+ ext;
 			f.setFileSystemName(systemName);
 			filemapper.insertFile(f);
 			try {
-				file.transferTo(new java.io.File(uploadDir+"/"+systemName));
+				file.transferTo(new java.io.File(
+						rePath+"/"+systemName));
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -75,8 +80,15 @@ public class DiaryServiceImp implements DiaryService {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(groupNo);
-		
+		System.out.println("여기까지왔나4");
 		diarymapper.insertAndUpset(diary);
+		Diary oneDiary = diarymapper.selectOne(diary);
+		System.out.println("여기까지왔나5");
+		if(oneDiary.getFileGroupNo() != null){
+			System.out.println("여기까지왔나6");
+		oneDiary.setFile(filemapper.selectFileList(oneDiary.getFileGroupNo()));
+		};
+		System.out.println("여기까지왔나7");
+		return oneDiary;
 	}
 }

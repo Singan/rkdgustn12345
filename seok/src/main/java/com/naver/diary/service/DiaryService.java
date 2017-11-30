@@ -10,5 +10,5 @@ import com.naver.repository.domain.Diary;
 
 public interface DiaryService {
 	public List<Diary> page(Diary diary) ;
-	public void save(Diary diary);
+	public Diary save(Diary diary);
 }
