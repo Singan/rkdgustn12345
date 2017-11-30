@@ -125,11 +125,22 @@
 			-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000;
 		}
 		
-		.bt_box{float: right;}
+		.bt_box{
+			float: right; 
+			width: 60px; height: 30px;
+			margin: 2px;
+			
+			text-align: center;
+			font-weight: bolder;
+		}
 		
 		.bt_yes{
-			
+			color: rgba(0,0,0,1);
+			background: rgba(255,255,255,0.75);
+			border: 2px solid rgba(255,255,255,1);
 		}
 		.bt_no{
-			
+			color: rgba(255,255,255,1);
+			background: rgba(0,0,0,0.75);
+			border: 2px solid rgba(0,0,0,1);
 		}

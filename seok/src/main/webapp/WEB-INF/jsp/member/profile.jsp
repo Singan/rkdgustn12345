@@ -30,7 +30,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="bt_box">편집</div>
+	<div class="bt_box bt_yes">수정</div>
 </div>
 
 <div id="postcount" class="at_box at_quarter">
