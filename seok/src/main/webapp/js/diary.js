@@ -32,10 +32,11 @@ var currYear,
 var currDate;
 var currEvent;
 // 달력채우기
-function diaryFulling(data, date) {
+var dList = [];
+function dataSetting(data){
+	
 	for (var i = 0; i < data.length; i++) {
-		var day = {
-		}
+		var day = {}
 		day.title = data[i].diaryContent
 		day.start = data[i].diaryYear + "-" + tenLg(data[i].diaryMonth) + "-" + tenLg(data[i].diaryDay)
 		day.day = tenLg(data[i].diaryDay);
@@ -45,57 +46,25 @@ function diaryFulling(data, date) {
 		day.fileGroupNo = data[i].fileGroupNo;
 		dList[i] = day;
 	}
-	jQuery("#calendar").fullCalendar({
-		header : {
-			center : "title",
-			left : ""
-		},
-		defaultDate : (date.getYear() + 1900) + "-" + tenLg(date.getMonth() + 1) + "-" + tenLg(date.getDate()),
-		editable : false,
-		eventLimit : true,
-		eventLimitText : "더보기",
-		eventLimitClick : "popover",
-		allDayDefault : true,
-		monthNames : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
-		monthNamesShort : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
-		dayNames : [ "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일" ],
-		dayNamesShort : [ "일", "월", "화", "수", "목", "금", "토" ],
-		today : "오늘",
-		month : "월별",
-		week : "주별",
-		day : "일별",
-		lang : "ko",
-		dayClick : function(date, jsEvent, view,event) {
-			var da = date.format();
-			dialogCreate(da)
-			console.dir(jsEvent);
-			currDate = da.split("-")[2];
-			currMonth = da.split("-")[1];
-			currYear = da.split("-")[0];
-		},
-		events : dList,
-		eventAfterRender : function(event, element, view) {
-			
-			$(".fc-content").children().each(function(a,b){
-				$(b).html($(b).html());
-			})
-			element.children()[0].id = "e" + event.year + "-" + event.month + "-" + event.day;
-			element.off("click");
-			element.click(function(c) {
-				currEvent = event;
-				currYear = event.year;
-				currMonth = event.month ;
-				currDate = event.day;
-				dialogCreate(currYear + "-" + currMonth + "-" + currDate,event);
-			});
-		},
-		eventRender : function(event, element) {
-			
-		},
-		 eventClick: function(calEvent, jsEvent, view) {
-		       
-		    }
-	})
+	
+}
+function diaryFulling(data, date) {
+	dataSetting(data);
+	$("#calendar").fullCalendar('removeEvents')
+	$("#calendar").fullCalendar('addEventSource',dList);
+	
+	jQuery("button.fc-prev-button").off("click",prev);
+	jQuery("button.fc-next-button").off("click",next);
+	jQuery("button.fc-prev-button").click(prev);
+	jQuery("button.fc-next-button").click(next);
+}
+function prev(){   
+	da.setMonth(da.getMonth()-1);
+    showCalendar(da);
+}
+function next(){   
+	da.setMonth(da.getMonth()-1);
+    showCalendar(da);
 }
 function dialogCreate(event,eveObj) {
 	content = $("#e" + event).children().text();
@@ -115,8 +84,8 @@ function dialogCreate(event,eveObj) {
 			}
 			if(eveObj){
 			for(var key in eveObj.fileList){
-				console.log(eveObj.fileList[key]);
-				$("#filezone").html($("#filezone").html()+"<div><a href='"+getContextPath()+eveObj.fileList[key].filePath+"/"+eveObj.fileList[key].fileSystemName+"'download>"+eveObj.fileList[key].fileOriginName+"</a></div>");
+			$("#filezone").html($("#filezone").html()+"<div><a href='"+getContextPath()+eveObj.fileList[key].filePath+"/"+
+			eveObj.fileList[key].fileSystemName+"'download>"+eveObj.fileList[key].fileOriginName+"</a></div>");
 			}}
 		},
 		buttons : {
@@ -136,6 +105,7 @@ function dialogCreate(event,eveObj) {
 					type : "POST",
 					url : getContextPath() + "/diary/save.json",
 					data : fd,
+					dataType:"json",
 					error : function(e) {
 						console.log("에러다이개")
 					},
@@ -168,6 +138,7 @@ function dialogCreate(event,eveObj) {
 	});
 	
 }
+
 
 $("#evenContent").click(function() {
 	console.log("일단 먹음")

@@ -50,7 +50,8 @@ public class DiaryServiceImp implements DiaryService {
 			String originName = file.getOriginalFilename();
 			System.out.println("여기까지왔나2");
 			if(file.isEmpty()){
-				continue;}
+				continue;
+				}
 			System.out.println("여기까지왔나3");
 			if(!ff.exists()) ff.mkdirs();
 			groupNo=diary.getFileGroupNo()==null?filemapper.selectGroupNo():diary.getFileGroupNo();
@@ -89,6 +90,10 @@ public class DiaryServiceImp implements DiaryService {
 		oneDiary.setFile(filemapper.selectFileList(oneDiary.getFileGroupNo()));
 		};
 		System.out.println("여기까지왔나7");
+		System.out.println();
+		for(File fi :oneDiary.getFile()){
+			System.out.println(fi.getFileOriginName());
+		}
 		return oneDiary;
 	}
 }

@@ -6,14 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src='/seok/node_modules/jquery/dist/jquery.min.js?1=11'></script>
 <script src='/seok/node_modules/jquery-ui-1.12.1/jquery-ui.js'></script>
 
@@ -28,6 +20,17 @@
 <script src='/seok/js/diary.js'></script>
 <link href='/seok/node_modules/jquery-ui-1.12.1/jquery-ui.css'
 	rel='stylesheet'></link>
+
+
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <style type="text/css">
 body {
 	margin: 40px 10px;
@@ -74,11 +77,66 @@ span.fc-title{
 	</div>
 	<script type="text/javascript">
 		var da;
-		var dList = [];
+		
 		var eve;
 		
 		$(document).ready(function() {
 			da = new Date();
+			jQuery("#calendar").fullCalendar({
+				header : {
+					center : "title",
+					left : ""
+				},
+				defaultDate : (da.getYear() + 1900) + "-" + tenLg(da.getMonth() + 1) + "-" + tenLg(da.getDate()),
+				editable : false,
+				eventLimit : true,
+				eventLimitText : "더보기",
+				eventLimitClick : "popover",
+				allDayDefault : true,
+				monthNames : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
+				monthNamesShort : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
+				dayNames : [ "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일" ],
+				dayNamesShort : [ "일", "월", "화", "수", "목", "금", "토" ],
+				today : "오늘",
+				month : "월별",
+				week : "주별",
+				day : "일별",
+				lang : "ko",
+				dayClick : function(date, jsEvent, view,event) {
+					var da = date.format();
+					dialogCreate(da)
+					console.dir(jsEvent);
+					currDate = da.split("-")[2];
+					currMonth = da.split("-")[1];
+					currYear = da.split("-")[0];
+				},
+				eventAfterRender : function(event, element, view) {
+					
+					$(".fc-content").children().each(function(a,b){
+						$(b).html($(b).html());
+					})
+					element.children()[0].id = "e" + event.year + "-" + event.month + "-" + event.day;
+					element.off("click");
+					element.click(function(c) {
+						currEvent = event;
+						currYear = event.year;
+						currMonth = event.month ;
+						currDate = event.day;
+						dialogCreate(currYear + "-" + currMonth + "-" + currDate,event);
+					});
+				},
+				eventRender : function(event, element) {
+					
+				},
+				 eventClick: function(calEvent, jsEvent, view) {
+				       
+				    }
+			})
+			showCalendar(da);
+			})
+		
+		
+		function showCalendar(da){
 			$.ajax({
 				type : "POST",
 				url : getContextPath() + "/diary/createDiary.json",
@@ -88,6 +146,7 @@ span.fc-title{
 				},
 				dataType : "json",
 				success : function(data) {
+					console.log(data);
 					diaryFulling(data, da);
 					$(".fc-day").on("click", function() {
 						console.log($("#e"+$(this).data("date")));
@@ -98,7 +157,7 @@ span.fc-title{
 					console.log($(".fc-day-top"));
 				}
 			})
-		})
+		}
 	</script>
 </body>
 </html>
