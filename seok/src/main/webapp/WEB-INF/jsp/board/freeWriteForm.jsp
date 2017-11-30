@@ -16,9 +16,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%-- <form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/board/freeWrite.do">
+		<input type="file" name="attach1" multiple="multiple" />
+		<input type="file" name="attach2" multiple="multiple" />
+		<button type="submit" value="a"></button>
+	</form> --%>
 	<br>
-	<form class="form-inline" 
-			enctype="multipart/form-data" action="${pageContext.request.contextPath}/board/freeWrite.do" method="post">
+	<form class="form-inline" enctype="multipart/form-data" action="${pageContext.request.contextPath}/board/freeWrite.do" method="post">
 	<div class="form-group container-fluid">
 		<table class="table tablem-striped table-bordered">
 			<thead>
@@ -51,6 +55,8 @@
 							<div class="pull-right">
 								<input type="file" name="attachFiles" multiple="multiple" class="form-control">
 								<i class="fa fa-file-o" aria-hidden="true"></i>
+								
+								<input type="text" name="bbbbbb" value="파일<<<<>>>>>이미지"/>
 							</div>	
 						</div>
 					 </td>
@@ -70,6 +76,11 @@
 	<br>
 	<br>
 	
+	
+</body>
+</html>
+
+
 	<script>
 	/*
 		$("button").click(function () {
@@ -98,6 +109,3 @@
 		});
 	*/
 	</script>
-	
-</body>
-</html>

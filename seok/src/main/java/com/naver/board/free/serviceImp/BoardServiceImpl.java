@@ -56,4 +56,9 @@ public class BoardServiceImpl implements BoardService {
 	public int sumVotesByMemberNo(int memberNo) throws Exception {
 		return boardMapper.sumVotesByMemberNo(memberNo);
 	};
+	
+	@Override
+	public int viewUpBoard(int boardNo) throws Exception {
+		return boardMapper.viewUpBoard(boardNo);
+	}
 }

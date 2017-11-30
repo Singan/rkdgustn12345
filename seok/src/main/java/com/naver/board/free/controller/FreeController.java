@@ -1,12 +1,12 @@
 package com.naver.board.free.controller;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,36 +53,52 @@ public class FreeController {
 			@PathVariable int boardNo) throws Exception{
 		// boardNo 로 comment 뽑는다.
 		List<Comment> commentList = commentService.selectComment((int)boardNo);
-		List<String> imageList = null;
-		List<String> fileList = null;
+		List<String> imageList = new ArrayList<>();
+		List<String> fileList = new ArrayList<>();
+		
+		boardService.viewUpBoard(boardNo);
 		
 		Board board = boardService.detailBoard((int)boardNo);
+		
 		int fileGroupNo = board.getFileGroupNo();
 		
+		System.out.println("filegroupno : " + fileGroupNo);
 		List<File> list = fileService.selectFileList(fileGroupNo);
-		Iterator<File> it = list.iterator();
 		
+		System.out.println(list.size());
+		Iterator<File> it = list.iterator();
+
 		while(it.hasNext()) {
-			int i = it.next().getFilePath().lastIndexOf("/");
-			String cate = it.next().getFilePath().substring(i+1);
-			String path = it.next().getFilePath() +"/"+it.next().getFileSystemName();
+			String cate = it.next().getFilePath(); // /image, /file
+			//String path = it.next().getFileSystemName(); 
+			System.out.println(it.next().getFileSystemName());
 			
-			if(cate.equals("image")) {
+			/*if(cate.equals("/image")) {
 				imageList.add(path);
 			}
-			else if(cate.equals("file")) {
+			else if(cate.equals("/file")) {
 				fileList.add(path);
-			}
+			}*/
 		}
-		if(!commentList.isEmpty())
+		/*System.out.println("1 :" + !commentList.isEmpty());
+		System.out.println("2 :" + !imageList.isEmpty());
+		System.out.println("3 :" + !fileList.isEmpty());
+		*/
+		if(!commentList.isEmpty()) {
+			System.out.println("11 :" + !commentList.isEmpty());
 			model.addAttribute("commentList", commentList);
-		if(!imageList.isEmpty())
+		}
+		if(imageList.size() == 0) {
+			System.out.println("22 :" + !imageList.isEmpty());
 			model.addAttribute("imageList", imageList);
-		if(!fileList.isEmpty())
+		}	
+		if(fileList.size() == 0) {
+			System.out.println("33 :" + !fileList.isEmpty());
 			model.addAttribute("fileList", fileList);
-		
+		}
 		model.addAttribute("board", board);
 		return "/board/freeDetailForm";
+		
 	}
 	
 	@RequestMapping("/freeWriteForm.do")
@@ -105,9 +121,8 @@ public class FreeController {
 	}
 	
 	@RequestMapping("/freeWrite.do")
-	public String freeWrite(HttpServletRequest request, HttpSession session,
-			@ModelAttribute("board") Board board) throws Exception{
-		
+	public String freeWrite(HttpSession session,
+			Board board) throws Exception{
 		int i = 1;
 		// 파일 처리 관련 부분
 		int fileGroupNo = fileService.selectGroupNo();
@@ -122,6 +137,8 @@ public class FreeController {
 		if(!fileDir.exists()) fileDir.mkdirs();
 		
 		for (MultipartFile mf : board.getImageFiles()) {
+			if(mf.isEmpty()) continue;
+			
 			File file = new File();
 			String fileOriginName = mf.getOriginalFilename();
 			int t = fileOriginName.lastIndexOf(".");
@@ -139,6 +156,8 @@ public class FreeController {
 			fileService.insertFile(file);
 		}
 		for (MultipartFile mf : board.getAttachFiles()) {
+			if(mf.isEmpty()) continue;
+			
 			File file = new File();
 			String fileOriginName = mf.getOriginalFilename();
 			
@@ -160,7 +179,6 @@ public class FreeController {
 		int memberNo = member.getMemberNo();
 		
 		board.setFileGroupNo(fileGroupNo);
-		
 		board.setCategoryNo(categoryNo);
 		board.setBoardWriter(boardWriter);
 		board.setMemberNo(memberNo);

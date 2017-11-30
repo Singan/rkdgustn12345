@@ -70,7 +70,20 @@ p {
 								<div>
 									${board.boardContent}	
 							 	</div>
-								
+								 <c:if test="${imageList != null}">
+							 		<c:forEach var='i' items="${imageList}">
+								 	<div>
+								 		<img src="/seok/upload/image/${i}" >
+									</div>
+									</c:forEach>
+								</c:if>
+								 <c:if test="${fileList != null}">
+							 		<c:forEach var='i' items="${fileList}">
+								 	<div>
+								 			
+									</div>
+									</c:forEach>
+								</c:if>
 							 	 
 							</div>
 							<div  class="pull-right" >
@@ -166,6 +179,7 @@ p {
 				}
 			})
 		});
+		
 	</script>
 </body>
 </html>

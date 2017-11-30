@@ -67,6 +67,11 @@
 	  	 where board_no = #{board_no}
 	</delete>
 	
+	<update id="viewUpBoard" parameterType="int">
+		update to_board
+		set board_views = board_views + 1
+		where board_no = #{boardNo}
+	</update>
 	<update id="upBoard" parameterType="int">
 		update to_board
 		set board_up = board_up + 1

@@ -18,4 +18,5 @@ public interface BoardMapper {
 	public int countBoardByMemberNo(int memberNo) throws Exception;
 	public int sumViewsByMemberNo(int memberNo) throws Exception;
 	public int sumVotesByMemberNo(int memberNo) throws Exception;
+	public int viewUpBoard(int boardNo) throws Exception;
 }
