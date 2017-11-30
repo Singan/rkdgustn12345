@@ -1,5 +1,6 @@
 package com.naver.board.free.controller;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.naver.board.comment.service.CommentService;
@@ -51,10 +53,35 @@ public class FreeController {
 			@PathVariable int boardNo) throws Exception{
 		// boardNo 로 comment 뽑는다.
 		List<Comment> commentList = commentService.selectComment((int)boardNo);
+		List<String> imageList = null;
+		List<String> fileList = null;
+		
+		Board board = boardService.detailBoard((int)boardNo);
+		int fileGroupNo = board.getFileGroupNo();
+		
+		List<File> list = fileService.selectFileList(fileGroupNo);
+		Iterator<File> it = list.iterator();
+		
+		while(it.hasNext()) {
+			int i = it.next().getFilePath().lastIndexOf("/");
+			String cate = it.next().getFilePath().substring(i+1);
+			String path = it.next().getFilePath() +"/"+it.next().getFileSystemName();
+			
+			if(cate.equals("image")) {
+				imageList.add(path);
+			}
+			else if(cate.equals("file")) {
+				fileList.add(path);
+			}
+		}
 		if(!commentList.isEmpty())
 			model.addAttribute("commentList", commentList);
+		if(!imageList.isEmpty())
+			model.addAttribute("imageList", imageList);
+		if(!fileList.isEmpty())
+			model.addAttribute("fileList", fileList);
 		
-		model.addAttribute("board",boardService.detailBoard((int)boardNo));
+		model.addAttribute("board", board);
 		return "/board/freeDetailForm";
 	}
 	
@@ -62,13 +89,15 @@ public class FreeController {
 	public void freeWriteForm() {}
 	
 	@RequestMapping("/up.do") 
-	public void up(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@ResponseBody
+	public void up(HttpServletRequest request) throws Exception {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		
 		boardService.upBoard(boardNo);
 	}
 	
 	@RequestMapping("/down.do") 
+	@ResponseBody
 	public void down(HttpServletRequest request) throws Exception {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		
@@ -102,7 +131,7 @@ public class FreeController {
 			
 			file.setFileSystemName(fileSystemName);
 			file.setFileOriginName(fileOriginName);
-			file.setFilePath(upImage);
+			file.setFilePath("/image");
 			file.setFileGroupNo(fileGroupNo);
 			
 			mf.transferTo(new java.io.File(upImage+"/"+fileSystemName+"."+ext));
@@ -119,7 +148,7 @@ public class FreeController {
 			
 			file.setFileSystemName(fileSystemName);
 			file.setFileOriginName(fileOriginName);
-			file.setFilePath(upFile);
+			file.setFilePath("/file");
 			file.setFileGroupNo(fileGroupNo);
 			mf.transferTo(new java.io.File(upFile+"/"+fileSystemName+"."+ext));
 			
@@ -129,6 +158,8 @@ public class FreeController {
 		int categoryNo = 1;
 		String boardWriter = member.getMemberName();
 		int memberNo = member.getMemberNo();
+		
+		board.setFileGroupNo(fileGroupNo);
 		
 		board.setCategoryNo(categoryNo);
 		board.setBoardWriter(boardWriter);

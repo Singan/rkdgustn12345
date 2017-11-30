@@ -70,11 +70,8 @@ p {
 								<div>
 									${board.boardContent}	
 							 	</div>
-							 	<div>
-							 		<c:if test="${boardImagePath != null}">
-										이미지
-									</c:if>
-								</div>
+								
+							 	 
 							</div>
 							<div  class="pull-right" >
 								<button type="button" class="btn btn-default">수정</button>
@@ -105,7 +102,7 @@ p {
 								<i class="fa fa-thumbs-o-down fa-2x" aria-hidden="true"></i>
 							</div>
 							
-							<div class="pull-left col-sm-1"><h4><strong id="downCount">-${board.boardDown}</strong></h4></div>
+							<div class="pull-left col-sm-1"><h4><strong id="downCount">${board.boardDown}</strong></h4></div>
 						</div>
 					</td>
 				</tr>
@@ -154,21 +151,21 @@ p {
 				url: "/seok/board/up.do",
 				data: "boardNo=" + ${board.boardNo},	
 				success: function () {
-					var i =	parseInt($("upCount").text()) + 1;
-					$("upCount").html(i);
+					var i =	parseInt($("#upCount").text()) + 1;
+					$("#upCount").html(i);
 				}
 			})
 		});
 		$("#down").click(function () {
 			$.ajax ({
-				url: "/seok/board/up.do",
+				url: "/seok/board/down.do",
 				data: "boardNo=" + ${board.boardNo},
 				success: function () {
-					
+					var i =	parseInt($("#downCount").text()) - 1;
+					$("#downCount").html(i);
 				}
 			})
 		});
 	</script>
-	
 </body>
 </html>
