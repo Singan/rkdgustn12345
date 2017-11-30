@@ -26,6 +26,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
+	public List<Board> selectBoardByMemberNo(int memberNo) throws Exception {
+		return boardMapper.selectBoardByMemberNo(memberNo);
+	};
+	
+	@Override
 	public Board detailBoard(int boardNo) throws Exception {
 		return boardMapper.detailBoard(boardNo);
 	}
@@ -38,4 +43,9 @@ public class BoardServiceImpl implements BoardService {
 	public void downBoard(int boardNo) throws Exception {
 		boardMapper.downBoard(boardNo);
 	}
+	
+	@Override
+	public int countBoard(int memberNo) throws Exception {
+		return boardMapper.countBoard(memberNo);
+	};
 }

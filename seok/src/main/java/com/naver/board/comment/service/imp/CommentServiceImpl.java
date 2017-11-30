@@ -24,4 +24,11 @@ public class CommentServiceImpl implements CommentService{
 	public void insertComment(Comment comment) throws Exception {
 		commentMapper.insertComment(comment);
 	}
+
+	@Override
+	public int countComment(int memberNo) throws Exception {
+		return commentMapper.countComment(memberNo);
+	}
+	
+	
 }

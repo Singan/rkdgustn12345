@@ -11,4 +11,6 @@ public interface CommentService {
 	public List<Comment> selectComment(int boardNo) throws Exception;
 	
 	public void insertComment(Comment comment) throws Exception;
+	
+	public int countComment(int memberNo) throws Exception;
 }

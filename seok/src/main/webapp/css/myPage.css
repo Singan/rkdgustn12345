@@ -109,3 +109,5 @@
 			text-align: center;
 		}
 		.at_input[disabled]{user-select:none;}
+		
+		.at_large{font-size: 2em;}

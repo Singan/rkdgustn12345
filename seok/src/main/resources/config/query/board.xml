@@ -79,10 +79,10 @@
 		where board_no = #{boardNo}
 	</update>
 	
-	<select id="countBoard">
+	<select id="countBoard" parameterType="int" resultType="int">
 		select count(*)
 		from to_board
-		where member_no = #{memberNo};
+		where member_no = #{memberNo}
 	</select>
 	
 </mapper>

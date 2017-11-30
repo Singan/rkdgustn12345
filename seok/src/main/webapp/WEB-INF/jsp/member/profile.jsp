@@ -32,9 +32,9 @@
 </div>
 
 
-<div id="postcount">작성한 글 수</div>
-<div id="commentcount">작성한 댓글 수</div>
-<div id="postlist">작성한 글 목록</div>
+<div id="postcount">작성한 글 수 ${postcount}</div>
+<div id="commentcount">작성한 댓글 수 ${commentcount}</div>
+<div id="postlist">작성한 글 목록 ${postlist}</div>
 
 <div id="testtest">!<br></div>
 <script>
