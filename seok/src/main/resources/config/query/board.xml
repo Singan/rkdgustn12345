@@ -26,6 +26,13 @@
 		order by board_no desc
 	</select>
 	
+	<select id="selectBoardByMemberNo" parameterType="int" resultMap="boardMap">
+		select  *
+		 from to_board
+		where member_no = #{MemberNo} 
+		order by board_no desc
+	</select>
+	
 	<insert id="insertBoard" parameterType="board">
 		insert into to_board(
 			board_no, category_no, board_name, board_writer, member_no,
@@ -71,5 +78,11 @@
 		set board_down = board_down -1
 		where board_no = #{boardNo}
 	</update>
+	
+	<select id="countBoard">
+		select count(*)
+		from to_board
+		where member_no = #{memberNo};
+	</select>
 	
 </mapper>

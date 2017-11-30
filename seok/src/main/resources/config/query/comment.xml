@@ -30,4 +30,10 @@
 		from to_comment
 		where comment_no = #{commentNo}
 	</delete>
+	
+	<select id="countComment" parameterType="int" resultType="int">
+		select count(*)
+		from to_comment
+		where member_no = #{memberNo};
+	</select>
 </mapper>

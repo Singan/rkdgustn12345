@@ -24,9 +24,7 @@
 				<div class="menutab">친구목록</div>
 			</div>
 		
-			<div id="content">
-				<!--import-->
-			</div>
+			<div id="content"><!--import--></div>
 		</div>
 		
 		<script>

@@ -7,7 +7,7 @@
 			left: 0; right: 0; top: 0; bottom: 0;
 			
 			display: block;
-			background: url("/seok/images/mypage/rupture1.jpg") no-repeat;
+			background: url("/seok/images/myPage/rupture1.jpg") no-repeat;
 			background-size: 100%;
 			
 			filter: blur(0.1vh);
@@ -60,7 +60,7 @@
 		}
 		.menutab.selected{
 			background: rgba(255,255,255,0.9);
-			color: black;
+			color: rgba(0,0,0,0.9);
 			border-bottom: .5vh solid rgba(255,255,255,0.5);
 		}
 		
@@ -69,24 +69,43 @@
 			overflow-y: auto;
 		}
 		
-		.table {
+		.mt_table {
 			display: table;
-			border-radius: 0.2vh;
+			border-radius: 0.5vh;
 			background: rgba(0,0,0,0.5);
-			
 			width:100%;
+			
 			font-size: 1.5em;
 			text-align: center;
 		}
-		.tbody {display: table-row-group;}
-		.trow {display: table-row;}
-		.trow:hover {background: rgba(0,0,0,0.25);}
-		.tcell{
+		.mt_body {display: table-row-group;}
+		.mt_row {display: table-row;}
+		.mt_row:hover {background: rgba(0,0,0,0.25);}
+		.mt_cell{
 			display: table-cell;
 			padding: 3px 10px;
 			border-bottom: 1px solid rgba(255,255,255,0.25);
 		}
-		.trow:last-child > .tcell{border-bottom: none;}
-		.tfield {font-weight: bold;}
+		.mt_row:last-child > .mt_cell{border-bottom: none;}
+		.mt_field {font-weight: bold;}
 		
+		.at_header{
+			background-image:
+			linear-gradient(to right, rgba(0,0,0,0) 35%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,0) 65%);
+			width:100%; height:1.5em;
+			margin-bottom: 3px;
+			
+			text-align: center;
+			font-weight: bold;
+			font-size: 1.4em;
+			color: rgba(220,220,220,1);
+		}
 		
+		.at_input {
+			background: none;
+			border: none;
+			
+			font-size: 1em;
+			text-align: center;
+		}
+		.at_input[disabled]{user-select:none;}
