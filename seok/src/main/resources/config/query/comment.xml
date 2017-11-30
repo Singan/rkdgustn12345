@@ -9,6 +9,7 @@
 		<result column="comment_content" property="commentContent" />
 		<result column="comment_date" property="commentDate" />
 		<result column="member_name" property="memberName" />
+		<result column="member_no" property="memberNo" />
 	</resultMap>
 	
 	<select id="selectComment" parameterType="int" resultMap="commentMap">
@@ -19,9 +20,9 @@
 		
 	<insert id="insertComment" parameterType="comment">
 		insert into to_comment(
-			comment_no, board_no, comment_content, member_name
+			comment_no, board_no, comment_content, member_name, member_no
 		) values(
-			to_comment_seq.nextval, #{boardNo}, #{commentContent}, #{memberName}
+			to_comment_seq.nextval, #{boardNo}, #{commentContent}, #{memberName}, #{memberNo}
 		)
 	</insert>
 	

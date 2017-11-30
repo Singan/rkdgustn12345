@@ -20,6 +20,9 @@ public class Comment {
 
 	// 회원 이름 작성자 이름
 	private String memberName;
+	
+	// 회원 번호
+	private Integer memberNo;
 
 	public Integer getCommentNo() {
 		return commentNo;
@@ -62,6 +65,15 @@ public class Comment {
 
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
+	}
+	
+
+	public Integer getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(Integer memberNo) {
+		this.memberNo = memberNo;
 	}
 
 	// ToComment 모델 복사

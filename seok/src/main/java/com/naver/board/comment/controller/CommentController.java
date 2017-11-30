@@ -33,7 +33,7 @@ public class CommentController {
 		System.out.println(member.toString());
 		comment.setMemberName(member.getMemberName());
 		comment.setBoardNo((int)boardNo);
-		
+		comment.setMemberNo(member.getMemberNo());
 		commentService.insertComment(comment);
 		
 		return "redirect:/board/{boardNo}/freeDetail.do";
