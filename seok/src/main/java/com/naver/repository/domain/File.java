@@ -5,13 +5,28 @@ import org.springframework.web.multipart.MultipartFile;
 //파일 파일 정보 테이블
 public class File {
 	
-	public File() {
-		// TODO Auto-generated constructor stub
+	private MultipartFile[] attachFiles;
+	private MultipartFile[] imageFiles;
+	
+	public MultipartFile[] getImageFiles() {
+		return imageFiles;
 	}
 
- // 파일 번호 
- private Integer fileNo;
+	public void setImageFiles(MultipartFile[] imageFiles) {
+		this.imageFiles = imageFiles;
+	}
 
+	public MultipartFile[] getAttachFiles() {
+		return attachFiles;
+	}
+
+	public void setAttachFiles(MultipartFile[] attachFiles) {
+	
+	}
+	
+// 파일 번호 
+ private Integer fileNo;
+ 
 
 // 파일 그룹 번호 
  private Integer fileGroupNo;

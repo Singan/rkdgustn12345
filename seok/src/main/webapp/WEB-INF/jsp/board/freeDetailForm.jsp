@@ -91,21 +91,21 @@ p {
 							</div>
 							
 							<div class="pull-left col-sm-1">
-								<h4><strong>${board.boardUp}</strong></h4>
+								<h4><strong id="upCount">${board.boardUp}</strong></h4>
 							</div>
 							
 							<div class="pull-left col-sm-2">
-								<button type="button" class="btn btn-default">추천</button>
+								<button type="button" class="btn btn-default" id="up">추천</button>
 							</div>
 							<div class="pull-left col-sm-3">
-								<button type="button" class="btn btn-default">비추천</button>
+								<button type="button" class="btn btn-default" id="down">비추천</button>
 							</div>
 							
 							<div class="col-sm-1 pull-left">
 								<i class="fa fa-thumbs-o-down fa-2x" aria-hidden="true"></i>
 							</div>
 							
-							<div class="pull-left col-sm-1"><h4><strong>-${board.boardDown}</strong></h4></div>
+							<div class="pull-left col-sm-1"><h4><strong id="downCount">-${board.boardDown}</strong></h4></div>
 						</div>
 					</td>
 				</tr>
@@ -148,5 +148,6 @@ p {
 	<br>
 	<br>
 	</c:if>
+	
 </body>
 </html>

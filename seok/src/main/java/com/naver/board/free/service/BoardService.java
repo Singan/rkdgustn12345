@@ -11,5 +11,8 @@ public interface BoardService {
 	public void insertBoard(Board board) throws Exception;
 	
 	public Board detailBoard(int boardNo) throws Exception;
+	
+	public void upBoard(int boardNo) throws Exception;
+	public void downBoard(int boardNo) throws Exception;
 }
 

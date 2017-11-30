@@ -17,7 +17,7 @@
 </head>
 <body>
 	<br>
-	<form class="form-inline"  method="post" enctype="multipart/form-data">
+	<form class="form-inline" action="${pageContext.request.contextPath}/board/freeWrite.do" method="post">
 	<div class="form-group container-fluid">
 		<table class="table table-striped table-bordered">
 			<thead>
@@ -69,33 +69,6 @@
 	<br>
 	<br>
 	
-	<script>
-		$("button").click(function () {
-			var fd = new FormData();
-			fd.append("boardName", $("input[name='boardName']").val());
-			fd.append("boardContent",$("input[name='boardContent']").val());
-			
-			var imageFiles = $("input[name='imageFiles']");
-			var attachFiles = $("input[name='attachFiles']");
-			
-			for (var i = 0; i<imageFiles.length; i++) {
-				fd.append("imageFile" + i, imageFiles[i]);
-			}
-			for (var i = 0; i<attachFiles.length; i++) {
-				fd.append("attachFile" + i, attachFiles[i]);
-			}
-			
-			$.ajax({
-				url: "/seok/board/freeWrite.do",
-				data: fd,
-				type:"POST",
-				processData: false,
-				contentType: false,
-				success: function() {
-					alert("글을 작성하였습니다.);
-				}
-			})
-		});
-	</script>
+	
 </body>
 </html>

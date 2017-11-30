@@ -30,4 +30,12 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.detailBoard(boardNo);
 	}
 	
+	@Override
+	public void upBoard(int boardNo) throws Exception {
+		boardMapper.upBoard(boardNo);
+	}
+	@Override
+	public void downBoard(int boardNo) throws Exception {
+		boardMapper.downBoard(boardNo);
+	}
 }

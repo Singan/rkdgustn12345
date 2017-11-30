@@ -1,9 +1,11 @@
 package com.naver.board.free.controller;
 
-import java.text.SimpleDateFormat;
+import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +14,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartRequest;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.naver.board.comment.service.CommentService;
 import com.naver.board.free.service.BoardService;
+import com.naver.file.service.FileService;
 import com.naver.repository.domain.Board;
 import com.naver.repository.domain.Comment;
+import com.naver.repository.domain.File;
 import com.naver.repository.domain.Member;
 
 @Controller
 @RequestMapping("/board")
 public class FreeController {
+	
+	@Autowired
+	private FileService fileService;
 	
 	@Autowired
 	private BoardService boardService;
@@ -51,10 +59,28 @@ public class FreeController {
 	@RequestMapping("/freeWriteForm.do")
 	public void freeWriteForm() {}
 	
+	@RequestMapping("/fileUpload.do")
+	public void freeUpload(File file) throws Exception{
+		fileService.insertFile(file);
+	} 
+	
+	@RequestMapping("/up.do") 
+	public void up(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		
+		boardService.upBoard(boardNo);
+	}
+	
+	@RequestMapping("/down.do") 
+	public void down(HttpServletRequest request) throws Exception {
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		
+		boardService.downBoard(boardNo);
+	}
+	
 	@RequestMapping("/freeWrite.do")
 	public String freeWrite(HttpServletRequest request, HttpSession session,
 			@ModelAttribute("board") Board board) throws Exception{
-		
 		
 		Member member = (Member)session.getAttribute("user");
 		

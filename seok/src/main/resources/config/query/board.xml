@@ -59,4 +59,17 @@
 		  from to_board
 	  	 where board_no = #{board_no}
 	</delete>
+	
+	<update id="upBoard" parameterType="int">
+		update to_board
+		set board_up = board_up + 1
+		where board_no = #{boardNo}
+	</update>
+
+	<update id="downBoard" parameterType="int">
+		update to_board
+		set board_down = board_down -1
+		where board_no = #{boardNo}
+	</update>
+	
 </mapper>
