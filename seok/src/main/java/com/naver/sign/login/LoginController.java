@@ -1,8 +1,12 @@
 package com.naver.sign.login;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +27,9 @@ public class LoginController {
 	private MemberService memberService;
 
 	@RequestMapping("/loginForm.do")
-	public void loginForm() {} 
+	public void loginForm(String url,Model model) {
+		model.addAttribute("url",url);
+	} 
 	
 	
 	
@@ -32,7 +38,8 @@ public class LoginController {
 			@ModelAttribute("member") Member member,
 			HttpSession session, 
 			Model model,
-			RedirectAttributes attr) throws Exception{
+			RedirectAttributes attr,
+			String url) throws Exception{
 		
 		
 		String id = member.getMemberId();
@@ -45,6 +52,11 @@ public class LoginController {
 				member = memberService.detailMember(id);
 				session.setAttribute("user", member); 
 				// attr.addFlashAttribute("msg", member.getMemberId()+ "님이 로그인 되었습니다.");
+				
+				if(url != null) {
+					return "redirect:/main/chatMove.do";
+				}
+				
 				model.addAttribute("msg", member.getMemberId()+ "님이 로그인 되었습니다.");
 				return "redirect:/main/main.do";
 			}
