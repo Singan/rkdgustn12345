@@ -56,7 +56,7 @@
 								<input type="file" name="attachFiles" multiple="multiple" class="form-control">
 								<i class="fa fa-file-o" aria-hidden="true"></i>
 								
-								<input type="text" name="bbbbbb" value="giushguhs"/>
+								<input type="text" name="bbbbbb" value="파일<<<<>>>>>이미지"/>
 							</div>	
 						</div>
 					 </td>

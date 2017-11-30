@@ -73,12 +73,12 @@ p {
 								 <c:if test="${imageList != null}">
 							 		<c:forEach var='i' items="${imageList}">
 								 	<div>
-								 		<img src="/seok/upload${}" >
+								 		<img src="/seok/upload/image/${i}" >
 									</div>
 									</c:forEach>
 								</c:if>
 								 <c:if test="${fileList != null}">
-							 		<c:forEach var='i' items="${imageList}">
+							 		<c:forEach var='i' items="${fileList}">
 								 	<div>
 								 			
 									</div>
