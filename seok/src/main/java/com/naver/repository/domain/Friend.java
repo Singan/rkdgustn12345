@@ -14,6 +14,9 @@ public class Friend {
  // 친구 날짜 친구 등록 일시
  private Date friendDate;
 
+ // 친구 상태 친구 등록 상태
+ private String friendStatus;
+ 
  public Integer getMemberNo() {
      return memberNo;
  }
@@ -38,11 +41,20 @@ public class Friend {
      this.friendDate = friendDate;
  }
 
- // Friend 모델 복사
+ public String getFriendStatus() {
+	return friendStatus;
+ }
+
+ public void setFriendStatus(String friendStatus) {
+ 	this.friendStatus = friendStatus;
+ }
+
+// Friend 모델 복사
  public void CopyData(Friend param)
  {
      this.memberNo = param.getMemberNo();
      this.friendNo = param.getFriendNo();
      this.friendDate = param.getFriendDate();
+     this.friendStatus = param.getFriendStatus();
  }
 }

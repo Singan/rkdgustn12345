@@ -175,9 +175,10 @@ COMMENT ON COLUMN To_Lunch.lunch_name IS '식당 이름';
 -- To_Friend Table Create SQL
 CREATE TABLE To_Friend
 (
-    member_no      NUMBER    NOT NULL, 
-    friend_no      NUMBER    NOT NULL, 
-    friend_date    DATE      DEFAULT sysdate, 
+    member_no      NUMBER      NOT NULL, 
+    friend_no      NUMBER      NOT NULL, 
+    friend_date    DATE        DEFAULT sysdate,
+    friend_status  VARCHAR2(2) NULL,
     CONSTRAINT TO_FRIEND_PK PRIMARY KEY (member_no, friend_no)
 );
 
@@ -185,6 +186,7 @@ COMMENT ON TABLE To_Friend IS '친구정보 테이블';
 COMMENT ON COLUMN To_Friend.member_no IS '회원 번호';
 COMMENT ON COLUMN To_Friend.friend_no IS '상대 번호';
 COMMENT ON COLUMN To_Friend.friend_date IS '친구 등록 일시';
+COMMENT ON COLUMN To_Friend.friend_status IS '친구 등록 상태';
 
 ALTER TABLE To_Friend
     ADD CONSTRAINT FK_To_Friend_member_no_To_Memb FOREIGN KEY (member_no)

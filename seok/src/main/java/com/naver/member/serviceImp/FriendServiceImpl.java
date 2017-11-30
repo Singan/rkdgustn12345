@@ -1,4 +1,4 @@
-package com.naver.friend;
+package com.naver.member.serviceImp;
 
 public class FriendServiceImpl {
 
