@@ -37,6 +37,7 @@ public class DiaryController {
 	public List<Diary> createDiary(Diary diary){
 		return  diaryService.page(diary);
 	}
+	
 	@ResponseBody
 	@RequestMapping("/save.json" /* method=RequestMethod.POST*/)
 	public Diary fileSave(Diary diary){
