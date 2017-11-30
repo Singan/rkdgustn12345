@@ -45,7 +45,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public int countBoard(int memberNo) throws Exception {
-		return boardMapper.countBoard(memberNo);
+	public int countBoardByMemberNo(int memberNo) throws Exception {
+		return boardMapper.countBoardByMemberNo(memberNo);
+	};
+	@Override
+	public int sumViewsByMemberNo(int memberNo) throws Exception {
+		return boardMapper.sumViewsByMemberNo(memberNo);
+	};
+	@Override
+	public int sumVotesByMemberNo(int memberNo) throws Exception {
+		return boardMapper.sumVotesByMemberNo(memberNo);
 	};
 }

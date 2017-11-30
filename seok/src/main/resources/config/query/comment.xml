@@ -16,6 +16,13 @@
 		select * 
 		from to_comment
 		where board_no = #{boardNo}
+		order by comment_no desc
+	</select>
+	<select id="selectCommentByMemberNo" parameterType="int" resultMap="commentMap">
+		select *
+		from to_comment
+		where member_no = #{memberNo}
+		order by comment_no desc
 	</select>
 		
 	<insert id="insertComment" parameterType="comment">
@@ -32,7 +39,7 @@
 		where comment_no = #{commentNo}
 	</delete>
 	
-	<select id="countComment" parameterType="int" resultType="int">
+	<select id="countCommentByMemberNo" parameterType="int" resultType="int">
 		select count(*)
 		from to_comment
 		where member_no = #{memberNo}

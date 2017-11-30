@@ -16,6 +16,9 @@ public interface BoardService {
 	public void upBoard(int boardNo) throws Exception;
 	public void downBoard(int boardNo) throws Exception;
 	
-	public int countBoard(int memberNo) throws Exception;
+	public int countBoardByMemberNo(int memberNo) throws Exception;
+	public int sumViewsByMemberNo(int memberNo) throws Exception;
+	public int sumVotesByMemberNo(int memberNo) throws Exception;
+	
 }
 

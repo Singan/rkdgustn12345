@@ -29,7 +29,7 @@
 	<select id="selectBoardByMemberNo" parameterType="int" resultMap="boardMap">
 		select  *
 		 from to_board
-		where member_no = #{MemberNo} 
+		where member_no = #{MemberNo} and rownum between 1 and 10
 		order by board_no desc
 	</select>
 	
@@ -79,8 +79,18 @@
 		where board_no = #{boardNo}
 	</update>
 	
-	<select id="countBoard" parameterType="int" resultType="int">
+	<select id="countBoardByMemberNo" parameterType="int" resultType="int">
 		select count(*)
+		from to_board
+		where member_no = #{memberNo}
+	</select>
+	<select id="sumViewsByMemberNo" parameterType="int" resultType="int">
+		select sum(board_views)
+		from to_board
+		where member_no = #{memberNo}
+	</select>
+	<select id="sumVotesByMemberNo" parameterType="int" resultType="int">
+		select sum(board_up-board_down)
 		from to_board
 		where member_no = #{memberNo}
 	</select>

@@ -19,15 +19,20 @@ public class CommentServiceImpl implements CommentService{
 	public List<Comment> selectComment(int boardNo) throws Exception {
 		return commentMapper.selectComment(boardNo);
 	}
-	
+	@Override
+	public List<Comment> selectCommentByMemberNo(int memberNo) throws Exception {
+		return commentMapper.selectCommentByMemberNo(memberNo);
+	}
+
+
 	@Override
 	public void insertComment(Comment comment) throws Exception {
 		commentMapper.insertComment(comment);
 	}
 
 	@Override
-	public int countComment(int memberNo) throws Exception {
-		return commentMapper.countComment(memberNo);
+	public int countCommentByMemberNo(int memberNo) throws Exception {
+		return commentMapper.countCommentByMemberNo(memberNo);
 	}
 	
 	

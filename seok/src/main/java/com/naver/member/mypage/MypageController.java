@@ -15,6 +15,7 @@ import com.naver.board.comment.service.CommentService;
 import com.naver.board.free.service.BoardService;
 import com.naver.member.service.MemberService;
 import com.naver.repository.domain.Board;
+import com.naver.repository.domain.Comment;
 import com.naver.repository.domain.Member;
 
 @Controller
@@ -38,15 +39,21 @@ public class MypageController {
 		Member member = (Member)session.getAttribute("user");
 		int memberNo = member.getMemberNo();
 		
-		int postcount = boardService.countBoard(memberNo);
-		int commentcount = commentService.countComment(memberNo);
+		int postcount = boardService.countBoardByMemberNo(memberNo);
+		int commentcount = commentService.countCommentByMemberNo(memberNo);
+		int viewstotal = boardService.sumViewsByMemberNo(memberNo);
+		int votestotal = boardService.sumVotesByMemberNo(memberNo);
 		
 		List<Board> postlist = boardService.selectBoardByMemberNo(memberNo);
+		List<Comment> commentlist = commentService.selectCommentByMemberNo(memberNo);
 		
 		model.addAttribute("postcount", postcount);
 		model.addAttribute("commentcount", commentcount);
+		model.addAttribute("viewstotal", viewstotal);
+		model.addAttribute("votestotal", votestotal);
 		
 		model.addAttribute("postlist", postlist);
+		model.addAttribute("commentlist", commentlist);
 	}
 	
 	@RequestMapping("/message.do")
