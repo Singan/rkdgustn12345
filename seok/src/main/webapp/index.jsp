@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script>
-	location.href ="${pageContext.request.contextPath}/sign/loginForm.do";
-</script>
+	<script>
+		location.href ="${pageContext.request.contextPath}/sign/loginForm.do";
+	</script>
 </body>
 </html>

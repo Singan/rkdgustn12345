@@ -1,28 +1,7 @@
 package com.naver.repository.domain;
 
-import org.springframework.web.multipart.MultipartFile;
-
 //파일 파일 정보 테이블
 public class File {
-	
-	private MultipartFile[] attachFiles;
-	private MultipartFile[] imageFiles;
-	
-	public MultipartFile[] getImageFiles() {
-		return imageFiles;
-	}
-
-	public void setImageFiles(MultipartFile[] imageFiles) {
-		this.imageFiles = imageFiles;
-	}
-
-	public MultipartFile[] getAttachFiles() {
-		return attachFiles;
-	}
-
-	public void setAttachFiles(MultipartFile[] attachFiles) {
-	
-	}
 	
 // 파일 번호 
  private Integer fileNo;

@@ -148,6 +148,27 @@ p {
 	<br>
 	<br>
 	</c:if>
+	<script>
+		$("#up").click(function () {
+			$.ajax ({
+				url: "/seok/board/up.do",
+				data: "boardNo=" + ${board.boardNo},	
+				success: function () {
+					var i =	parseInt($("upCount").text()) + 1;
+					$("upCount").html(i);
+				}
+			})
+		});
+		$("#down").click(function () {
+			$.ajax ({
+				url: "/seok/board/up.do",
+				data: "boardNo=" + ${board.boardNo},
+				success: function () {
+					
+				}
+			})
+		});
+	</script>
 	
 </body>
 </html>

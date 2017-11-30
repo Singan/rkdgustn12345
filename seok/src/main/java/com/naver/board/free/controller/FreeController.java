@@ -1,9 +1,9 @@
 package com.naver.board.free.controller;
 
-import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.naver.board.comment.service.CommentService;
 import com.naver.board.free.service.BoardService;
@@ -28,6 +27,9 @@ import com.naver.repository.domain.Member;
 @Controller
 @RequestMapping("/board")
 public class FreeController {
+	
+	@Autowired
+	private ServletContext servletContext;
 	
 	@Autowired
 	private FileService fileService;
@@ -59,11 +61,6 @@ public class FreeController {
 	@RequestMapping("/freeWriteForm.do")
 	public void freeWriteForm() {}
 	
-	@RequestMapping("/fileUpload.do")
-	public void freeUpload(File file) throws Exception{
-		fileService.insertFile(file);
-	} 
-	
 	@RequestMapping("/up.do") 
 	public void up(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
@@ -82,8 +79,53 @@ public class FreeController {
 	public String freeWrite(HttpServletRequest request, HttpSession session,
 			@ModelAttribute("board") Board board) throws Exception{
 		
-		Member member = (Member)session.getAttribute("user");
+		int i = 1;
+		// 파일 처리 관련 부분
+		int fileGroupNo = fileService.selectGroupNo();
 		
+		String upImage = servletContext.getRealPath("/upload/image");
+		String upFile = servletContext.getRealPath("/upload/file");
+		
+		java.io.File imageDir = new java.io.File(upImage);
+		if(!imageDir.exists()) imageDir.mkdirs(); 
+		
+		java.io.File fileDir = new java.io.File(upFile);
+		if(!fileDir.exists()) fileDir.mkdirs();
+		
+		for (MultipartFile mf : board.getImageFiles()) {
+			File file = new File();
+			String fileOriginName = mf.getOriginalFilename();
+			int t = fileOriginName.lastIndexOf(".");
+			String ext = fileOriginName.substring(t+1);
+			
+			String fileSystemName = UUID.randomUUID().toString()+"."+ext;
+			
+			file.setFileSystemName(fileSystemName);
+			file.setFileOriginName(fileOriginName);
+			file.setFilePath(upImage);
+			file.setFileGroupNo(fileGroupNo);
+			
+			mf.transferTo(new java.io.File(upImage+"/"+fileSystemName+"."+ext));
+			
+			fileService.insertFile(file);
+		}
+		for (MultipartFile mf : board.getAttachFiles()) {
+			File file = new File();
+			String fileOriginName = mf.getOriginalFilename();
+			
+			int t = fileOriginName.lastIndexOf(".");
+			String ext = fileOriginName.substring(t+1);
+			String fileSystemName = UUID.randomUUID().toString()+"."+ext;
+			
+			file.setFileSystemName(fileSystemName);
+			file.setFileOriginName(fileOriginName);
+			file.setFilePath(upFile);
+			file.setFileGroupNo(fileGroupNo);
+			mf.transferTo(new java.io.File(upFile+"/"+fileSystemName+"."+ext));
+			
+			fileService.insertFile(file);
+		}
+		Member member = (Member)session.getAttribute("user");
 		int categoryNo = 1;
 		String boardWriter = member.getMemberName();
 		int memberNo = member.getMemberNo();

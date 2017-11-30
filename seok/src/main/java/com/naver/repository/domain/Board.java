@@ -3,13 +3,36 @@ package com.naver.repository.domain;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 //게시판 게시글 테이블
 public class Board {
-
+	private MultipartFile[] attachFiles;
+	private MultipartFile[] imageFiles;
  // 게시글 번호 
  private Integer boardNo;
 
- // 카테고리 번호 
+ public MultipartFile[] getAttachFiles() {
+	return attachFiles;
+}
+
+public void setAttachFiles(MultipartFile[] attachFiles) {
+	this.attachFiles = attachFiles;
+}
+
+public MultipartFile[] getImageFiles() {
+	return imageFiles;
+}
+
+public void setImageFiles(MultipartFile[] imageFiles) {
+	this.imageFiles = imageFiles;
+}
+
+public void setBoardDate(String boardDate) {
+	this.boardDate = boardDate;
+}
+
+// 카테고리 번호 
  private Integer categoryNo;
 
  // 게시글 제목 
