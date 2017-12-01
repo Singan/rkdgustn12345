@@ -9,4 +9,47 @@
 	<result column="friend_status" property="friendStatus"/>
 	</resultMap>
 	
+	<select id="selectFriend" parameterType="int" resultMap="friendMap">
+		select *
+		from to_friend
+		where member_no = #{memberNo} and friend_status='Y'
+		order by friend_date desc
+	</select>
+	
+	<select id="selectFriendResponse" parameterType="int" resultMap="friendMap">
+		select *
+		from to_friend
+		where friend_no = #{memberNo} and friend_status='N'
+		order by friend_date desc
+	</select>
+	
+	<select id="selectFriendRequest" parameterType="int" resultMap="friendMap">
+		select *
+		from to_friend
+		where member_no = #{memberNo} and friend_status='N'
+		order by friend_date desc
+	</select>
+	
+	<insert id="insertFriendRequest" parameterType="friend">
+		insert into to_friend
+		values (#{memberNo},#{friendNo},sysdate,'N')
+	</insert>
+	
+	<insert id="insertFriendAccept" parameterType="friend">
+		insert into to_friend
+		values (#{memberNo},#{friendNo},sysdate,'Y')
+	</insert>
+	
+	<update id="updateFriendAccept" parameterType="friend">
+		update to_friend
+		set friend_status = 'Y'
+		where member_no = #{friendNo} and friend_no = #{memberNo}
+	</update>
+	
+	<delete id="deleteFriend" parameterType="friend">
+		delete from to_friend
+		where (member_no = #{memberNo} and friend_no = #{friendNo})
+		or (member_no = #{friendNo} and friend_no = #{memberNo})
+	</delete>
+	
 </mapper>

@@ -22,6 +22,7 @@ import com.naver.member.service.MemberService;
 import com.naver.member.service.MessageService;
 import com.naver.repository.domain.Board;
 import com.naver.repository.domain.Comment;
+import com.naver.repository.domain.Friend;
 import com.naver.repository.domain.Member;
 
 @Controller
@@ -39,9 +40,9 @@ public class MypageController {
 	
 //	@Autowired
 //	private MessageService messageService;
-//	
-//	@Autowired
-//	private FriendService friendService;
+	
+	@Autowired
+	private FriendService friendService;
 	
 	
 	@RequestMapping("/myPage.do")
@@ -89,6 +90,13 @@ public class MypageController {
 		return "ok";
 	}
 	
+	@RequestMapping("/profilecancle.do")
+	@ResponseBody
+	public Member profileCancle(HttpSession session){
+		Member member = (Member)session.getAttribute("user");
+		return member;
+	}
+	
 	@RequestMapping("/message.do")
 	public void message(){}
 	
@@ -107,11 +115,25 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/friend.do")
-	public void friend(){}
+	public void friend(Model model, HttpSession session) throws Exception{
+		Member member = (Member)session.getAttribute("user");
+		int memberNo = member.getMemberNo();
+		
+		List<Friend> friendlist = friendService.selectFriend(memberNo);
+		List<Friend> friendrequestlist = friendService.selectFriendRequest(memberNo);
+		List<Friend> friendresponselist = friendService.selectFriendResponse(memberNo);
+		
+		model.addAttribute("friendlist", friendlist);
+		model.addAttribute("friendrequestlist", friendrequestlist);
+		model.addAttribute("friendresponselist", friendresponselist);
+	}
 	
 	@RequestMapping("/friendrequest.do")
 	@ResponseBody
 	public String friendRequest(HttpServletRequest request) {
+		Friend friend = new Friend();
+		friend.setMemberNo(Integer.parseInt(request.getParameter("memberNo"))); 
+		friend.setFriendNo(Integer.parseInt(request.getParameter("friendNo")));
 		
 		return "ok";
 	}
@@ -119,14 +141,21 @@ public class MypageController {
 	@RequestMapping("/friendaccept.do")
 	@ResponseBody
 	public String friendAccept(HttpServletRequest request) {
+		Friend friend = new Friend();
+		friend.setMemberNo(Integer.parseInt(request.getParameter("memberNo"))); 
+		friend.setFriendNo(Integer.parseInt(request.getParameter("friendNo")));
 		
 		return "ok";
 	}
 	
 	@RequestMapping("/frienddelete.do")
 	@ResponseBody
-	public String friendDelete(HttpServletRequest request) {
+	public String friendDelete(HttpServletRequest request) throws Exception {
+		Friend friend = new Friend();
+		friend.setMemberNo(Integer.parseInt(request.getParameter("memberNo"))); 
+		friend.setFriendNo(Integer.parseInt(request.getParameter("friendNo")));
 		
+		friendService.deleteFriend(friend);
 		return "ok";
 	}
 }

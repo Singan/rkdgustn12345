@@ -121,10 +121,16 @@
 	});
 	
 	$("#myinfo").on("click","#infocancel",function(){
-		$("#memberPass").val("${user.memberPass}");
-		$("#memberName").val("${user.memberName}");
-		$("#memberEmail").val("${user.memberEmail}");
-		myinfo();
+		$.ajax({
+			url: "/seok/member/profilecancle.do",
+			success: function (d) {
+				eval("var data="+d);
+				$("#memberPass").val(data.memberPass);
+				$("#memberName").val(data.memberName);
+				$("#memberEmail").val(data.memberEmail);
+				myinfo();
+			}
+		});
 	});
 	
 </script>
