@@ -108,6 +108,7 @@
 			font-size: 1em;
 			text-align: center;
 		}
+		.at_input:focus{outline:none;}
 		.at_input[disabled]{user-select:none;}
 		
 		.at_box {float: left;}

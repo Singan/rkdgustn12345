@@ -6,31 +6,31 @@
 		<div class="mt_body">
 			<div class="mt_row">
 				<div class="mt_field mt_cell">아이디</div>
-				<div class="mt_cell">
-					<input class="at_input" type="text" value="${user.memberId}" disabled/>
-				</div>
+				<div id="memberId" class="mt_cell">${user.memberId}</div>
 			</div>
 			<div class="mt_row">
 				<div class="mt_field mt_cell">비밀번호</div>
 				<div class="mt_cell">
-					<input class="at_input" type="password" value="${user.memberPass}" disabled/>
+					<input id="memberPass" class="at_input" type="password"
+					value="${user.memberPass}" maxlength="20"/>
 				</div>
 			</div>
 			<div class="mt_row">
 				<div class="mt_field mt_cell">이름</div>
 				<div class="mt_cell">
-					<input class="at_input" type="text" value="${user.memberName}" disabled/>
+					<input id="memberName" class="at_input" type="text"
+					value="${user.memberName}" maxlength="20"/>
 				</div>
 			</div>
 			<div class="mt_row">
 				<div class="mt_field mt_cell">이메일</div>
 				<div class="mt_cell">
-					<input class="at_input" type="email" value="${user.memberEmail}" disabled/>
+					<input id="memberEmail" class="at_input" type="email"
+					value="${user.memberEmail}" maxlength="50"/>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="bt_box bt_yes">수정</div>
 </div>
 
 <div id="postcount" class="at_box at_quarter">
@@ -91,5 +91,37 @@
 </div>
 
 <script>
-	$("document").ready(function (){});
+	var myinfo = function(){
+		$("#myinfo").find(".at_input").attr("disabled","");
+		$("#infosubmit").remove();
+		$("#infocancel").remove();
+		$("#myinfo").append('<div id="infoedit" class="bt_box bt_yes">편집</div>');
+	};
+
+	$("document").ready(function(){myinfo();});
+	
+	$("#myinfo").on("click","#infoedit",function(){
+		$("#myinfo").find(".at_input").removeAttr("disabled");
+		$("#infoedit").remove();
+		$("#myinfo").append('<div id="infocancel" class="bt_box bt_no">취소</div>')
+					.append('<div id="infosubmit" class="bt_box bt_yes">확인</div>');
+	});
+	
+	$("#myinfo").on("click","#infosubmit",function(){
+		$.ajax({
+			url: "/seok/member/profileupdate.do",
+			data:
+				"no=${user.memberNo}"
+				+"&id=${user.memberId}"
+				+"&pass=" + $("#memberPass").val()
+				+"&name=" + $("#memberName").val()
+				+"&email=" + $("#memberEmail").val(),
+			success: function () {myinfo();}
+		});
+	});
+	
+	$("#myinfo").on("click","#infocancel",function(){
+		myinfo();
+	});
+	
 </script>
