@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1>${url}</h1>
-<form name="chatMove" action="http://localhost:3000/main" method="post">
+<form name="chatMove" action="http://192.168.0.138:3000/main" method="post">
 	<input type="hidden" name="id" value="${user.memberId}" />
 	<input type="hidden" name="pass" value="${user.memberPass}" />
 </form>

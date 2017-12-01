@@ -14,7 +14,7 @@
 	<a href="${pageContext.request.contextPath}/board/question.do">question</a></br>
 	<a href="${pageContext.request.contextPath}/diary/diary.do">diary</a></br>
 	<a href="${pageContext.request.contextPath}/sign/logout.do">로그아웃</a></br>
-	
+	<a href="${pageContext.request.contextPath}/main/chatMove.do">채팅창</a>
 	<script>
 		$(function(){
 			if ("${msg}") {
