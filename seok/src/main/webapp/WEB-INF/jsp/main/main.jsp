@@ -4,6 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -14,12 +17,15 @@
 	<a href="${pageContext.request.contextPath}/board/question.do">question</a></br>
 	<a href="${pageContext.request.contextPath}/diary/diary.do">diary</a></br>
 	<a href="${pageContext.request.contextPath}/sign/logout.do">로그아웃</a></br>
-	<a href="${pageContext.request.contextPath}/main/chatMove.do">채팅창</a>
+	<button id="chat">채팅방이동</button>
 	<script>
 		$(function(){
 			if ("${msg}") {
 				alert("${msg}");
 			}
+		});
+		$("#chat").click(function () {
+			window.open("${pageContext.request.contextPath}/main/chatMove.do","","width=500, height=700, resizable=no");
 		});
 	</script>
 </body>
