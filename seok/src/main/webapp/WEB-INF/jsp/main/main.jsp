@@ -10,16 +10,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="${pageContext.request.contextPath}/member/myPage.do">myPage</a></br>
-	<a href="${pageContext.request.contextPath}/sign/signForm.do">signUp</a></br>
-	<a href="${pageContext.request.contextPath}/board/quiz.do">quiz</a></br>
-	<a href="${pageContext.request.contextPath}/board/question.do">question</a></br>
-	<a href="${pageContext.request.contextPath}/diary/diary.do">diary</a></br>
+	<a href="${pageContext.request.contextPath}/member/myPage.do">마이페이지</a></br>
+	<a href="${pageContext.request.contextPath}/sign/signForm.do">회원가입</a></br>
 	<a href="${pageContext.request.contextPath}/sign/logout.do">로그아웃</a></br>
 	
-	자유게시판 iframe 테스트<br>
-	<iframe src="${pageContext.request.contextPath}/board/free.do"
-	style="width:50%; height:50vh;" frameborder="1"></iframe><br>
+	<div>
+		iframe 테스트<br>
+		<a href="${pageContext.request.contextPath}/board/free.do" target="boards">자게</a>
+		<a href="${pageContext.request.contextPath}/board/quiz.do" target="boards">문게</a>
+		<a href="${pageContext.request.contextPath}/board/question.do" target="boards">질게</a>
+		<a href="${pageContext.request.contextPath}/diary/diary.do" target="boards">달력</a>
+		<a href="${pageContext.request.contextPath}/lunch/lunch.do" target="boards">점심</a>
+		<br>
+		<iframe name="boards" src="${pageContext.request.contextPath}/board/free.do"
+		style="width:50vw; height:50vh;" frameborder="0"></iframe>
+	</div>
 	
 	<button id="chat">채팅방이동</button>
 	<script>
