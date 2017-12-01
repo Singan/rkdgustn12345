@@ -74,13 +74,20 @@ p {
 									</div>
 									</c:forEach>
 								</c:if>
+								
 								 <c:if test="${fileList != null}">
 							 		<c:forEach var='i' items="${fileList}">
-								 	<div>
-								 		<a href="${pageContext.request.contextPath}/downimage.do?filePath=${i.filePath}&fileSystemName=${i.fileSystemName}&fileOriginName=${i.fileOriginName}">
-								 			${i.fileOriginName}
-								 		</a>	
-									</div>
+							 		<form class="form-inline" role="form">
+								 		<div class="form-group">
+									 		<input type="text" width="70%" size="1" class="form-control" id="fileTxt" value="${i.fileOriginName}" readonly/>
+									 		<a style="display:none" id="fileff" href="${pageContext.request.contextPath}/downimage.do?filePath=${i.filePath}&fileSystemName=${i.fileSystemName}&fileOriginName=${i.fileOriginName}">
+									 			${i.fileOriginName}
+									 		</a>
+									 	</div>
+									 	<div class="form-group">
+									 		<i class="fa fa-download fa-2x"  onclick="document.getElementById('fileff').click();"></i>
+										</div>
+									</form>
 									</c:forEach>
 								</c:if>
 							</div>
