@@ -49,7 +49,7 @@
 					<td>
 						<div>
 							<div class="pull-right">
-								<input type="file" name="imageFiles" multiple="multiple" class="form-control">
+								<input type="file" name="imageFiles" multiple="multiple" class="form-control" accept="image/gif, image/jpeg, image/png, image/bmp, image/jpg">
 								<i class="fa fa-picture-o" aria-hidden="true"></i>
 							</div>	
 							<div class="pull-right">
