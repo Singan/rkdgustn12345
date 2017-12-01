@@ -11,4 +11,6 @@
 	<result column="receiver_id" property="receiverId"/>
 	</resultMap>
 	
+	
+	
 </mapper>
