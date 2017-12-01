@@ -7,8 +7,7 @@ public class Lunch {
     private Integer lunchNo;
 
     // 회원 이름 식당 정보 작성자의 회원번호
-    private Integer memberName;
-
+    private String memberName;
     // 위도 
     private Float lng;
 
@@ -35,11 +34,11 @@ public class Lunch {
         this.lunchNo = lunchNo;
     }
 
-    public Integer getMemberName() {
+    public String getMemberName() {
         return memberName;
     }
 
-    public void setMemberName(Integer memberName) {
+    public void setMemberName(String memberName) {
         this.memberName = memberName;
     }
 

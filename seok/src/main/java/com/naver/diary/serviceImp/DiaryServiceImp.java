@@ -91,9 +91,6 @@ public class DiaryServiceImp implements DiaryService {
 		};
 		System.out.println("여기까지왔나7");
 		System.out.println();
-		for(File fi :oneDiary.getFile()){
-			System.out.println(fi.getFileOriginName());
-		}
 		return oneDiary;
 	}
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.naver.repository.mapper.LunchMapper">
+	<resultMap type="lunch" id="lunchMap">
+		<result column="LAT" property="lat"/>
+		<result column="LNG" property="lng"/>
+		<result column="LUNCH_RATE" property="lunchRate"/>
+		<result column="MEMBER_NAME" property="memberName"/>
+		<result column="LUNCH_NO" property="lunchNo"/>
+		<result column="LUNCH_NAME" property="lunchName"/>	
+		<result column="LUNCH_ADDR" property="lunchAddr"/>
+		<result column="LUNCH_REVIEW" property="lunchReview"/>	
+	</resultMap>
+
+	<select id="selectLunchList" resultMap="lunchMap">
+		select d.* from (select rownum rd,c.* from to_lunch c) d where 0 &lt; d.rd and 11 &gt; d.rd
+	</select>
+	<insert id="insertLunch" parameterType="lunch"></insert>
+</mapper>
