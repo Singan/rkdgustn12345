@@ -15,6 +15,11 @@
 
 <link rel="stylesheet"
 	href="https://rawgit.com/wenzhixin/bootstrap-table/master/src/bootstrap-table.css">
+<style type="text/css">
+	body {
+		background-color: none;
+	}
+</style>
 </head>
 <body>
 	<br>

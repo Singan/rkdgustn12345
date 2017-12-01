@@ -14,12 +14,24 @@
 <title>Insert title here</title>
 <style>
 	body {
-		background-image: url("${pageContext.request.contextPath}/images/main/ds2.jpg");
+		background-image: url("${pageContext.request.contextPath}/images/main/ds12.jpg");
 	}
 	
 	#body{
+		left: 25%;
+		position: relative;
 		width: 50vw;
 		height: 50vh;
+		
+	}
+	#topMenu{
+		width : 100%;
+		height: 100px;
+	}
+	#chatBtn{
+		position: relative;
+		right : 40px;
+		float: right;
 	}
 </style>
 </head>
@@ -27,27 +39,41 @@
 	<a href="${pageContext.request.contextPath}/member/myPage.do">마이페이지</a></br>
 	<a href="${pageContext.request.contextPath}/sign/signForm.do">회원가입</a></br>
 	<a href="${pageContext.request.contextPath}/sign/logout.do">로그아웃</a></br>
+	<div id="topMenu">
+		<center>
+			<div class="page-header">
+ 				<h1>석성희 외 3명 <small>홈페이지</small></h1>
+			</div>
+		</center>
+	</div>
 	
 	<div id="body">
 		<ul class="nav nav-tabs">
-			<li role="presentation"><a href="${pageContext.request.contextPath}/board/free.do" target="boards">자게</a></li>
+			<li role="presentation" class="active"><a href="${pageContext.request.contextPath}/board/free.do" target="boards">자게</a></li>
 			<li role="presentation"><a href="${pageContext.request.contextPath}/board/quiz.do" target="boards">문게</a></li>
 			<li role="presentation"><a href="${pageContext.request.contextPath}/board/question.do" target="boards">질게</a></li>
 			<li role="presentation"><a href="${pageContext.request.contextPath}/diary/diary.do" target="boards">달력</a></li>
 			<li role="presentation"><a href="${pageContext.request.contextPath}/lunch/lunch.do" target="boards">점심</a></li>
-		</ul><br>
+		</ul>
+	<br>
 		<iframe name="boards" src="${pageContext.request.contextPath}/board/free.do"
 		style="width:50vw; height:50vh;" frameborder="0"></iframe>
 	</div>
 	
-	<button id="chat">채팅방이동</button>
+	<div id="chatBtn">
+	<label class="btn btn-danger" id="product-images-add" for="product-images-files" style="float:right">
+      <input class="hide" id="product-images-files" type="button" >
+                                        <i class="fa fa-file-image-o" aria-hidden="true"></i> 채팅방 이동
+                                   </label>
+	
+	</div>
 	<script>
 		$(function(){
 			if ("${msg}") {
 				alert("${msg}");
 			}
 		});
-		$("#chat").click(function () {
+		$("#product-images-add").click(function () {
 			window.open("${pageContext.request.contextPath}/main/chatMove.do","","width=500, height=700, resizable=no");
 		});
 		
