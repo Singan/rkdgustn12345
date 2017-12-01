@@ -7,4 +7,5 @@ import com.naver.repository.domain.Lunch;
 public interface LunchMapper {
 	public List<Lunch> selectLunchList();
 	public void insertLunch(Lunch lunch);
+	
 }

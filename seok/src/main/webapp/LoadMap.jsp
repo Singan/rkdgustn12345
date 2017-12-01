@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<script src='/seok/node_modules/jquery/dist/jquery.min.js?1=1'></script>
+<script src='/seok/node_modules/jquery/dist/jquery.min.js?1=11'></script>
 <script src='/seok/node_modules/jquery-ui-1.12.1/jquery-ui.js'></script>
 <link href='/seok/node_modules/jquery-ui-1.12.1/jquery-ui.css'
 	rel='stylesheet'></link>
@@ -36,13 +36,11 @@
 <body>
 	<div style="width: 100%; height: 100%;">
 		<div style="width: 50%; float: left;height: 100%;">
-			
-			<button id="addBtn">추가하기</button>
-			<button id="del">화살표 지우기</button>
+			<button>랜덤선택</button>
+			<button>추가하기</button>
 			<br>
 			<div style="width: 100%;">
 				<select multiple="multiple" style="width: 49%; float: left;">
-				<option data-lat="37.49791212725605" data-lng="127.02755212783813">강남역</option>
 				<c:forEach items="${lunchList}" var="i">
 					<option data-lng="${i.lng}" data-lat="${i.lat}">${i.lunchName}</option>
 				</c:forEach>
@@ -63,18 +61,7 @@
 		var select;
 		var directionsService;
 		var directionsDisplay;
-		var markers = [];
-		$("#addBtn").click(function(){
-			location.href="/seok/lunch/map.do"
-		})
-		$("#del").click(deleteMaker);
-		function deleteMaker(){
-			
-			for(var i = 0 ; i<markers.length;i++){
-				markers[i].setMap(null);
-			}
-			
-		}
+		
 		$("option").click(function(e){
 			 select = new google.maps.LatLng($(this).data("lat"), $(this).data("lng"));
 			calcRoute();
@@ -102,19 +89,19 @@
 		        map.addListener('click', function(e) {
 		         
 		            select = e.latLng;
-		        	
+		        	console.log()
 		            calcRoute();
 		          });
 		}
 		function calcRoute() {
-			
+			console.log(select)
 			  if(select == null)
 				  {	
 				  	alert("선택을 해주세요")
 				  	//alert('랜덤선택이 되지 않았습니다.');
 				  	//return;
 				  }
-			 var marker =  new google.maps.Marker({
+			  new google.maps.Marker({
 				    position: select,
 				    map: map
 				  });
@@ -136,8 +123,6 @@
 					    }
 			    
 			  });
-			  markers.push(marker);
-			  marker.focus();
 			}
 	</script>
 

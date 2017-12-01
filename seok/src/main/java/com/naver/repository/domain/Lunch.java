@@ -11,7 +11,14 @@ public class Lunch {
     // 위도 
     private Float lng;
 
-    // 경도 
+    @Override
+	public String toString() {
+		return "Lunch [lunchNo=" + lunchNo + ", memberName=" + memberName + ", lng=" + lng + ", lat=" + lat
+				+ ", lunchReview=" + lunchReview + ", lunchAddr=" + lunchAddr + ", lunchRate=" + lunchRate
+				+ ", lunchName=" + lunchName + "]";
+	}
+
+	// 경도 
     private Float lat;
 
     // 점심 리뷰 식당 리뷰

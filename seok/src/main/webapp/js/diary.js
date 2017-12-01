@@ -63,7 +63,7 @@ function prev(){
     showCalendar(da);
 }
 function next(){   
-	da.setMonth(da.getMonth()-1);
+	da.setMonth(da.getMonth()+1);
     showCalendar(da);
 }
 function dialogCreate(event,eveObj) {

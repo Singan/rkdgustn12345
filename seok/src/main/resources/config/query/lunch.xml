@@ -16,5 +16,8 @@
 	<select id="selectLunchList" resultMap="lunchMap">
 		select d.* from (select rownum rd,c.* from to_lunch c) d where 0 &lt; d.rd and 11 &gt; d.rd
 	</select>
-	<insert id="insertLunch" parameterType="lunch"></insert>
+	<insert id="insertLunch" parameterType="lunch">
+		insert into to_lunch(LUNCH_NO,LUNCH_ADDR,LUNCH_RATE,LUNCH_NAME,LUNCH_REVIEW,MEMBER_NAME,LAT,LNG) values(
+			TO_LUNCH_SEQ.nextval,#{lunchAddr},#{lunchRate},#{lunchName},#{lunchReview},#{memberName},#{lat},#{lng})
+	</insert>
 </mapper>

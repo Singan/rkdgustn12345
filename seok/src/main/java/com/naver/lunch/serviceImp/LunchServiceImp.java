@@ -16,5 +16,10 @@ public class LunchServiceImp implements LunchService{
 	public List<Lunch> selectLunchList() {
 		return lunchMapper.selectLunchList();
 	}
+	@Override
+	public void saveLunch(Lunch lunch) {
+		lunchMapper.insertLunch(lunch);
+		
+	}
 
 }
