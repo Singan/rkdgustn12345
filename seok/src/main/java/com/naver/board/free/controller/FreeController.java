@@ -121,6 +121,8 @@ public class FreeController {
 		boardService.downBoard(boardNo);
 	}
 	
+	
+	
 	@RequestMapping("/freeWrite.do")
 	public String freeWrite(HttpSession session, Model model,
 			Board board) throws Exception{

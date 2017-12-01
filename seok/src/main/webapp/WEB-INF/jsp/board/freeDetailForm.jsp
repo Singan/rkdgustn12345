@@ -85,7 +85,7 @@ p {
 								</c:if>
 							</div>
 							<div  class="pull-right" >
-								<button type="button" class="btn btn-default">수정</button>
+								<button type="button" class="btn btn-default" id="boardMody">수정</button>
 								<a href="${pageContext.request.contextPath}/board/${board.boardNo}/freeDelete.do" class="btn btn-default">삭제</a>
 							</div>
 						</div>
@@ -136,8 +136,8 @@ p {
 															</div>
 															<div class="pull-right">
 																${c.commentDate} 
-																<a href>수정</a> |
-																<a href="${pageContext.request.contextPath}/board/commentDelete.do">삭제</a>
+																<button type="button" class="btn btn-default" id="mody">수정</button>
+																<button type="button" class="btn btn-default" id="dele">삭제</button>
 															</div>
 														</div>
 													</tr>
@@ -186,6 +186,16 @@ p {
 	<br>
 	</c:if>
 	<script>
+		$("#mody").click(function () {
+			alert("ㅈㅅ");
+		})
+		$("#dele").click(function () {
+			alert("ㅈㅅ");
+		})
+		$("#boardMody").click(function () {
+			alert("ㅈㅅ");
+		})
+	
 		$("#up").click(function () {
 			$.ajax ({
 				url: "/seok/board/up.do",
