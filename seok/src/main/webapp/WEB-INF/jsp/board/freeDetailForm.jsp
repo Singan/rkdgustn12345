@@ -43,10 +43,9 @@ p {
 								<strong>제목: </strong>${board.boardName}
 							</div>
 							
-							<div>
+							<div class="col-sm-5">
 								<strong>작성자: </strong>${board.boardWriter}
 								<strong>| 조회수: </strong>${board.boardViews}
-								<strong>| 댓글수: </strong>${board.boardContent}						
 								<strong>| 추천수: </strong>${board.boardUp}						
 							</div>
 						</div>

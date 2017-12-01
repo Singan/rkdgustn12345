@@ -33,7 +33,7 @@
 			<tbody>
 				<c:forEach var='b' items='${list}'>
 					<tr>
-						<div class="container-fluid">
+						<div class="container-fluid" id="content">
 						<td>
 							<div class="pull-left">
 								${b.boardNo}
@@ -67,8 +67,11 @@
 						</td>
 					</tr>
 				</c:forEach>
+				</tbody>
+			</table>
+			<table  width=100% class="table table-striped">
 				<tr>
-					<td colspan="6" align="center">
+					<td align="center">
 						<div id="toolbar" class="btn-group">
 							<div class="pull-left">
 								<select class="form-control">
@@ -92,13 +95,23 @@
 						</div>
 					</td>
 				</tr>
-			</tbody>
-		</table>
+			</table>
+		
 	</div>
 	<br>
 	<br>
 	<br>
 	
+	<script>
+	$(document).ready(function() {
+        $("#search").click(function() {
+			var k = $("#keyword").val();
+			$("#user-table > tbody > tr").hide();
+			var temp = $("#user-table > tbody > tr > td:contains('" + k + "')");
+			
+			$(temp).parent().show();
+        })
+    });
 	</script>
 </body>
 </html>

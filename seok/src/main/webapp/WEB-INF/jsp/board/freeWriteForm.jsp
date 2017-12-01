@@ -35,7 +35,7 @@
 						</div>
 						
 						<div class="col-xs-7">
-							<input type="text" name="boardName" min="1" class="form-control" placeholder="제목">
+							<input type="text" name="boardName" class="form-control" placeholder="제목">
 						</div>
 						 	
 						<div class="pull-right">
@@ -48,7 +48,7 @@
 				<tr>
 					<td>
 						<div>
-							<div class="pull-right col-sm-5">
+							<div class="pull-right col-sm-7">
 								<!-- <input type="text" class="form-control" size="5" id="imageTxt"/> -->
 								<input type="file" id="imageFile" style="display:none" onchange="document.getElementById('imageTxt').value=this.value" name="imageFiles" multiple="multiple" class="form-control" accept="image/gif, image/jpeg, image/png, image/bmp, image/jpg"/>
 								<i class="fa fa-picture-o fa-3x"  onclick="document.getElementById('imageFile').click();"></i>
