@@ -5,6 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
 <style>
 /* Fonts */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
@@ -116,7 +118,7 @@ form {
 		<form action="${pageContext.request.contextPath}/sign/signUp.do"
 			method="post">
 			<div class="form-item">
-				<label for="ID"></label> <input type="text" name="memberId"
+				<label for="ID"></label> <input type="text" id="keyid" name="memberId"
 					required="required" placeholder="ID"></input>
 			</div>
 			<div class="form-item">
@@ -143,18 +145,15 @@ form {
 		</div>
 	</div>
 	<script>
-	$(document).ready(function () {
-		$("input[name=memberId]").keyup(function(event){
+		$("#keyid").keyup(function(event){
 			if(!(event.keyCode >= 37 && event.keyCode <= 40)) {
 				var inputVal = $(this).val();
 				$(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
 			}
 		});
-		if ("${msg}") {
-			alert("${msg}");
-		}
-	});
-	
+	if ("${msg}") {
+		alert("${msg}");
+	}
 	</script>
 </body>
 </html>
