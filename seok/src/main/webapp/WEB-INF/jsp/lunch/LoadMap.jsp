@@ -137,7 +137,7 @@
 			    
 			  });
 			  markers.push(marker);
-			  marker.focus();
+			  
 			}
 	</script>
 
