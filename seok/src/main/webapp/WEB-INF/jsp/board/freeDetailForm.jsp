@@ -67,20 +67,20 @@ p {
 					<td>
 						<div class="container-fluid">
 							<div>
-								<div>
-									${board.boardContent}	
-							 	</div>
+								<div>${board.boardContent}</div>
 								 <c:if test="${imageList != null}">
 							 		<c:forEach var='i' items="${imageList}">
 								 	<div>
-								 		<img src="/seok/upload/image/${i}" >
+								 		<img width="300" src="${pageContext.request.contextPath}/downimage.do?filePath=${i.filePath}&fileSystemName=${i.fileSystemName}&fileOriginName=${i.fileOriginName}" >
 									</div>
 									</c:forEach>
 								</c:if>
 								 <c:if test="${fileList != null}">
 							 		<c:forEach var='i' items="${fileList}">
 								 	<div>
-								 			
+								 		<a href="${pageContext.request.contextPath}/downimage.do?filePath=${i.filePath}&fileSystemName=${i.fileSystemName}&fileOriginName=${i.fileOriginName}">
+								 			${i.fileOriginName}
+								 		</a>	
 									</div>
 									</c:forEach>
 								</c:if>
@@ -106,7 +106,7 @@ p {
 							<div class="pull-left col-sm-2">
 								<button type="button" class="btn btn-default" id="up">추천</button>
 							</div>
-							<div class="pull-left col-sm-3">
+							<div class="pull-left">
 								<button type="button" class="btn btn-default" id="down">비추천</button>
 							</div>
 							
@@ -124,13 +124,42 @@ p {
 						<tbody>
 							<div class="form-group container-fluid">
 								<c:if test="${commentList != null}">
-									<c:forEach var='c' items='${commentList}'>
-										<tr>
-											<th>${c.memberName}</th>
-											<td>${c.commentContent}</td>
-											<td>${c.commentDate} 수정 | 삭제</td>
-										</tr>
-									</c:forEach>
+								 		<c:forEach var='c' items='${commentList}'>
+											<c:choose>
+												<c:when test="${c.memberNo == board.memberNo}">
+													<tr>
+														<div class="container-fluid">
+															<div class="pull-left">
+																<strong>${c.memberName}</strong>
+															</div>
+															<div class="pull-left col-sm-3">
+																${c.commentContent}
+															</div>
+															<div class="pull-right">
+																${c.commentDate} 
+																<a href>수정</a> |
+																<a href>삭제</a>
+															</div>
+														</div>
+													</tr>
+											</c:when>
+											<c:otherwise>
+												<tr>
+													<div class="container-fluid">
+														<div class="pull-left">
+															<strong>${c.memberName}</strong>
+														</div>
+														<div class="pull-left col-sm-5">
+															${c.commentContent}
+														</div>
+														<div class="pull-right">
+															${c.commentDate} 
+														</div>
+													</div>
+												</tr>
+											</c:otherwise>
+									</c:choose>
+								</c:forEach>
 								</c:if>
 							</div>
 							<tr>
@@ -163,8 +192,12 @@ p {
 				url: "/seok/board/up.do",
 				data: "boardNo=" + ${board.boardNo},	
 				success: function () {
+					
 					var i =	parseInt($("#upCount").text()) + 1;
 					$("#upCount").html(i);
+					
+					$("#up").attr("disabled","disabled");
+					$("#down").attr("disabled","disabled");
 				}
 			})
 		});
@@ -175,10 +208,12 @@ p {
 				success: function () {
 					var i =	parseInt($("#downCount").text()) - 1;
 					$("#downCount").html(i);
+					
+					$("#up").attr("disabled","disabled");
+					$("#down").attr("disabled","disabled");
 				}
 			})
 		});
-		
 	</script>
 </body>
 </html>

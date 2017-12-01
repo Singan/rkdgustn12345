@@ -65,4 +65,13 @@ public void setFileNo(Integer fileNo) {
      this.filePath = param.getFilePath();
      this.fileOriginName = param.getFileOriginName();
  }
+
+@Override
+public String toString() {
+	return "File [fileNo=" + fileNo + ", fileGroupNo=" + fileGroupNo + ", filePath=" + filePath + ", fileOriginName="
+			+ fileOriginName + ", fileSystemName=" + fileSystemName + "]";
+}
+ 
+ 
+ 
 }

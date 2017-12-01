@@ -51,15 +51,17 @@ public class FreeController {
 	@RequestMapping("/{boardNo}/freeDetail.do") 
 	public String freeDetailForm(Model model, 
 			@PathVariable int boardNo) throws Exception{
+		
 		boardService.viewUpBoard(boardNo);
 
 		List<Comment> commentList = commentService.selectComment((int)boardNo);
-		List<String> imageList = new ArrayList<>();
-		List<String> fileList = new ArrayList<>();
 
 		Board board = boardService.detailBoard((int)boardNo);
 		int fileGroupNo = board.getFileGroupNo();
+
 		List<File> list = fileService.selectFileList(fileGroupNo);
+		List<File> imageList = new ArrayList<>();
+		List<File> fileList = new ArrayList<>();
 		
 		Iterator<File> it = list.iterator();
 
@@ -69,10 +71,10 @@ public class FreeController {
 			String path = file.getFileSystemName();  // uuid.ext
 			
 			if(cate.equals("/image")) {
-				imageList.add(path);
+				imageList.add(file);
 			}
 			else if(cate.equals("/file")) {
-				fileList.add(path);
+				fileList.add(file);
 			}
 		}
 		
@@ -85,7 +87,11 @@ public class FreeController {
 		if(!fileList.isEmpty()) {
 			model.addAttribute("fileList", fileList);
 		}
+		
 		model.addAttribute("board", board);
+		model.addAttribute("imageList", imageList);
+		model.addAttribute("fileList", fileList);
+		model.addAttribute("commentList",commentList);
 		return "/board/freeDetailForm";
 	}
 	
@@ -109,14 +115,23 @@ public class FreeController {
 	}
 	
 	@RequestMapping("/freeWrite.do")
-	public String freeWrite(HttpSession session,
+	public String freeWrite(HttpSession session, Model model,
 			Board board) throws Exception{
 		int i = 1;
 		// 파일 처리 관련 부분
 		int fileGroupNo = fileService.selectGroupNo();
 		
-		String upImage = servletContext.getRealPath("/upload/image");
-		String upFile = servletContext.getRealPath("/upload/file");
+//		String upImage = servletContext.getRealPath("/upload/image");
+//		System.out.println(upImage);
+//		String upFile = servletContext.getRealPath("/upload/file");
+		// 프로젝트
+		
+		String root = "C:/kang/upload";
+		String imagePath = "/image";
+		String upImage = root+imagePath;
+		
+		String filePath = "/file";
+		String upFile = root + filePath;
 		
 		java.io.File imageDir = new java.io.File(upImage);
 		if(!imageDir.exists()) imageDir.mkdirs(); 
@@ -139,7 +154,8 @@ public class FreeController {
 			file.setFilePath("/image");
 			file.setFileGroupNo(fileGroupNo);
 			
-			mf.transferTo(new java.io.File(upImage+"/"+fileSystemName+"."+ext));
+			String imageRealPath = upImage+"/"+fileSystemName;
+			mf.transferTo(new java.io.File(imageRealPath));
 			
 			fileService.insertFile(file);
 		}
@@ -157,10 +173,13 @@ public class FreeController {
 			file.setFileOriginName(fileOriginName);
 			file.setFilePath("/file");
 			file.setFileGroupNo(fileGroupNo);
-			mf.transferTo(new java.io.File(upFile+"/"+fileSystemName+"."+ext));
+
+			String fileRealPath = upFile+"/"+fileSystemName;
+			mf.transferTo(new java.io.File(fileRealPath));
 			
 			fileService.insertFile(file);
 		}
+		
 		Member member = (Member)session.getAttribute("user");
 		int categoryNo = 1;
 		String boardWriter = member.getMemberName();

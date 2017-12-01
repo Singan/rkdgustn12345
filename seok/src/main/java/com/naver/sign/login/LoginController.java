@@ -31,8 +31,6 @@ public class LoginController {
 		model.addAttribute("url",url);
 	} 
 	
-	
-	
 	@RequestMapping("/login.do")
 	public String login(
 			@ModelAttribute("member") Member member,
@@ -51,6 +49,7 @@ public class LoginController {
 			if(iterator.next().getMemberId().equals(id)) {
 				member = memberService.detailMember(id);
 				session.setAttribute("user", member); 
+				session.setMaxInactiveInterval(3600);
 				// attr.addFlashAttribute("msg", member.getMemberId()+ "님이 로그인 되었습니다.");
 				System.out.println(url);
 				if(url.contains("main")) {

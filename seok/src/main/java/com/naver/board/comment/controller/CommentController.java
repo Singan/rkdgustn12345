@@ -30,7 +30,6 @@ public class CommentController {
 		) throws Exception{
 		
 		Member member = (Member)session.getAttribute("user");
-		System.out.println(member.toString());
 		comment.setMemberName(member.getMemberName());
 		comment.setBoardNo((int)boardNo);
 		comment.setMemberNo(member.getMemberNo());

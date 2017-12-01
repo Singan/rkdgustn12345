@@ -56,7 +56,7 @@
 								<input type="file" name="attachFiles" multiple="multiple" class="form-control">
 								<i class="fa fa-file-o" aria-hidden="true"></i>
 								
-								<input type="text" name="bbbbbb" value="파일<<<<>>>>>이미지"/>
+								<input type="text" name="" value="파일<<<<<<>>>>>이미지"/>
 							</div>	
 						</div>
 					 </td>
@@ -75,37 +75,5 @@
 	<br>
 	<br>
 	<br>
-	
-	
 </body>
 </html>
-
-
-	<script>
-	/*
-		$("button").click(function () {
-			var fd = new FormData();
-			
-			var imageFiles = $("input[name='imageFiles']");
-			var attachFiles = $("input[name='attachFiles']");
-			
-			for (var i = 0; i<imageFiles.length; i++) {
-				fd.append("imageFile" + i, imageFiles[i]);
-			}
-			for (var i = 0; i<attachFiles.length; i++) {
-				fd.append("attachFile" + i, attachFiles[i]);
-			}
-			
-			$.ajax({
-				url: "/seok/board/fileUpload.do",
-				data: fd,
-				type:"POST",
-				processData: false,
-				contentType: false,
-				success: function() {
-					alert("성공");
-				}
-			})
-		});
-	*/
-	</script>
