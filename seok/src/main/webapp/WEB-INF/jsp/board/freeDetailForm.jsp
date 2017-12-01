@@ -87,7 +87,7 @@ p {
 							</div>
 							<div  class="pull-right" >
 								<button type="button" class="btn btn-default">수정</button>
-								<button type="button" class="btn btn-default">삭제</button>
+								<a href="${pageContext.request.contextPath}/board/${board.boardNo}/freeDelete.do" class="btn btn-default">삭제</a>
 							</div>
 						</div>
 					 </td>
@@ -96,7 +96,7 @@ p {
 					<td colspan="6">
 						<div class="container-fluid" style='width:400px;'>
 							<div class="col-sm-1 pull-left">
-								<i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i>
+								<i class="fa fa-thumbs-o-up fa-2x " aria-hidden="true"></i>
 							</div>
 							
 							<div class="pull-left col-sm-1">
@@ -111,7 +111,7 @@ p {
 							</div>
 							
 							<div class="col-sm-1 pull-left">
-								<i class="fa fa-thumbs-o-down fa-2x" aria-hidden="true"></i>
+								<i class="fa fa-thumbs-o-down fa-2x " aria-hidden="true"></i>
 							</div>
 							
 							<div class="pull-left col-sm-1"><h4><strong id="downCount">${board.boardDown}</strong></h4></div>
@@ -138,7 +138,7 @@ p {
 															<div class="pull-right">
 																${c.commentDate} 
 																<a href>수정</a> |
-																<a href>삭제</a>
+																<a href="${pageContext.request.contextPath}/board/commentDelete.do">삭제</a>
 															</div>
 														</div>
 													</tr>

@@ -19,12 +19,7 @@
 <body>
 	<br>
 	<div style="width: 100%; padding: 10px;">
-		<table width=100% class="table table-striped table-bordered"
-			data-toggle="table" data-search="true" data-pagination="true"
-			data-advanced-search="true" data-id-table="advancedTable"
-			//data-sortable="true" //data-sorter="htmlSorter" data-height="300"
-			data-show-refresh="true" data-show-toggle="true"
-			data-show-columns="true" data-toolbar="#toolbar">
+		<table width=100% class="table table-striped table-bordered" id="user-table">
 			<thead>
 				<tr>
 					<th>번호</th>
@@ -83,12 +78,12 @@
 							</div>
 							<div class="pull-left" class="inner-addon left-addon">
 
-								<input class="form-control" type="text">
+								<input class="form-control" id="keyword" type="text">
 							</div>
 							<div class="pull-left">
-								<button type="button" class="btn btn-default">
+								<button type="button" id="search" class="btn btn-default">
 									<i class="glyphicon glyphicon-search"></i>
-									검색
+									<strong>검색</strong>
 								</button>
 							</div>
 						</div>
@@ -103,5 +98,7 @@
 	<br>
 	<br>
 	<br>
+	
+	</script>
 </body>
 </html>

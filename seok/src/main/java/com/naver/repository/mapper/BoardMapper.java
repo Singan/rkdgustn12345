@@ -9,9 +9,9 @@ public interface BoardMapper {
 	public List<Board> selectBoardByMemberNo(int memberNo) throws Exception;
 
 	public void insertBoard(Board board) throws Exception;
-	
 	public Board detailBoard(int boardNo) throws Exception;
-	
+	public void deleteBoard(int boardNo) throws Exception;
+
 	public void upBoard(int boardNo) throws Exception;
 	public void downBoard(int boardNo) throws Exception;
 	

@@ -35,7 +35,7 @@
 						</div>
 						
 						<div class="col-xs-7">
-							<input type="text" name="boardName" class="form-control" placeholder="제목">
+							<input type="text" name="boardName" min="1" class="form-control" placeholder="제목">
 						</div>
 						 	
 						<div class="pull-right">

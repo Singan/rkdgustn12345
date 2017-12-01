@@ -42,6 +42,13 @@ public class FreeController {
 	@Autowired
 	private CommentService commentService;
 	
+	@RequestMapping("/{boardNo}/freeDelete.do")
+	public String freeDelete(@PathVariable int boardNo) throws Exception {
+		boardService.deleteBoard(boardNo);
+		
+		return "redirect:/board/free.do";
+	}
+	
 	@RequestMapping("/free.do")
 	public String free(Model model) throws Exception{
 		model.addAttribute("list",boardService.selectBoard(1));

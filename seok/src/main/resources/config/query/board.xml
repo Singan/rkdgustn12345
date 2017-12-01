@@ -18,7 +18,6 @@
 		<result column="board_image_path" property="boardImagePath" />
 	</resultMap>
 	
-	
 	<select id="selectBoard" parameterType="int" resultMap="boardMap">
 		select  *
 		 from to_board
@@ -64,9 +63,8 @@
 	<delete id="deleteBoard" parameterType="int">
 		delete
 		  from to_board
-	  	 where board_no = #{board_no}
+	  	 where board_no = #{boardNo}
 	</delete>
-	
 	<update id="viewUpBoard" parameterType="int">
 		update to_board
 		set board_views = board_views + 1
@@ -77,7 +75,6 @@
 		set board_up = board_up + 1
 		where board_no = #{boardNo}
 	</update>
-
 	<update id="downBoard" parameterType="int">
 		update to_board
 		set board_down = board_down -1

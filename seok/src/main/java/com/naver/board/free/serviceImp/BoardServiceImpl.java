@@ -61,4 +61,9 @@ public class BoardServiceImpl implements BoardService {
 	public int viewUpBoard(int boardNo) throws Exception {
 		return boardMapper.viewUpBoard(boardNo);
 	}
+	
+	@Override
+	public void deleteBoard(int boardNo) throws Exception {
+		boardMapper.deleteBoard(boardNo);
+	}
 }
