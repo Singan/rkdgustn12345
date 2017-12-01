@@ -17,20 +17,14 @@ public class Board {
 	public MultipartFile[] getAttachFiles() {
 		return attachFiles;
 	}
-	
-	
 
 	public String getId() {
 		return id;
 	}
 
-
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
-
 
 	public void setAttachFiles(MultipartFile[] attachFiles) {
 		this.attachFiles = attachFiles;

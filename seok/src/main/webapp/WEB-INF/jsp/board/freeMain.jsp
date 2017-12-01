@@ -28,7 +28,7 @@
 			<thead>
 				<tr>
 					<th>번호</th>
-					<th>제목</th>
+					<th  width="30%">제목</th>
 					<th>작성자</th>
 					<th>작성일</th>
 					<th>조회수</th>
@@ -38,20 +38,43 @@
 			<tbody>
 				<c:forEach var='b' items='${list}'>
 					<tr>
-						<td>${b.boardNo}</td>
+						<div class="container-fluid">
 						<td>
-							<a href="${pageContext.request.contextPath}/board/${b.boardNo}/freeDetail.do">
-								${b.boardName}</a>
+							<div class="pull-left">
+								${b.boardNo}
+							</div>
 						</td>
-						<td>${b.boardWriter}</td>
-						<td>${b.boardDate}</td>
-						<td>${b.boardViews}</td>
-						<td>${b.boardUp}</td>
+						<td>
+							<div class="pull-left">
+								<a href="${pageContext.request.contextPath}/board/${b.boardNo}/freeDetail.do">${b.boardName}</a>
+							</div>
+						</td>
+						<td>
+							<div>
+								${b.boardWriter}
+							</div>
+						</td>
+						<td>
+							<div>
+								${b.boardDate}
+							</div>
+						</td>
+						<td>
+							<div>
+								${b.boardViews}
+							</div>
+						</td>	
+						<td>
+							<div>
+								${b.boardUp}
+							</div>
+						</div>
+						</td>
 					</tr>
 				</c:forEach>
 				<tr>
 					<td colspan="6" align="center">
-						<div id="toolbar" class="btn-group" class="pull-left">
+						<div id="toolbar" class="btn-group">
 							<div class="pull-left">
 								<select class="form-control">
 									<option>제목</option>
