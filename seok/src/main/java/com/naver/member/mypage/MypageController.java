@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.naver.board.comment.service.CommentService;
 import com.naver.board.free.service.BoardService;
+import com.naver.member.service.FriendService;
 import com.naver.member.service.MemberService;
+import com.naver.member.service.MessageService;
 import com.naver.repository.domain.Board;
 import com.naver.repository.domain.Comment;
 import com.naver.repository.domain.Member;
@@ -34,6 +36,13 @@ public class MypageController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+//	@Autowired
+//	private MessageService messageService;
+//	
+//	@Autowired
+//	private FriendService friendService;
+	
 	
 	@RequestMapping("/myPage.do")
 	public void myPage(){}
@@ -83,6 +92,41 @@ public class MypageController {
 	@RequestMapping("/message.do")
 	public void message(){}
 	
+	@RequestMapping("/messagesend.do")
+	@ResponseBody
+	public String messageSend(HttpServletRequest request) {
+		
+		return "ok";
+	}
+	
+	@RequestMapping("/messagedelete.do")
+	@ResponseBody
+	public String messageDelete(HttpServletRequest request) {
+		
+		return "ok";
+	}
+	
 	@RequestMapping("/friend.do")
 	public void friend(){}
+	
+	@RequestMapping("/friendrequest.do")
+	@ResponseBody
+	public String friendRequest(HttpServletRequest request) {
+		
+		return "ok";
+	}
+	
+	@RequestMapping("/friendaccept.do")
+	@ResponseBody
+	public String friendAccept(HttpServletRequest request) {
+		
+		return "ok";
+	}
+	
+	@RequestMapping("/frienddelete.do")
+	@ResponseBody
+	public String friendDelete(HttpServletRequest request) {
+		
+		return "ok";
+	}
 }

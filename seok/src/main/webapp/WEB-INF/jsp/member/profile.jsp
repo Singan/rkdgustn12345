@@ -6,7 +6,7 @@
 		<div class="mt_body">
 			<div class="mt_row">
 				<div class="mt_field mt_cell">아이디</div>
-				<div id="memberId" class="mt_cell">${user.memberId}</div>
+				<div class="mt_cell">${user.memberId}</div>
 			</div>
 			<div class="mt_row">
 				<div class="mt_field mt_cell">비밀번호</div>
@@ -121,6 +121,9 @@
 	});
 	
 	$("#myinfo").on("click","#infocancel",function(){
+		$("#memberPass").val("${user.memberPass}");
+		$("#memberName").val("${user.memberName}");
+		$("#memberEmail").val("${user.memberEmail}");
 		myinfo();
 	});
 	

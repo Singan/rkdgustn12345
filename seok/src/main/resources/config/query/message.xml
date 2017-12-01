@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.naver.repository.mapper.MessageMapper">
+	<resultMap type="message" id="messageMap">
+	<result column="message_no" property="messageNo"/>
+	<result column="message_content" property="messageContent"/>
+	<result column="sender_name" property="senderName"/>
+	<result column="sender_id" property="senderId"/>
+	<result column="receiver_name" property="receiverName"/>
+	<result column="receiver_id" property="receiverId"/>
+	</resultMap>
+	
+</mapper>
