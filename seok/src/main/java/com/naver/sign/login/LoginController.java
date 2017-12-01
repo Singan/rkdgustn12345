@@ -51,7 +51,6 @@ public class LoginController {
 				session.setAttribute("user", member); 
 				session.setMaxInactiveInterval(3600);
 				// attr.addFlashAttribute("msg", member.getMemberId()+ "님이 로그인 되었습니다.");
-				System.out.println(url);
 				if(url.contains("main")) {
 					return "redirect:/main/chatMove.do";
 				}
