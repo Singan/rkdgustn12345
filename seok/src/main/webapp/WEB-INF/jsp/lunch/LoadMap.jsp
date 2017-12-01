@@ -41,13 +41,14 @@
 			<button id="del">화살표 지우기</button>
 			<br>
 			<div style="width: 100%;">
-				<select multiple="multiple" style="width: 49%; float: left;">
-				<option data-lat="37.49791212725605" data-lng="127.02755212783813">강남역</option>
+				<ul class="list-group" style="width: 49%; float: left;">
+ 					
+					<li class="list-group-item" data-lat="37.49791212725605" 
+					data-lng="127.02755212783813">강남역</li>
 				<c:forEach items="${lunchList}" var="i">
-					<option data-lng="${i.lng}" data-lat="${i.lat}">${i.lunchName}</option>
+					 <li class="list-group-item" data-lng="${i.lng}" data-lat="${i.lat}">${i.lunchName}</li>
 				</c:forEach>
-				</select>
-				<textarea style="width: 50%; float: 50%;"></textarea>
+				</ul>
 			</div>
 			
 		</div>
@@ -75,7 +76,7 @@
 			}
 			
 		}
-		$("option").click(function(e){
+		$(".list-group-item").click(function(e){
 			 select = new google.maps.LatLng($(this).data("lat"), $(this).data("lng"));
 			calcRoute();
 		});
